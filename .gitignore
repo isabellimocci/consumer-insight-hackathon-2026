@@ -91,6 +91,9 @@ out
 .nuxt
 dist
 
+dist-ssr
+*.local
+
 # Gatsby files
 .cache/
 # Comment in the public line in if your project uses Gatsby and not Next.js
@@ -127,6 +130,17 @@ dist
 
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
 
 # yarn v2
 .yarn/cache
