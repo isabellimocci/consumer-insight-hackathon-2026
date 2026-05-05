@@ -59,9 +59,9 @@ Fluxo transforma transações brutas em **insights comportamentais**: identifica
 
 | Tecnologia | Versão | Uso |
 |---|---|---|
-| [React](https://react.dev/) | 19.1 | Biblioteca JS para criação de UI |
-| [TypeScript](https://www.typescriptlang.org/) | 6.0.3 | Tipagem estática |
-| [Vite](https://vitejs.dev/) | 8.x | Build tool e dev server |
+| [React](https://react.dev/) | 19.2 | Biblioteca JS para criação de UI |
+| [TypeScript](https://www.typescriptlang.org/) | 6.0.2 | Tipagem estática |
+| [Vite](https://vitejs.dev/) | 8.0.10 | Build tool e dev server |
 | [Tailwind CSS](https://tailwindcss.com/) | 4.2 | Estilização utilitária |
 | [shadcn/ui](https://ui.shadcn.com/) | latest | Componentes acessíveis com Tailwind |
 | [Recharts](https://recharts.org/) | 3.8 | Gráficos |
