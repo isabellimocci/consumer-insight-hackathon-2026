@@ -1,18 +1,6 @@
-export interface Transaction {
-  id: string;
-  date: string;
-  category: string;
-  subcategory: string;
-  description: string;
-  amount: number;
-}
+import type { MonthData } from '../types';
 
-export interface MonthData {
-  month: string;
-  transactions: Transaction[];
-}
-
-export const mockData: MonthData[] = [
+export const mockData = [
   {
     month: "03/2025",
     transactions: [
