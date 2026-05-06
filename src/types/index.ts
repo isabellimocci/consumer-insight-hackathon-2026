@@ -8,7 +8,7 @@ export type Category =
   | 'Educação'
 
 export interface Transaction {
-  id: string & { readonly _brand: 'TransactionId' }
+  id: string
   date: string // formato: dd/mm/aaaa
   category: Category
   subcategory: string
