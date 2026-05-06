@@ -108,6 +108,7 @@ export const mockData = [
       { id: "t059", date: "03/05/2025", category: "Transporte", subcategory: "Uber/99", description: "Uber - shopping com amigas", amount: 42.00 },
       { id: "t060", date: "03/05/2025", category: "Transporte", subcategory: "Uber/99", description: "Uber - ida ao trabalho extra", amount: 48.00 },
       { id: "t061", date: "04/05/2025", category: "Transporte", subcategory: "Uber/99", description: "Uber - trabalho", amount: 39.00 },
+      { id: "t092", date: "04/05/2025", category: "Transporte", subcategory: "Uber/99", description: "Uber - ida ao aeroporto buscar amiga", amount: 78.00 },
       { id: "t062", date: "05/05/2025", category: "Transporte", subcategory: "Uber/99", description: "Uber - faculdade", amount: 36.00 },
       { id: "t063", date: "06/05/2025", category: "Transporte", subcategory: "Combustível", description: "Posto Shell - tanque cheio", amount: 160.00 },
       { id: "t064", date: "06/05/2025", category: "Transporte", subcategory: "Uber/99", description: "99 - volta tarde do trabalho", amount: 54.00 },
