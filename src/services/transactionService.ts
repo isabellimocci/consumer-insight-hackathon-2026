@@ -3,7 +3,7 @@ import { mockData } from '@data/transactions'
 import type { MonthData, Transaction } from '../types'
 
 export function getTransactionsByMonth(month: string): Transaction[] {
-  return mockData.find((m) => m.month === month)?.transactions ?? []
+  return [...(mockData.find((m) => m.month === month)?.transactions ?? [])]
 }
 
 export function getAvailableMonths(): string[] {
@@ -11,5 +11,5 @@ export function getAvailableMonths(): string[] {
 }
 
 export function getAllMonthsData(): MonthData[] {
-  return mockData
+  return mockData.map((m) => ({ ...m, transactions: [...m.transactions] }))
 }

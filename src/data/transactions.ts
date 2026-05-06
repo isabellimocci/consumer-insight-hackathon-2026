@@ -1,4 +1,6 @@
-import type { MonthData } from '../types'
+import type { MonthData, TransactionId } from '../types'
+
+const tid = (id: string) => id as TransactionId
 
 export const mockData: MonthData[] = [
   {
@@ -6,7 +8,7 @@ export const mockData: MonthData[] = [
     transactions: [
       // Alimentação
       {
-        id: 't001',
+        id: tid('t001'),
         date: '03/02/2026',
         category: 'Alimentação',
         subcategory: 'Delivery',
@@ -14,7 +16,7 @@ export const mockData: MonthData[] = [
         amount: 42.9,
       },
       {
-        id: 't002',
+        id: tid('t002'),
         date: '05/02/2026',
         category: 'Alimentação',
         subcategory: 'Delivery',
@@ -22,7 +24,7 @@ export const mockData: MonthData[] = [
         amount: 38.5,
       },
       {
-        id: 't003',
+        id: tid('t003'),
         date: '08/02/2026',
         category: 'Alimentação',
         subcategory: 'Restaurante',
@@ -30,7 +32,7 @@ export const mockData: MonthData[] = [
         amount: 67.0,
       },
       {
-        id: 't004',
+        id: tid('t004'),
         date: '12/02/2026',
         category: 'Alimentação',
         subcategory: 'Delivery',
@@ -38,7 +40,7 @@ export const mockData: MonthData[] = [
         amount: 55.9,
       },
       {
-        id: 't005',
+        id: tid('t005'),
         date: '18/02/2026',
         category: 'Alimentação',
         subcategory: 'Mercado',
@@ -46,7 +48,7 @@ export const mockData: MonthData[] = [
         amount: 134.7,
       },
       {
-        id: 't006',
+        id: tid('t006'),
         date: '24/02/2026',
         category: 'Alimentação',
         subcategory: 'Delivery',
@@ -54,7 +56,7 @@ export const mockData: MonthData[] = [
         amount: 32.0,
       },
       {
-        id: 't007',
+        id: tid('t007'),
         date: '28/02/2026',
         category: 'Alimentação',
         subcategory: 'Lanchonete',
@@ -64,7 +66,7 @@ export const mockData: MonthData[] = [
 
       // Transporte — Uber/99 domina desde março
       {
-        id: 't008',
+        id: tid('t008'),
         date: '04/02/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
@@ -72,7 +74,7 @@ export const mockData: MonthData[] = [
         amount: 18.5,
       },
       {
-        id: 't009',
+        id: tid('t009'),
         date: '07/02/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
@@ -80,7 +82,7 @@ export const mockData: MonthData[] = [
         amount: 22.0,
       },
       {
-        id: 't010',
+        id: tid('t010'),
         date: '11/02/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
@@ -88,7 +90,7 @@ export const mockData: MonthData[] = [
         amount: 21.0,
       },
       {
-        id: 't011',
+        id: tid('t011'),
         date: '14/02/2026',
         category: 'Transporte',
         subcategory: 'Combustível',
@@ -96,7 +98,7 @@ export const mockData: MonthData[] = [
         amount: 60.0,
       },
       {
-        id: 't012',
+        id: tid('t012'),
         date: '21/02/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
@@ -104,7 +106,7 @@ export const mockData: MonthData[] = [
         amount: 19.9,
       },
       {
-        id: 't013',
+        id: tid('t013'),
         date: '27/02/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
@@ -114,7 +116,7 @@ export const mockData: MonthData[] = [
 
       // Lazer
       {
-        id: 't014',
+        id: tid('t014'),
         date: '02/02/2026',
         category: 'Lazer',
         subcategory: 'Cinema',
@@ -122,7 +124,7 @@ export const mockData: MonthData[] = [
         amount: 36.0,
       },
       {
-        id: 't015',
+        id: tid('t015'),
         date: '15/02/2026',
         category: 'Lazer',
         subcategory: 'Bar',
@@ -130,7 +132,7 @@ export const mockData: MonthData[] = [
         amount: 78.0,
       },
       {
-        id: 't016',
+        id: tid('t016'),
         date: '22/02/2026',
         category: 'Lazer',
         subcategory: 'Jogo',
@@ -140,7 +142,7 @@ export const mockData: MonthData[] = [
 
       // Assinaturas
       {
-        id: 't017',
+        id: tid('t017'),
         date: '01/02/2026',
         category: 'Assinaturas',
         subcategory: 'Streaming',
@@ -148,7 +150,7 @@ export const mockData: MonthData[] = [
         amount: 39.9,
       },
       {
-        id: 't018',
+        id: tid('t018'),
         date: '01/02/2026',
         category: 'Assinaturas',
         subcategory: 'Streaming',
@@ -156,7 +158,7 @@ export const mockData: MonthData[] = [
         amount: 21.9,
       },
       {
-        id: 't019',
+        id: tid('t019'),
         date: '10/02/2026',
         category: 'Assinaturas',
         subcategory: 'Serviço digital',
@@ -166,7 +168,7 @@ export const mockData: MonthData[] = [
 
       // Compras
       {
-        id: 't020',
+        id: tid('t020'),
         date: '09/02/2026',
         category: 'Compras',
         subcategory: 'Roupas',
@@ -174,7 +176,7 @@ export const mockData: MonthData[] = [
         amount: 64.0,
       },
       {
-        id: 't021',
+        id: tid('t021'),
         date: '20/02/2026',
         category: 'Compras',
         subcategory: 'Eletrônicos',
@@ -184,7 +186,7 @@ export const mockData: MonthData[] = [
 
       // Saúde
       {
-        id: 't022',
+        id: tid('t022'),
         date: '11/02/2026',
         category: 'Saúde',
         subcategory: 'Farmácia',
@@ -192,7 +194,7 @@ export const mockData: MonthData[] = [
         amount: 58.4,
       },
       {
-        id: 't023',
+        id: tid('t023'),
         date: '25/02/2026',
         category: 'Saúde',
         subcategory: 'Academia',
@@ -202,7 +204,7 @@ export const mockData: MonthData[] = [
 
       // Educação
       {
-        id: 't024',
+        id: tid('t024'),
         date: '06/02/2026',
         category: 'Educação',
         subcategory: 'Curso online',
@@ -210,7 +212,7 @@ export const mockData: MonthData[] = [
         amount: 27.9,
       },
       {
-        id: 't025',
+        id: tid('t025'),
         date: '17/02/2026',
         category: 'Educação',
         subcategory: 'Material',
@@ -218,7 +220,7 @@ export const mockData: MonthData[] = [
         amount: 89.9,
       },
       {
-        id: 't026',
+        id: tid('t026'),
         date: '28/02/2026',
         category: 'Educação',
         subcategory: 'Curso online',
@@ -233,7 +235,7 @@ export const mockData: MonthData[] = [
     transactions: [
       // Alimentação
       {
-        id: 't027',
+        id: tid('t027'),
         date: '01/03/2026',
         category: 'Alimentação',
         subcategory: 'Delivery',
@@ -241,7 +243,7 @@ export const mockData: MonthData[] = [
         amount: 45.9,
       },
       {
-        id: 't028',
+        id: tid('t028'),
         date: '03/03/2026',
         category: 'Alimentação',
         subcategory: 'Delivery',
@@ -249,7 +251,7 @@ export const mockData: MonthData[] = [
         amount: 89.9,
       },
       {
-        id: 't029',
+        id: tid('t029'),
         date: '07/03/2026',
         category: 'Alimentação',
         subcategory: 'Lanchonete',
@@ -257,7 +259,7 @@ export const mockData: MonthData[] = [
         amount: 24.5,
       },
       {
-        id: 't030',
+        id: tid('t030'),
         date: '10/03/2026',
         category: 'Alimentação',
         subcategory: 'Delivery',
@@ -265,7 +267,7 @@ export const mockData: MonthData[] = [
         amount: 52.0,
       },
       {
-        id: 't031',
+        id: tid('t031'),
         date: '15/03/2026',
         category: 'Alimentação',
         subcategory: 'Mercado',
@@ -273,7 +275,7 @@ export const mockData: MonthData[] = [
         amount: 148.2,
       },
       {
-        id: 't032',
+        id: tid('t032'),
         date: '20/03/2026',
         category: 'Alimentação',
         subcategory: 'Delivery',
@@ -281,7 +283,7 @@ export const mockData: MonthData[] = [
         amount: 97.0,
       },
       {
-        id: 't033',
+        id: tid('t033'),
         date: '26/03/2026',
         category: 'Alimentação',
         subcategory: 'Restaurante',
@@ -291,7 +293,7 @@ export const mockData: MonthData[] = [
 
       // Transporte — crescendo, Uber/99 dominando
       {
-        id: 't034',
+        id: tid('t034'),
         date: '01/03/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
@@ -299,7 +301,7 @@ export const mockData: MonthData[] = [
         amount: 21.0,
       },
       {
-        id: 't035',
+        id: tid('t035'),
         date: '03/03/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
@@ -307,7 +309,7 @@ export const mockData: MonthData[] = [
         amount: 23.5,
       },
       {
-        id: 't036',
+        id: tid('t036'),
         date: '05/03/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
@@ -315,7 +317,7 @@ export const mockData: MonthData[] = [
         amount: 28.9,
       },
       {
-        id: 't037',
+        id: tid('t037'),
         date: '09/03/2026',
         category: 'Transporte',
         subcategory: 'Combustível',
@@ -323,7 +325,7 @@ export const mockData: MonthData[] = [
         amount: 130.0,
       },
       {
-        id: 't038',
+        id: tid('t038'),
         date: '12/03/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
@@ -331,7 +333,7 @@ export const mockData: MonthData[] = [
         amount: 26.0,
       },
       {
-        id: 't039',
+        id: tid('t039'),
         date: '16/03/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
@@ -339,7 +341,7 @@ export const mockData: MonthData[] = [
         amount: 19.9,
       },
       {
-        id: 't040',
+        id: tid('t040'),
         date: '19/03/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
@@ -347,7 +349,7 @@ export const mockData: MonthData[] = [
         amount: 24.0,
       },
       {
-        id: 't041',
+        id: tid('t041'),
         date: '23/03/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
@@ -355,7 +357,7 @@ export const mockData: MonthData[] = [
         amount: 42.0,
       },
       {
-        id: 't042',
+        id: tid('t042'),
         date: '28/03/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
@@ -365,7 +367,7 @@ export const mockData: MonthData[] = [
 
       // Lazer
       {
-        id: 't043',
+        id: tid('t043'),
         date: '05/03/2026',
         category: 'Lazer',
         subcategory: 'Bar',
@@ -373,7 +375,7 @@ export const mockData: MonthData[] = [
         amount: 112.0,
       },
       {
-        id: 't044',
+        id: tid('t044'),
         date: '13/03/2026',
         category: 'Lazer',
         subcategory: 'Cinema',
@@ -381,7 +383,7 @@ export const mockData: MonthData[] = [
         amount: 68.0,
       },
       {
-        id: 't045',
+        id: tid('t045'),
         date: '22/03/2026',
         category: 'Lazer',
         subcategory: 'Show',
@@ -391,7 +393,7 @@ export const mockData: MonthData[] = [
 
       // Assinaturas
       {
-        id: 't046',
+        id: tid('t046'),
         date: '01/03/2026',
         category: 'Assinaturas',
         subcategory: 'Streaming',
@@ -399,7 +401,7 @@ export const mockData: MonthData[] = [
         amount: 39.9,
       },
       {
-        id: 't047',
+        id: tid('t047'),
         date: '01/03/2026',
         category: 'Assinaturas',
         subcategory: 'Streaming',
@@ -407,7 +409,7 @@ export const mockData: MonthData[] = [
         amount: 21.9,
       },
       {
-        id: 't048',
+        id: tid('t048'),
         date: '01/03/2026',
         category: 'Assinaturas',
         subcategory: 'Serviço digital',
@@ -417,7 +419,7 @@ export const mockData: MonthData[] = [
 
       // Compras
       {
-        id: 't049',
+        id: tid('t049'),
         date: '08/03/2026',
         category: 'Compras',
         subcategory: 'Roupas',
@@ -425,7 +427,7 @@ export const mockData: MonthData[] = [
         amount: 138.0,
       },
       {
-        id: 't050',
+        id: tid('t050'),
         date: '18/03/2026',
         category: 'Compras',
         subcategory: 'Beleza',
@@ -435,7 +437,7 @@ export const mockData: MonthData[] = [
 
       // Saúde
       {
-        id: 't051',
+        id: tid('t051'),
         date: '04/03/2026',
         category: 'Saúde',
         subcategory: 'Academia',
@@ -443,7 +445,7 @@ export const mockData: MonthData[] = [
         amount: 99.9,
       },
       {
-        id: 't052',
+        id: tid('t052'),
         date: '17/03/2026',
         category: 'Saúde',
         subcategory: 'Farmácia',
@@ -453,7 +455,7 @@ export const mockData: MonthData[] = [
 
       // Educação
       {
-        id: 't053',
+        id: tid('t053'),
         date: '10/03/2026',
         category: 'Educação',
         subcategory: 'Curso online',
@@ -468,7 +470,7 @@ export const mockData: MonthData[] = [
     transactions: [
       // Alimentação
       {
-        id: 't054',
+        id: tid('t054'),
         date: '01/04/2026',
         category: 'Alimentação',
         subcategory: 'Delivery',
@@ -476,7 +478,7 @@ export const mockData: MonthData[] = [
         amount: 49.9,
       },
       {
-        id: 't055',
+        id: tid('t055'),
         date: '05/04/2026',
         category: 'Alimentação',
         subcategory: 'Lanchonete',
@@ -484,7 +486,7 @@ export const mockData: MonthData[] = [
         amount: 18.5,
       },
       {
-        id: 't056',
+        id: tid('t056'),
         date: '07/04/2026',
         category: 'Alimentação',
         subcategory: 'Delivery',
@@ -494,7 +496,7 @@ export const mockData: MonthData[] = [
 
       // Transporte semana 1 — muito pesado
       {
-        id: 't057',
+        id: tid('t057'),
         date: '01/04/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
@@ -502,7 +504,7 @@ export const mockData: MonthData[] = [
         amount: 34.0,
       },
       {
-        id: 't058',
+        id: tid('t058'),
         date: '02/04/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
@@ -510,7 +512,7 @@ export const mockData: MonthData[] = [
         amount: 37.0,
       },
       {
-        id: 't059',
+        id: tid('t059'),
         date: '03/04/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
@@ -518,7 +520,7 @@ export const mockData: MonthData[] = [
         amount: 42.0,
       },
       {
-        id: 't060',
+        id: tid('t060'),
         date: '03/04/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
@@ -526,7 +528,7 @@ export const mockData: MonthData[] = [
         amount: 48.0,
       },
       {
-        id: 't061',
+        id: tid('t061'),
         date: '04/04/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
@@ -534,7 +536,7 @@ export const mockData: MonthData[] = [
         amount: 39.0,
       },
       {
-        id: 't092',
+        id: tid('t092'),
         date: '04/04/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
@@ -542,7 +544,7 @@ export const mockData: MonthData[] = [
         amount: 78.0,
       },
       {
-        id: 't062',
+        id: tid('t062'),
         date: '05/04/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
@@ -550,7 +552,7 @@ export const mockData: MonthData[] = [
         amount: 36.0,
       },
       {
-        id: 't063',
+        id: tid('t063'),
         date: '06/04/2026',
         category: 'Transporte',
         subcategory: 'Combustível',
@@ -558,7 +560,7 @@ export const mockData: MonthData[] = [
         amount: 160.0,
       },
       {
-        id: 't064',
+        id: tid('t064'),
         date: '06/04/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
@@ -566,7 +568,7 @@ export const mockData: MonthData[] = [
         amount: 54.0,
       },
       {
-        id: 't065',
+        id: tid('t065'),
         date: '07/04/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
@@ -576,7 +578,7 @@ export const mockData: MonthData[] = [
 
       // Compra por impulso semana 1
       {
-        id: 't066',
+        id: tid('t066'),
         date: '04/04/2026',
         category: 'Compras',
         subcategory: 'Roupas',
@@ -586,7 +588,7 @@ export const mockData: MonthData[] = [
 
       // Alimentação
       {
-        id: 't067',
+        id: tid('t067'),
         date: '12/04/2026',
         category: 'Alimentação',
         subcategory: 'Restaurante',
@@ -596,7 +598,7 @@ export const mockData: MonthData[] = [
 
       // Transporte semana 2 — ainda pesado
       {
-        id: 't068',
+        id: tid('t068'),
         date: '08/04/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
@@ -604,7 +606,7 @@ export const mockData: MonthData[] = [
         amount: 36.0,
       },
       {
-        id: 't069',
+        id: tid('t069'),
         date: '08/04/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
@@ -612,7 +614,7 @@ export const mockData: MonthData[] = [
         amount: 48.0,
       },
       {
-        id: 't070',
+        id: tid('t070'),
         date: '09/04/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
@@ -620,7 +622,7 @@ export const mockData: MonthData[] = [
         amount: 39.5,
       },
       {
-        id: 't071',
+        id: tid('t071'),
         date: '10/04/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
@@ -628,7 +630,7 @@ export const mockData: MonthData[] = [
         amount: 44.0,
       },
       {
-        id: 't072',
+        id: tid('t072'),
         date: '10/04/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
@@ -636,7 +638,7 @@ export const mockData: MonthData[] = [
         amount: 67.0,
       },
       {
-        id: 't073',
+        id: tid('t073'),
         date: '11/04/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
@@ -644,7 +646,7 @@ export const mockData: MonthData[] = [
         amount: 41.0,
       },
       {
-        id: 't074',
+        id: tid('t074'),
         date: '12/04/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
@@ -652,7 +654,7 @@ export const mockData: MonthData[] = [
         amount: 58.0,
       },
       {
-        id: 't075',
+        id: tid('t075'),
         date: '13/04/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
@@ -660,7 +662,7 @@ export const mockData: MonthData[] = [
         amount: 73.0,
       },
       {
-        id: 't076',
+        id: tid('t076'),
         date: '13/04/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
@@ -668,7 +670,7 @@ export const mockData: MonthData[] = [
         amount: 33.0,
       },
       {
-        id: 't077',
+        id: tid('t077'),
         date: '14/04/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
@@ -678,7 +680,7 @@ export const mockData: MonthData[] = [
 
       // Compra por impulso semana 2
       {
-        id: 't078',
+        id: tid('t078'),
         date: '11/04/2026',
         category: 'Compras',
         subcategory: 'Beleza',
@@ -688,7 +690,7 @@ export const mockData: MonthData[] = [
 
       // Assinaturas fixas
       {
-        id: 't079',
+        id: tid('t079'),
         date: '15/04/2026',
         category: 'Assinaturas',
         subcategory: 'Streaming',
@@ -696,7 +698,7 @@ export const mockData: MonthData[] = [
         amount: 39.9,
       },
       {
-        id: 't080',
+        id: tid('t080'),
         date: '15/04/2026',
         category: 'Assinaturas',
         subcategory: 'Streaming',
@@ -704,7 +706,7 @@ export const mockData: MonthData[] = [
         amount: 21.9,
       },
       {
-        id: 't081',
+        id: tid('t081'),
         date: '15/04/2026',
         category: 'Assinaturas',
         subcategory: 'Serviço digital',
@@ -714,7 +716,7 @@ export const mockData: MonthData[] = [
 
       // Transporte semana 3 — caiu muito
       {
-        id: 't082',
+        id: tid('t082'),
         date: '19/04/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
@@ -724,7 +726,7 @@ export const mockData: MonthData[] = [
 
       // Alimentação semana 3
       {
-        id: 't083',
+        id: tid('t083'),
         date: '17/04/2026',
         category: 'Alimentação',
         subcategory: 'Mercado',
@@ -734,7 +736,7 @@ export const mockData: MonthData[] = [
 
       // Saúde
       {
-        id: 't084',
+        id: tid('t084'),
         date: '16/04/2026',
         category: 'Saúde',
         subcategory: 'Academia',
@@ -742,7 +744,7 @@ export const mockData: MonthData[] = [
         amount: 99.9,
       },
       {
-        id: 't085',
+        id: tid('t085'),
         date: '20/04/2026',
         category: 'Saúde',
         subcategory: 'Farmácia',
@@ -752,7 +754,7 @@ export const mockData: MonthData[] = [
 
       // Educação
       {
-        id: 't086',
+        id: tid('t086'),
         date: '18/04/2026',
         category: 'Educação',
         subcategory: 'Curso online',
@@ -762,7 +764,7 @@ export const mockData: MonthData[] = [
 
       // FIX: Compra por impulso semana 3
       {
-        id: 't087',
+        id: tid('t087'),
         date: '20/04/2026',
         category: 'Compras',
         subcategory: 'Roupas',
@@ -772,7 +774,7 @@ export const mockData: MonthData[] = [
 
       // Alimentação básica
       {
-        id: 't088',
+        id: tid('t088'),
         date: '26/04/2026',
         category: 'Alimentação',
         subcategory: 'Mercado',
@@ -782,7 +784,7 @@ export const mockData: MonthData[] = [
 
       // Lazer mínimo
       {
-        id: 't089',
+        id: tid('t089'),
         date: '24/04/2026',
         category: 'Lazer',
         subcategory: 'Bar',
@@ -792,7 +794,7 @@ export const mockData: MonthData[] = [
 
       // Compra por impulso semana 4
       {
-        id: 't090',
+        id: tid('t090'),
         date: '28/04/2026',
         category: 'Compras',
         subcategory: 'Eletrônicos',
@@ -802,7 +804,7 @@ export const mockData: MonthData[] = [
 
       // Transporte mínimo semana 4
       {
-        id: 't091',
+        id: tid('t091'),
         date: '29/04/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
