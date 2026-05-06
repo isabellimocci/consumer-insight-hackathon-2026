@@ -112,8 +112,8 @@ Desenvolvido com 💜 no **Hackathon Elas+Tech 2026 — Ada & Artemisia**
 
 | Nome | Papel | GitHub | LinkedIn |
 |---|---|---|---|
-| **Isabelli Mocci** | Frontend ·  | [isabellimocci](https://github.com/isabellimocci) | [/in/isabellimocci](https://linkedin.com/in/isabellimocci) |
-| **Taisa Soares** | Gestão · Frontend  | [taisasoares](https://github.com/taisasoares) | [/in/taisasoares](https://www.linkedin.com/in/taisasoares) |
+| **Isabelli Mocci** | Frontend ·  | [isabellimocci](https://github.com/isabellimocci) | [/in/isabellimocci](https://www.linkedin.com/in/isabellimocci) |
+| **Taisa Soares** | Gestão · Frontend | [taisasoares](https://github.com/taisasoares) | [/in/taisasoares](https://www.linkedin.com/in/taisasoares) |
 | **Fabianne Costa** | Frontend ·  | [AnneCosta](https://github.com/AnneCosta) | [/in/fabiannecosta](https://www.linkedin.com/in/fabiannecosta) |
 | **Joyce Pereira** | Frontend ·  | [joyceps44](https://github.com/joyceps44) | [/in/joycepereirasantos](https://www.linkedin.com/in/joycepereirasantos) |
 | **Priscila Oliveira** | Frontend ·  | [PriOliverS](https://github.com/PriOliverS) | [/in/priscila-soares-de-oliveira-47aa06233/](https://www.linkedin.com/in/priscila-soares-de-oliveira-47aa06233/) |
