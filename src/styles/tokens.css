@@ -1,21 +1,21 @@
 @import 'tailwindcss';
 
 @theme {
-	--color-primary: oklch(0.984 0.0147 80.71);
-	--color-surface: oklch(0.8608 0.0438 133.49);
-	--color-bg: oklch(0.913 0.0239 133.47);
-	--color-text: oklch(0.4364 0.0588 142.9);
-	--color-danger: oklch(0.6307 0.194 29.44);
-	--color-success: oklch(0.708 0.0982 132.04);
+  --color-primary: oklch(0.984 0.0147 80.71);
+  --color-surface: oklch(0.8608 0.0438 133.49);
+  --color-bg: oklch(0.913 0.0239 133.47);
+  --color-text: oklch(0.4364 0.0588 142.9);
+  --color-danger: oklch(0.6307 0.194 29.44);
+  --color-success: oklch(0.708 0.0982 132.04);
 
-	--font-size-sm: 1.2rem;
-	--font-size-base: 1.6rem;
-	--font-size-lg: 2.1rem;
-	--font-size-xl: 2.8rem;
+  --font-size-sm: 1.2rem;
+  --font-size-base: 1.6rem;
+  --font-size-lg: 2.1rem;
+  --font-size-xl: 2.8rem;
 
-	--spacing-xs: 0.4rem;
-	--spacing-sm: 0.8rem;
-	--spacing-md: 1.6rem;
-	--spacing-lg: 3.2rem;
-	--spacing-xl: 6.4rem;
+  --spacing-xs: 0.4rem;
+  --spacing-sm: 0.8rem;
+  --spacing-md: 1.6rem;
+  --spacing-lg: 3.2rem;
+  --spacing-xl: 6.4rem;
 }
