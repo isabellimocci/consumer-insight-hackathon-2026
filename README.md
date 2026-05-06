@@ -14,6 +14,7 @@
 - [Funcionalidades](#-funcionalidades)
 - [Screenshots](#-screenshots)
 - [Tecnologias](#-tecnologias)
+- [Estrutura de Pastas](#-estrutura-de-pastas)
 - [Time](#-time)
 - [Licença](#-licença)
 
@@ -86,7 +87,26 @@ Recharts foi escolhido por ser **React-first**: a API é declarativa em JSX (`<B
 
 ---
 
-## 👩‍💻 Time
+## � Estrutura de Pastas
+
+```
+src/
+├── components/   # Componentes React reutilizáveis (botões, cards, inputs, etc.)
+├── pages/        # Telas completas da aplicação (Transações, Dashboard, Vilão, Insights)
+├── utils/        # Funções utilitárias puras (formatação, cálculos, helpers)
+├── data/         # Dados mockados em JSON (sem backend nesta versão)
+├── types/        # Interfaces e tipos TypeScript compartilhados entre módulos
+├── styles/       # Tokens de design, variáveis CSS e estilos globais
+├── App.tsx       # Componente raiz com configuração de rotas
+├── main.tsx      # Entry point — monta o React no DOM
+└── index.css     # Reset CSS e configuração do Tailwind
+```
+
+> Cada pasta contém um `index.ts` que serve como barrel file para re-exports futuros.
+
+---
+
+## �👩‍💻 Time
 
 Desenvolvido com 💜 no **Hackathon Elas+Tech 2026 — Ada & Artemisia**
 
