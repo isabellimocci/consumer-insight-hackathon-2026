@@ -1,3 +1,3 @@
 export default function InsightsPage() {
-  return <h1>Insights</h1>;
+  return <h1>Insights</h1>
 }

@@ -36,12 +36,12 @@ Fluxo transforma transações brutas em **insights comportamentais**: identifica
 
 ## ✨ Funcionalidades
 
-| Tela | Funcionalidade | Descrição |
-|------|---------------|-----------|
-| **Transações** | Listagem com filtros | Histórico mensal com filtro por categoria e busca por texto |
-| **Dashboard** | Visão geral do mês | KPIs, gráfico de pizza por categoria e destaque do vilão |
-| **Vilão do Mês** | Análise da pior categoria | Detalhamento da categoria que mais cresceu, com comparação mensal |
-| **Insights** | Perfil comportamental | Arquétipo de consumo, padrão semanal, categoria em crescimento e alertas |
+| Tela             | Funcionalidade            | Descrição                                                                |
+| ---------------- | ------------------------- | ------------------------------------------------------------------------ |
+| **Transações**   | Listagem com filtros      | Histórico mensal com filtro por categoria e busca por texto              |
+| **Dashboard**    | Visão geral do mês        | KPIs, gráfico de pizza por categoria e destaque do vilão                 |
+| **Vilão do Mês** | Análise da pior categoria | Detalhamento da categoria que mais cresceu, com comparação mensal        |
+| **Insights**     | Perfil comportamental     | Arquétipo de consumo, padrão semanal, categoria em crescimento e alertas |
 
 ---
 
@@ -58,14 +58,14 @@ Fluxo transforma transações brutas em **insights comportamentais**: identifica
 
 ### Frontend
 
-| Tecnologia | Versão | Uso |
-|---|---|---|
-| [React](https://react.dev/) | 19.2 | Biblioteca JS para criação de UI |
-| [TypeScript](https://www.typescriptlang.org/) | 6.0.2 | Tipagem estática |
-| [Vite](https://vitejs.dev/) | 8.0.10 | Build tool e dev server |
-| [Tailwind CSS](https://tailwindcss.com/) | 4.2 | Estilização utilitária |
-| [shadcn/ui](https://ui.shadcn.com/) | 4.7 | Componentes acessíveis com Tailwind |
-| [Recharts](https://recharts.org/) | 3.8 | Gráficos |
+| Tecnologia                                    | Versão | Uso                                 |
+| --------------------------------------------- | ------ | ----------------------------------- |
+| [React](https://react.dev/)                   | 19.2   | Biblioteca JS para criação de UI    |
+| [TypeScript](https://www.typescriptlang.org/) | 6.0.2  | Tipagem estática                    |
+| [Vite](https://vitejs.dev/)                   | 8.0.10 | Build tool e dev server             |
+| [Tailwind CSS](https://tailwindcss.com/)      | 4.2    | Estilização utilitária              |
+| [shadcn/ui](https://ui.shadcn.com/)           | 4.7    | Componentes acessíveis com Tailwind |
+| [Recharts](https://recharts.org/)             | 3.8    | Gráficos                            |
 
 ## Por que essas escolhas?
 
@@ -73,7 +73,7 @@ Fluxo transforma transações brutas em **insights comportamentais**: identifica
 
 `Tailwind v4` foi escolhido como base de estilização porque metade do time tem experiência intermediária em CSS e não pode gerenciar arquivos `.module.css` de forma sustentável em um prazo de hackathon. Com Tailwind, não há contexto extra para manter porque toda a estilização acontece inline no JSX. Já a biblioteca `shadcn/ui` complementa o Tailwind entregando componentes React completamente tipados com acessibilidade embutida (ARIA, foco, teclado).
 
->[!NOTE]
+> [!NOTE]
 > **Nota de instalação:** Recharts funciona nativamente via `<ChartContainer>` do shadcn: basta instalar o componente de chart pelo CLI do shadcn.
 
 ---
@@ -110,13 +110,13 @@ src/
 
 Desenvolvido com 💜 no **Hackathon Elas+Tech 2026 — Ada & Artemisia**
 
-| Nome | Papel | GitHub | LinkedIn |
-|---|---|---|---|
-| **Isabelli Mocci** | Frontend ·  | [isabellimocci](https://github.com/isabellimocci) | [/in/isabellimocci](https://www.linkedin.com/in/isabellimocci) |
-| **Taisa Soares** | Gestão · Frontend | [taisasoares](https://github.com/taisasoares) | [/in/taisasoares](https://www.linkedin.com/in/taisasoares) |
-| **Fabianne Costa** | Frontend ·  | [AnneCosta](https://github.com/AnneCosta) | [/in/fabiannecosta](https://www.linkedin.com/in/fabiannecosta) |
-| **Joyce Pereira** | Frontend ·  | [joyceps44](https://github.com/joyceps44) | [/in/joycepereirasantos](https://www.linkedin.com/in/joycepereirasantos) |
-| **Priscila Oliveira** | Frontend ·  | [PriOliverS](https://github.com/PriOliverS) | [/in/priscila-soares-de-oliveira-47aa06233/](https://www.linkedin.com/in/priscila-soares-de-oliveira-47aa06233/) |
+| Nome                  | Papel             | GitHub                                            | LinkedIn                                                                                                         |
+| --------------------- | ----------------- | ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| **Isabelli Mocci**    | Frontend ·        | [isabellimocci](https://github.com/isabellimocci) | [/in/isabellimocci](https://www.linkedin.com/in/isabellimocci)                                                   |
+| **Taisa Soares**      | Gestão · Frontend | [taisasoares](https://github.com/taisasoares)     | [/in/taisasoares](https://www.linkedin.com/in/taisasoares)                                                       |
+| **Fabianne Costa**    | Frontend ·        | [AnneCosta](https://github.com/AnneCosta)         | [/in/fabiannecosta](https://www.linkedin.com/in/fabiannecosta)                                                   |
+| **Joyce Pereira**     | Frontend ·        | [joyceps44](https://github.com/joyceps44)         | [/in/joycepereirasantos](https://www.linkedin.com/in/joycepereirasantos)                                         |
+| **Priscila Oliveira** | Frontend ·        | [PriOliverS](https://github.com/PriOliverS)       | [/in/priscila-soares-de-oliveira-47aa06233/](https://www.linkedin.com/in/priscila-soares-de-oliveira-47aa06233/) |
 
 ---
 

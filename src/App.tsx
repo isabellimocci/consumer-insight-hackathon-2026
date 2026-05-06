@@ -1,9 +1,9 @@
-import DashboardPage from '@pages/DashboardPage';
-import InsightsPage from '@pages/InsightsPage';
-import TransacoesPage from '@pages/TransacoesPage';
-import VilaoPage from '@pages/VilaoPage';
-import { ROUTES } from '@utils/routes';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import DashboardPage from '@pages/DashboardPage'
+import InsightsPage from '@pages/InsightsPage'
+import TransacoesPage from '@pages/TransacoesPage'
+import VilaoPage from '@pages/VilaoPage'
+import { ROUTES } from '@utils/routes'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 const router = createBrowserRouter([
   {
@@ -24,12 +24,16 @@ const router = createBrowserRouter([
   },
   {
     path: ROUTES.NOT_FOUND,
-    element: <div><h1>404 - Página não encontrada</h1></div>,
+    element: (
+      <div>
+        <h1>404 - Página não encontrada</h1>
+      </div>
+    ),
   },
-]);
+])
 
 function App() {
-  return <RouterProvider router={router} />;
+  return <RouterProvider router={router} />
 }
 
-export default App;
+export default App
