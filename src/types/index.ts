@@ -27,3 +27,9 @@ export interface UserProfile {
   name: string
   archetype: string | null
 }
+
+export interface CategoryTotal {
+  category: Category;
+  total: number;
+  count: number;
+}
