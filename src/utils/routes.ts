@@ -4,4 +4,4 @@ export const ROUTES = {
   VILAO: '/vilao',
   INSIGHTS: '/insights',
   NOT_FOUND: '*',
-};
+}
