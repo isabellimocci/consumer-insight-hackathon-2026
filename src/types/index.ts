@@ -7,8 +7,10 @@ export type Category =
   | 'Saúde'
   | 'Educação'
 
+export type TransactionId = string & { readonly __brand: 'TransactionId' }
+
 export interface Transaction {
-  id: string & { readonly _brand: 'TransactionId' }
+  id: TransactionId
   date: string // formato: dd/mm/aaaa
   category: Category
   subcategory: string
