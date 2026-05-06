@@ -1,14 +1,14 @@
-import type { Transaction, CategoryTotal } from '../types';
+import type { Transaction, CategoryTotal, Category } from '../types';
 
 export function getTotalByCategory(
   transactions: Transaction[],
 ): CategoryTotal[] {
-  const map = new Map<string, CategoryTotal>();
+  const map = new Map<Category, CategoryTotal>();
 
   for (const tx of transactions) {
     const entry = map.get(tx.category);
     if (entry) {
-      entry.total += tx.amount;
+      entry.total = Math.round((entry.total + tx.amount) * 100) / 100;
       entry.count += 1;
     } else {
       map.set(tx.category, {
@@ -19,5 +19,7 @@ export function getTotalByCategory(
     }
   }
 
-  return Array.from(map.values()).sort((a, b) => b.total - a.total);
+  return Array.from(map.values()).sort(
+    (a, b) => b.total - a.total || a.category.localeCompare(b.category),
+  );
 }
