@@ -2,27 +2,28 @@ import DashboardPage from '@pages/DashboardPage';
 import InsightsPage from '@pages/InsightsPage';
 import TransacoesPage from '@pages/TransacoesPage';
 import VilaoPage from '@pages/VilaoPage';
+import { ROUTES } from '@utils/routes';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: ROUTES.DASHBOARD,
     element: <DashboardPage />,
   },
   {
-    path: '/transacoes',
+    path: ROUTES.TRANSACOES,
     element: <TransacoesPage />,
   },
   {
-    path: '/vilao',
+    path: ROUTES.VILAO,
     element: <VilaoPage />,
   },
   {
-    path: '/insights',
+    path: ROUTES.INSIGHTS,
     element: <InsightsPage />,
   },
   {
-    path: '*',
+    path: ROUTES.NOT_FOUND,
     element: <div><h1>404 - Página não encontrada</h1></div>,
   },
 ]);
