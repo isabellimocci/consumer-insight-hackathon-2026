@@ -103,15 +103,15 @@ export const mockData = [
       { id: "t056", date: "07/05/2025", category: "Alimentação", subcategory: "Delivery", description: "iFood - Outback", amount: 72.00 },
 
       // Transporte semana 1 — muito pesado
-      { id: "t057", date: "01/05/2025", category: "Transporte", subcategory: "Uber/99", description: "Uber - faculdade manhã", amount: 27.00 },
-      { id: "t058", date: "02/05/2025", category: "Transporte", subcategory: "Uber/99", description: "Uber - faculdade tarde", amount: 29.50 },
-      { id: "t059", date: "03/05/2025", category: "Transporte", subcategory: "Uber/99", description: "Uber - shopping com amigas", amount: 34.00 },
-      { id: "t060", date: "03/05/2025", category: "Transporte", subcategory: "Uber/99", description: "Uber - ida ao trabalho extra", amount: 38.00 },
-      { id: "t061", date: "04/05/2025", category: "Transporte", subcategory: "Uber/99", description: "Uber - trabalho", amount: 31.00 },
-      { id: "t062", date: "05/05/2025", category: "Transporte", subcategory: "Uber/99", description: "Uber - faculdade", amount: 28.00 },
+      { id: "t057", date: "01/05/2025", category: "Transporte", subcategory: "Uber/99", description: "Uber - faculdade manhã", amount: 34.00 },
+      { id: "t058", date: "02/05/2025", category: "Transporte", subcategory: "Uber/99", description: "Uber - faculdade tarde", amount: 37.00 },
+      { id: "t059", date: "03/05/2025", category: "Transporte", subcategory: "Uber/99", description: "Uber - shopping com amigas", amount: 42.00 },
+      { id: "t060", date: "03/05/2025", category: "Transporte", subcategory: "Uber/99", description: "Uber - ida ao trabalho extra", amount: 48.00 },
+      { id: "t061", date: "04/05/2025", category: "Transporte", subcategory: "Uber/99", description: "Uber - trabalho", amount: 39.00 },
+      { id: "t062", date: "05/05/2025", category: "Transporte", subcategory: "Uber/99", description: "Uber - faculdade", amount: 36.00 },
       { id: "t063", date: "06/05/2025", category: "Transporte", subcategory: "Combustível", description: "Posto Shell - tanque cheio", amount: 160.00 },
-      { id: "t064", date: "06/05/2025", category: "Transporte", subcategory: "Uber/99", description: "99 - volta tarde do trabalho", amount: 44.00 },
-      { id: "t065", date: "07/05/2025", category: "Transporte", subcategory: "Uber/99", description: "99 - festa aniversário", amount: 52.00 },
+      { id: "t064", date: "06/05/2025", category: "Transporte", subcategory: "Uber/99", description: "99 - volta tarde do trabalho", amount: 54.00 },
+      { id: "t065", date: "07/05/2025", category: "Transporte", subcategory: "Uber/99", description: "99 - festa aniversário", amount: 62.00 },
 
       // Compra por impulso semana 1
       { id: "t066", date: "04/05/2025", category: "Compras", subcategory: "Roupas", description: "Shein - compra impulsiva madrugada", amount: 212.00 },
@@ -122,14 +122,14 @@ export const mockData = [
       { id: "t067", date: "12/05/2025", category: "Alimentação", subcategory: "Restaurante", description: "Dia das Mães - restaurante", amount: 187.00 },
 
       // Transporte semana 2 — ainda pesado
-      { id: "t068", date: "08/05/2025", category: "Transporte", subcategory: "Uber/99", description: "Uber - faculdade manhã", amount: 29.00 },
-      { id: "t069", date: "08/05/2025", category: "Transporte", subcategory: "Uber/99", description: "Uber - reunião presencial", amount: 39.00 },
-      { id: "t070", date: "09/05/2025", category: "Transporte", subcategory: "Uber/99", description: "Uber - faculdade tarde", amount: 31.50 },
-      { id: "t071", date: "10/05/2025", category: "Transporte", subcategory: "Uber/99", description: "Uber - shopping", amount: 36.00 },
-      { id: "t072", date: "10/05/2025", category: "Transporte", subcategory: "Uber/99", description: "Uber - consulta longe", amount: 55.00 },
-      { id: "t073", date: "11/05/2025", category: "Transporte", subcategory: "Uber/99", description: "Uber - trabalho", amount: 33.00 },
-      { id: "t074", date: "12/05/2025", category: "Transporte", subcategory: "Uber/99", description: "Uber - Dia das Mães jantar", amount: 48.00 },
-      { id: "t075", date: "13/05/2025", category: "Transporte", subcategory: "Uber/99", description: "99 - volta da balada", amount: 61.00 },
+      { id: "t068", date: "08/05/2025", category: "Transporte", subcategory: "Uber/99", description: "Uber - faculdade manhã", amount: 36.00 },
+      { id: "t069", date: "08/05/2025", category: "Transporte", subcategory: "Uber/99", description: "Uber - reunião presencial", amount: 48.00 },
+      { id: "t070", date: "09/05/2025", category: "Transporte", subcategory: "Uber/99", description: "Uber - faculdade tarde", amount: 39.50 },
+      { id: "t071", date: "10/05/2025", category: "Transporte", subcategory: "Uber/99", description: "Uber - shopping", amount: 44.00 },
+      { id: "t072", date: "10/05/2025", category: "Transporte", subcategory: "Uber/99", description: "Uber - consulta longe", amount: 67.00 },
+      { id: "t073", date: "11/05/2025", category: "Transporte", subcategory: "Uber/99", description: "Uber - trabalho", amount: 41.00 },
+      { id: "t074", date: "12/05/2025", category: "Transporte", subcategory: "Uber/99", description: "Uber - Dia das Mães jantar", amount: 58.00 },
+      { id: "t075", date: "13/05/2025", category: "Transporte", subcategory: "Uber/99", description: "99 - volta da balada", amount: 73.00 },
       { id: "t076", date: "13/05/2025", category: "Transporte", subcategory: "Uber/99", description: "99 - ida ao shopping", amount: 33.00 },
       { id: "t077", date: "14/05/2025", category: "Transporte", subcategory: "Uber/99", description: "Uber - faculdade", amount: 27.50 },
 
