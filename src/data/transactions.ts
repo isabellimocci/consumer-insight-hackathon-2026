@@ -1,4 +1,18 @@
-export const mockData = [
+export interface Transaction {
+  id: string;
+  date: string;
+  category: string;
+  subcategory: string;
+  description: string;
+  amount: number;
+}
+
+export interface MonthData {
+  month: string;
+  transactions: Transaction[];
+}
+
+export const mockData: MonthData[] = [
   {
     month: "03/2025",
     transactions: [
