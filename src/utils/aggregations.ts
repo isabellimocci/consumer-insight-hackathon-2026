@@ -1,4 +1,4 @@
-import type { Transaction, CategoryTotal, Category } from '../types';
+import type { Category,CategoryTotal, Transaction } from '../types';
 
 export function getTotalByCategory(
   transactions: Transaction[],
