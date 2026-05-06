@@ -13,7 +13,7 @@ export const mockData = [
       { id: "t006", date: "24/03/2025", category: "Alimentação", subcategory: "Delivery", description: "iFood - Subway", amount: 32.00 },
       { id: "t007", date: "28/03/2025", category: "Alimentação", subcategory: "Lanchonete", description: "Bob's - shopping", amount: 29.90 },
 
-      // Transporte — FIX: Uber/99 domina desde março (combustível reduzido para R$60)
+      // Transporte — Uber/99 domina desde março
       { id: "t008", date: "04/03/2025", category: "Transporte", subcategory: "Uber/99", description: "Uber - faculdade", amount: 18.50 },
       { id: "t009", date: "07/03/2025", category: "Transporte", subcategory: "Uber/99", description: "Uber - shopping", amount: 22.00 },
       { id: "t010", date: "11/03/2025", category: "Transporte", subcategory: "Uber/99", description: "Uber - trabalho", amount: 21.00 },
@@ -175,18 +175,4 @@ export const mockData = [
       { id: "t091", date: "29/05/2025", category: "Transporte", subcategory: "Uber/99", description: "Uber - última corrida do mês", amount: 19.00 },
     ],
   },
-]
-
-/*
-  VERIFICAÇÃO MAIO:
-  Transporte: 27+29,5+34+38+31+28+160+44+52+29+39+31,5+36+55+33+48+61+33+27,5+24+19 = ~R$1.079 (≈42%)
-  Alimentação: 49,9+18,5+72+187+112,3+89,4 = ~R$529 (≈21%)
-  Compras: 212+349+98+67 = ~R$726 (≈28%)
-  Demais: ~R$335
-  Total: ~R$2.560
-
-  ✅ Transporte é categoria dominante em maio
-  ✅ Transporte > 40% do total de maio
-  ✅ Uber/99 domina sobre Combustível em todos os 3 meses
-  ✅ Compra por impulso em todas as 4 semanas de maio
-*/
+] as unknown as MonthData[]
