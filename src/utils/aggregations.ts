@@ -6,6 +6,8 @@ import type {
   Transaction,
 } from '../types'
 
+export const NEW_CATEGORY_SENTINEL = 999
+
 export function getTotalByCategory(transactions: Transaction[]): CategoryTotal[] {
   const map = new Map<Category, CategoryTotal>()
 
@@ -56,7 +58,7 @@ export function compareTwoMonths(
 
     let variationPercent: number
     if (previous === 0) {
-      variationPercent = current > 0 ? 100 : 0
+      variationPercent = current > 0 ? NEW_CATEGORY_SENTINEL : 0
     } else if (current === 0) {
       variationPercent = -100
     } else {
