@@ -66,3 +66,9 @@ export interface GrowingCategoryResult {
   totals: number[] // [mês1, mês2, mês3]
   growthRate: number // crescimento médio percentual mês a mês
 }
+
+export interface EconomyRecommendation {
+  copy: string
+  savingsAmount: number
+  category: Category
+}

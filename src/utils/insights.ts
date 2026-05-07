@@ -1,4 +1,10 @@
-import type { GrowingCategoryResult, MonthData, Transaction, VilaoResult } from '../types'
+import type {
+  EconomyRecommendation,
+  GrowingCategoryResult,
+  MonthData,
+  Transaction,
+  VilaoResult,
+} from '../types'
 import { CATEGORIES } from '../types'
 import { compareTwoMonths, getTotalByCategory } from './aggregations'
 import { getEconomyCopy } from './copy'
@@ -57,4 +63,34 @@ export function getGrowingCategory(months: MonthData[]): GrowingCategoryResult |
   if (candidates.length === 0) return null
 
   return candidates.sort((a, b) => b.growthRate - a.growthRate)[0]
+}
+
+const ECONOMY_TEMPLATES: Record<string, (n: number, savings: string) => string> = {
+  Alimentação: (n, s) =>
+    `Se você tivesse feito ${n} ${n === 1 ? 'pedido' : 'pedidos'} de delivery a menos, teria sobrado ${s} este mês.`,
+  Transporte: (n, s) =>
+    `Trocando ${n} ${n === 1 ? 'corrida' : 'corridas'} de app por transporte público, você guardaria ${s}.`,
+  Lazer: (n, s) =>
+    `Com ${n} ${n === 1 ? 'programa' : 'programas'} mais em conta, você teria ${s} sobrando este mês.`,
+  Assinaturas: (n, s) =>
+    `Cancelando ${n} ${n === 1 ? 'assinatura' : 'assinaturas'} que não usa, você liberaria ${s} por mês.`,
+  Compras: (n, s) =>
+    `Evitando ${n} ${n === 1 ? 'compra' : 'compras'} por impulso, você teria guardado ${s}.`,
+  Saúde: (n, s) =>
+    `Revisando ${n} ${n === 1 ? 'gasto' : 'gastos'} com saúde, você poderia poupar ${s} este mês.`,
+  Educação: (n, s) =>
+    `Escolhendo ${n} ${n === 1 ? 'curso' : 'cursos'} com mais critério, você guardaria ${s} este mês.`,
+}
+
+export function getEconomyRecommendation(vilao: VilaoResult): EconomyRecommendation {
+  const txToRemove = Math.max(1, Math.round(vilao.transactionCount * 0.2))
+  const savings = vilao.savingsIfReduced20.toLocaleString('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+  })
+  return {
+    copy: ECONOMY_TEMPLATES[vilao.category](txToRemove, savings),
+    savingsAmount: vilao.savingsIfReduced20,
+    category: vilao.category,
+  }
 }
