@@ -1,5 +1,6 @@
 import type {
   Category,
+  CategoryTotal,
   EconomyRecommendation,
   GrowingCategoryResult,
   MonthData,
@@ -36,6 +37,14 @@ export function getVilaoDoMes(
     economyCopy: getEconomyCopy(vilao.category, vilao.variationPercent),
     savingsIfReduced20: Math.round(vilao.currentTotal * 0.2 * 100) / 100,
   }
+}
+
+export function getDominantCategory(transactions: Transaction[]): CategoryTotal | null {
+  const totals = getTotalByCategory(transactions)
+  if (totals.length === 0) {
+    return null
+  }
+  return totals[0]
 }
 
 export function getGrowingCategory(months: MonthData[]): GrowingCategoryResult | null {
