@@ -4,11 +4,7 @@ import { ConsumerProfileCard } from '@components/ConsumerProfileCard'
 import { GrowingCategoryCard } from '@components/GrowingCategoryCard'
 import { WeeklyPatternChart } from '@components/WeeklyPatternChart'
 import { useMonth } from '@contexts/useMonth'
-import {
-  getAllMonthsData,
-  getAvailableMonths,
-  getTransactionsByMonth,
-} from '@services/transactionService'
+import { getAllMonthsData, getTransactionsByMonth } from '@services/transactionService'
 import { getPercentageByCategory, getTotalByCategory } from '@utils/aggregations'
 import { formatCurrency, formatMonthLabel } from '@utils/formatters'
 import { getConsumerProfile, getGrowingCategory, getWeeklyPattern } from '@utils/insights'
@@ -18,12 +14,6 @@ export default function InsightsPage() {
   const { selectedMonth } = useMonth()
 
   const allMonthsData = useMemo(() => getAllMonthsData(), [])
-
-  const previousMonth = useMemo(() => {
-    const months = getAvailableMonths()
-    const idx = months.indexOf(selectedMonth)
-    return idx > 0 ? months[idx - 1] : null
-  }, [selectedMonth])
 
   const currentTxs = useMemo(() => getTransactionsByMonth(selectedMonth), [selectedMonth])
 
@@ -63,8 +53,6 @@ export default function InsightsPage() {
 
   const monthLabel = formatMonthLabel(selectedMonth)
   const shortMonth = monthLabel.split(' ')[0]
-
-  void previousMonth
 
   return (
     <div
