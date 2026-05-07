@@ -88,6 +88,6 @@ export function getWeeklyPattern(transactions: Transaction[]): WeeklyPattern[] {
   return ([1, 2, 3, 4] as const).map((week) => ({
     week,
     total: weekTotals[week],
-    percentage: monthTotal === 0 ? 0 : (weekTotals[week] / monthTotal) * 100,
+    percentage: monthTotal === 0 ? 0 : Math.round((weekTotals[week] / monthTotal) * 1000) / 10,
   }))
 }
