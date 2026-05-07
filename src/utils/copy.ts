@@ -1,11 +1,5 @@
-import type { Category } from '../types'
+import type { Category, ConsumerProfile } from '../types'
 import { NEW_CATEGORY_SENTINEL } from './aggregations'
-
-interface ArchetypeData {
-  archetype: string
-  emoji: string
-  description: string
-}
 
 const COPIES: Record<Category, (growth: number) => string> = {
   Alimentação: (g) =>
@@ -18,7 +12,7 @@ const COPIES: Record<Category, (growth: number) => string> = {
   Educação: (g) => `Educação cresceu ${g}%. Investimento em conhecimento tem retorno.`,
 }
 
-const ARCHETYPE_MAP: Record<string, ArchetypeData> = {
+const ARCHETYPE_MAP: Record<Category | 'default', ConsumerProfile> = {
   Alimentação: {
     archetype: 'O Sibarita',
     emoji: '🍽️',
@@ -62,7 +56,7 @@ const ARCHETYPE_MAP: Record<string, ArchetypeData> = {
   },
 }
 
-export function getArchetypeProfile(category: Category | null): ArchetypeData {
+export function getArchetypeProfile(category: Category | null): ConsumerProfile {
   return category ? ARCHETYPE_MAP[category] : ARCHETYPE_MAP['default']
 }
 
