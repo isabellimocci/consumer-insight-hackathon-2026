@@ -6,11 +6,20 @@
       "@components/*": ["components/*"],
       "@utils/*": ["utils/*"],
       "@data/*": ["data/*"],
+      "@services": ["services/index"],
       "@types/*": ["types/*"],
       "@pages/*": ["pages/*"],
-      "@styles/*": ["styles/*"]
+      "@styles/*": ["styles/*"],
+      "@services/*": ["services/*"]
     }
   },
   "files": [],
-  "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }]
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
 }

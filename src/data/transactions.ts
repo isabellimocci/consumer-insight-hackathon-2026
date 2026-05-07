@@ -1,61 +1,63 @@
-import type { MonthData } from '../types'
+import type { MonthData, TransactionId } from '../types'
 
-export const mockData = [
+const tid = (id: string) => id as TransactionId
+
+export const mockData: MonthData[] = [
   {
-    month: '03/2025',
+    month: '02/2026',
     transactions: [
       // Alimentação
       {
-        id: 't001',
-        date: '03/03/2025',
+        id: tid('t001'),
+        date: '03/02/2026',
         category: 'Alimentação',
         subcategory: 'Delivery',
         description: "iFood - McDonald's",
         amount: 42.9,
       },
       {
-        id: 't002',
-        date: '05/03/2025',
+        id: tid('t002'),
+        date: '05/02/2026',
         category: 'Alimentação',
         subcategory: 'Delivery',
         description: 'iFood - Burguer King',
         amount: 38.5,
       },
       {
-        id: 't003',
-        date: '08/03/2025',
+        id: tid('t003'),
+        date: '08/02/2026',
         category: 'Alimentação',
         subcategory: 'Restaurante',
         description: 'Restaurante Temakeria',
         amount: 67.0,
       },
       {
-        id: 't004',
-        date: '12/03/2025',
+        id: tid('t004'),
+        date: '12/02/2026',
         category: 'Alimentação',
         subcategory: 'Delivery',
         description: 'iFood - Pizza Hut',
         amount: 55.9,
       },
       {
-        id: 't005',
-        date: '18/03/2025',
+        id: tid('t005'),
+        date: '18/02/2026',
         category: 'Alimentação',
         subcategory: 'Mercado',
         description: 'Mercado Extra',
         amount: 134.7,
       },
       {
-        id: 't006',
-        date: '24/03/2025',
+        id: tid('t006'),
+        date: '24/02/2026',
         category: 'Alimentação',
         subcategory: 'Delivery',
         description: 'iFood - Subway',
         amount: 32.0,
       },
       {
-        id: 't007',
-        date: '28/03/2025',
+        id: tid('t007'),
+        date: '28/02/2026',
         category: 'Alimentação',
         subcategory: 'Lanchonete',
         description: "Bob's - shopping",
@@ -64,48 +66,48 @@ export const mockData = [
 
       // Transporte — Uber/99 domina desde março
       {
-        id: 't008',
-        date: '04/03/2025',
+        id: tid('t008'),
+        date: '04/02/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
         description: 'Uber - faculdade',
         amount: 18.5,
       },
       {
-        id: 't009',
-        date: '07/03/2025',
+        id: tid('t009'),
+        date: '07/02/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
         description: 'Uber - shopping',
         amount: 22.0,
       },
       {
-        id: 't010',
-        date: '11/03/2025',
+        id: tid('t010'),
+        date: '11/02/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
         description: 'Uber - trabalho',
         amount: 21.0,
       },
       {
-        id: 't011',
-        date: '14/03/2025',
+        id: tid('t011'),
+        date: '14/02/2026',
         category: 'Transporte',
         subcategory: 'Combustível',
         description: 'Posto Shell',
         amount: 60.0,
       },
       {
-        id: 't012',
-        date: '21/03/2025',
+        id: tid('t012'),
+        date: '21/02/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
         description: 'Uber - trabalho',
         amount: 19.9,
       },
       {
-        id: 't013',
-        date: '27/03/2025',
+        id: tid('t013'),
+        date: '27/02/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
         description: '99 - volta da festa',
@@ -114,24 +116,24 @@ export const mockData = [
 
       // Lazer
       {
-        id: 't014',
-        date: '02/03/2025',
+        id: tid('t014'),
+        date: '02/02/2026',
         category: 'Lazer',
         subcategory: 'Cinema',
         description: 'Cinemark - ingresso',
         amount: 36.0,
       },
       {
-        id: 't015',
-        date: '15/03/2025',
+        id: tid('t015'),
+        date: '15/02/2026',
         category: 'Lazer',
         subcategory: 'Bar',
         description: 'Bar do Alemão - saída',
         amount: 78.0,
       },
       {
-        id: 't016',
-        date: '22/03/2025',
+        id: tid('t016'),
+        date: '22/02/2026',
         category: 'Lazer',
         subcategory: 'Jogo',
         description: 'Steam - jogo em promoção',
@@ -140,24 +142,24 @@ export const mockData = [
 
       // Assinaturas
       {
-        id: 't017',
-        date: '01/03/2025',
+        id: tid('t017'),
+        date: '01/02/2026',
         category: 'Assinaturas',
         subcategory: 'Streaming',
         description: 'Netflix',
         amount: 39.9,
       },
       {
-        id: 't018',
-        date: '01/03/2025',
+        id: tid('t018'),
+        date: '01/02/2026',
         category: 'Assinaturas',
         subcategory: 'Streaming',
         description: 'Spotify',
         amount: 21.9,
       },
       {
-        id: 't019',
-        date: '10/03/2025',
+        id: tid('t019'),
+        date: '10/02/2026',
         category: 'Assinaturas',
         subcategory: 'Serviço digital',
         description: 'iCloud 50GB',
@@ -166,16 +168,16 @@ export const mockData = [
 
       // Compras
       {
-        id: 't020',
-        date: '09/03/2025',
+        id: tid('t020'),
+        date: '09/02/2026',
         category: 'Compras',
         subcategory: 'Roupas',
         description: 'Shein - blusa',
         amount: 64.0,
       },
       {
-        id: 't021',
-        date: '20/03/2025',
+        id: tid('t021'),
+        date: '20/02/2026',
         category: 'Compras',
         subcategory: 'Eletrônicos',
         description: 'Americanas - cabo USB',
@@ -184,16 +186,16 @@ export const mockData = [
 
       // Saúde
       {
-        id: 't022',
-        date: '11/03/2025',
+        id: tid('t022'),
+        date: '11/02/2026',
         category: 'Saúde',
         subcategory: 'Farmácia',
         description: 'Drogasil - medicamentos',
         amount: 58.4,
       },
       {
-        id: 't023',
-        date: '25/03/2025',
+        id: tid('t023'),
+        date: '25/02/2026',
         category: 'Saúde',
         subcategory: 'Academia',
         description: 'Smart Fit - mensalidade',
@@ -202,24 +204,24 @@ export const mockData = [
 
       // Educação
       {
-        id: 't024',
-        date: '06/03/2025',
+        id: tid('t024'),
+        date: '06/02/2026',
         category: 'Educação',
         subcategory: 'Curso online',
         description: 'Udemy - curso de React',
         amount: 27.9,
       },
       {
-        id: 't025',
-        date: '17/03/2025',
+        id: tid('t025'),
+        date: '17/02/2026',
         category: 'Educação',
         subcategory: 'Material',
         description: 'Amazon - livro técnico',
         amount: 89.9,
       },
       {
-        id: 't026',
-        date: '29/03/2025',
+        id: tid('t026'),
+        date: '28/02/2026',
         category: 'Educação',
         subcategory: 'Curso online',
         description: 'Alura - assinatura mensal',
@@ -229,60 +231,60 @@ export const mockData = [
   },
 
   {
-    month: '04/2025',
+    month: '03/2026',
     transactions: [
       // Alimentação
       {
-        id: 't027',
-        date: '01/04/2025',
+        id: tid('t027'),
+        date: '01/03/2026',
         category: 'Alimentação',
         subcategory: 'Delivery',
         description: 'iFood - Burguer King',
         amount: 45.9,
       },
       {
-        id: 't028',
-        date: '03/04/2025',
+        id: tid('t028'),
+        date: '03/03/2026',
         category: 'Alimentação',
         subcategory: 'Delivery',
         description: 'iFood - Outback',
         amount: 89.9,
       },
       {
-        id: 't029',
-        date: '07/04/2025',
+        id: tid('t029'),
+        date: '07/03/2026',
         category: 'Alimentação',
         subcategory: 'Lanchonete',
         description: 'Padaria perto do trabalho',
         amount: 24.5,
       },
       {
-        id: 't030',
-        date: '10/04/2025',
+        id: tid('t030'),
+        date: '10/03/2026',
         category: 'Alimentação',
         subcategory: 'Delivery',
         description: 'iFood - Spoleto',
         amount: 52.0,
       },
       {
-        id: 't031',
-        date: '15/04/2025',
+        id: tid('t031'),
+        date: '15/03/2026',
         category: 'Alimentação',
         subcategory: 'Mercado',
         description: 'Carrefour',
         amount: 148.2,
       },
       {
-        id: 't032',
-        date: '20/04/2025',
+        id: tid('t032'),
+        date: '20/03/2026',
         category: 'Alimentação',
         subcategory: 'Delivery',
         description: 'iFood - Sushi',
         amount: 97.0,
       },
       {
-        id: 't033',
-        date: '26/04/2025',
+        id: tid('t033'),
+        date: '26/03/2026',
         category: 'Alimentação',
         subcategory: 'Restaurante',
         description: 'Frango Assado - almoço',
@@ -291,72 +293,72 @@ export const mockData = [
 
       // Transporte — crescendo, Uber/99 dominando
       {
-        id: 't034',
-        date: '01/04/2025',
+        id: tid('t034'),
+        date: '01/03/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
         description: 'Uber - faculdade manhã',
         amount: 21.0,
       },
       {
-        id: 't035',
-        date: '03/04/2025',
+        id: tid('t035'),
+        date: '03/03/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
         description: 'Uber - faculdade tarde',
         amount: 23.5,
       },
       {
-        id: 't036',
-        date: '05/04/2025',
+        id: tid('t036'),
+        date: '05/03/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
         description: 'Uber - shopping',
         amount: 28.9,
       },
       {
-        id: 't037',
-        date: '09/04/2025',
+        id: tid('t037'),
+        date: '09/03/2026',
         category: 'Transporte',
         subcategory: 'Combustível',
         description: 'Posto Ipiranga',
         amount: 130.0,
       },
       {
-        id: 't038',
-        date: '12/04/2025',
+        id: tid('t038'),
+        date: '12/03/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
         description: 'Uber - trabalho',
         amount: 26.0,
       },
       {
-        id: 't039',
-        date: '16/04/2025',
+        id: tid('t039'),
+        date: '16/03/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
         description: '99 - consulta médica',
         amount: 19.9,
       },
       {
-        id: 't040',
-        date: '19/04/2025',
+        id: tid('t040'),
+        date: '19/03/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
         description: 'Uber - faculdade',
         amount: 24.0,
       },
       {
-        id: 't041',
-        date: '23/04/2025',
+        id: tid('t041'),
+        date: '23/03/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
         description: 'Uber - volta da festa',
         amount: 42.0,
       },
       {
-        id: 't042',
-        date: '28/04/2025',
+        id: tid('t042'),
+        date: '28/03/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
         description: 'Uber - aeroporto',
@@ -365,24 +367,24 @@ export const mockData = [
 
       // Lazer
       {
-        id: 't043',
-        date: '05/04/2025',
+        id: tid('t043'),
+        date: '05/03/2026',
         category: 'Lazer',
         subcategory: 'Bar',
         description: 'Bar Brahma - saída com amigos',
         amount: 112.0,
       },
       {
-        id: 't044',
-        date: '13/04/2025',
+        id: tid('t044'),
+        date: '13/03/2026',
         category: 'Lazer',
         subcategory: 'Cinema',
         description: 'Cinemark - ingresso + pipoca',
         amount: 68.0,
       },
       {
-        id: 't045',
-        date: '22/04/2025',
+        id: tid('t045'),
+        date: '22/03/2026',
         category: 'Lazer',
         subcategory: 'Show',
         description: 'Ingresso - show sertanejo',
@@ -391,24 +393,24 @@ export const mockData = [
 
       // Assinaturas
       {
-        id: 't046',
-        date: '01/04/2025',
+        id: tid('t046'),
+        date: '01/03/2026',
         category: 'Assinaturas',
         subcategory: 'Streaming',
         description: 'Netflix',
         amount: 39.9,
       },
       {
-        id: 't047',
-        date: '01/04/2025',
+        id: tid('t047'),
+        date: '01/03/2026',
         category: 'Assinaturas',
         subcategory: 'Streaming',
         description: 'Spotify',
         amount: 21.9,
       },
       {
-        id: 't048',
-        date: '01/04/2025',
+        id: tid('t048'),
+        date: '01/03/2026',
         category: 'Assinaturas',
         subcategory: 'Serviço digital',
         description: 'iCloud 50GB',
@@ -417,16 +419,16 @@ export const mockData = [
 
       // Compras
       {
-        id: 't049',
-        date: '08/04/2025',
+        id: tid('t049'),
+        date: '08/03/2026',
         category: 'Compras',
         subcategory: 'Roupas',
         description: 'Shein - vestido + acessórios',
         amount: 138.0,
       },
       {
-        id: 't050',
-        date: '18/04/2025',
+        id: tid('t050'),
+        date: '18/03/2026',
         category: 'Compras',
         subcategory: 'Beleza',
         description: 'Sephora - maquiagem',
@@ -435,16 +437,16 @@ export const mockData = [
 
       // Saúde
       {
-        id: 't051',
-        date: '04/04/2025',
+        id: tid('t051'),
+        date: '04/03/2026',
         category: 'Saúde',
         subcategory: 'Academia',
         description: 'Smart Fit - mensalidade',
         amount: 99.9,
       },
       {
-        id: 't052',
-        date: '17/04/2025',
+        id: tid('t052'),
+        date: '17/03/2026',
         category: 'Saúde',
         subcategory: 'Farmácia',
         description: 'Drogasil - vitaminas',
@@ -453,8 +455,8 @@ export const mockData = [
 
       // Educação
       {
-        id: 't053',
-        date: '10/04/2025',
+        id: tid('t053'),
+        date: '10/03/2026',
         category: 'Educação',
         subcategory: 'Curso online',
         description: 'Alura - assinatura mensal',
@@ -464,30 +466,28 @@ export const mockData = [
   },
 
   {
-    month: '05/2025',
+    month: '04/2026',
     transactions: [
-      // ━━━ SEMANA 1 (01–07/05) ━━━
-
       // Alimentação
       {
-        id: 't054',
-        date: '01/05/2025',
+        id: tid('t054'),
+        date: '01/04/2026',
         category: 'Alimentação',
         subcategory: 'Delivery',
         description: 'iFood - Burguer King',
         amount: 49.9,
       },
       {
-        id: 't055',
-        date: '05/05/2025',
+        id: tid('t055'),
+        date: '05/04/2026',
         category: 'Alimentação',
         subcategory: 'Lanchonete',
         description: 'Padaria - café e pão de queijo',
         amount: 18.5,
       },
       {
-        id: 't056',
-        date: '07/05/2025',
+        id: tid('t056'),
+        date: '07/04/2026',
         category: 'Alimentação',
         subcategory: 'Delivery',
         description: 'iFood - Outback',
@@ -496,80 +496,80 @@ export const mockData = [
 
       // Transporte semana 1 — muito pesado
       {
-        id: 't057',
-        date: '01/05/2025',
+        id: tid('t057'),
+        date: '01/04/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
         description: 'Uber - faculdade manhã',
         amount: 34.0,
       },
       {
-        id: 't058',
-        date: '02/05/2025',
+        id: tid('t058'),
+        date: '02/04/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
         description: 'Uber - faculdade tarde',
         amount: 37.0,
       },
       {
-        id: 't059',
-        date: '03/05/2025',
+        id: tid('t059'),
+        date: '03/04/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
         description: 'Uber - shopping com amigas',
         amount: 42.0,
       },
       {
-        id: 't060',
-        date: '03/05/2025',
+        id: tid('t060'),
+        date: '03/04/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
         description: 'Uber - ida ao trabalho extra',
         amount: 48.0,
       },
       {
-        id: 't061',
-        date: '04/05/2025',
+        id: tid('t061'),
+        date: '04/04/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
         description: 'Uber - trabalho',
         amount: 39.0,
       },
       {
-        id: 't092',
-        date: '04/05/2025',
+        id: tid('t092'),
+        date: '04/04/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
         description: 'Uber - ida ao aeroporto buscar amiga',
         amount: 78.0,
       },
       {
-        id: 't062',
-        date: '05/05/2025',
+        id: tid('t062'),
+        date: '05/04/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
         description: 'Uber - faculdade',
         amount: 36.0,
       },
       {
-        id: 't063',
-        date: '06/05/2025',
+        id: tid('t063'),
+        date: '06/04/2026',
         category: 'Transporte',
         subcategory: 'Combustível',
         description: 'Posto Shell - tanque cheio',
         amount: 160.0,
       },
       {
-        id: 't064',
-        date: '06/05/2025',
+        id: tid('t064'),
+        date: '06/04/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
         description: '99 - volta tarde do trabalho',
         amount: 54.0,
       },
       {
-        id: 't065',
-        date: '07/05/2025',
+        id: tid('t065'),
+        date: '07/04/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
         description: '99 - festa aniversário',
@@ -578,20 +578,18 @@ export const mockData = [
 
       // Compra por impulso semana 1
       {
-        id: 't066',
-        date: '04/05/2025',
+        id: tid('t066'),
+        date: '04/04/2026',
         category: 'Compras',
         subcategory: 'Roupas',
         description: 'Shein - compra impulsiva madrugada',
         amount: 212.0,
       },
 
-      // ━━━ SEMANA 2 (08–14/05) ━━━
-
       // Alimentação
       {
-        id: 't067',
-        date: '12/05/2025',
+        id: tid('t067'),
+        date: '12/04/2026',
         category: 'Alimentação',
         subcategory: 'Restaurante',
         description: 'Dia das Mães - restaurante',
@@ -600,80 +598,80 @@ export const mockData = [
 
       // Transporte semana 2 — ainda pesado
       {
-        id: 't068',
-        date: '08/05/2025',
+        id: tid('t068'),
+        date: '08/04/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
         description: 'Uber - faculdade manhã',
         amount: 36.0,
       },
       {
-        id: 't069',
-        date: '08/05/2025',
+        id: tid('t069'),
+        date: '08/04/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
         description: 'Uber - reunião presencial',
         amount: 48.0,
       },
       {
-        id: 't070',
-        date: '09/05/2025',
+        id: tid('t070'),
+        date: '09/04/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
         description: 'Uber - faculdade tarde',
         amount: 39.5,
       },
       {
-        id: 't071',
-        date: '10/05/2025',
+        id: tid('t071'),
+        date: '10/04/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
         description: 'Uber - shopping',
         amount: 44.0,
       },
       {
-        id: 't072',
-        date: '10/05/2025',
+        id: tid('t072'),
+        date: '10/04/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
         description: 'Uber - consulta longe',
         amount: 67.0,
       },
       {
-        id: 't073',
-        date: '11/05/2025',
+        id: tid('t073'),
+        date: '11/04/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
         description: 'Uber - trabalho',
         amount: 41.0,
       },
       {
-        id: 't074',
-        date: '12/05/2025',
+        id: tid('t074'),
+        date: '12/04/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
         description: 'Uber - Dia das Mães jantar',
         amount: 58.0,
       },
       {
-        id: 't075',
-        date: '13/05/2025',
+        id: tid('t075'),
+        date: '13/04/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
         description: '99 - volta da balada',
         amount: 73.0,
       },
       {
-        id: 't076',
-        date: '13/05/2025',
+        id: tid('t076'),
+        date: '13/04/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
         description: '99 - ida ao shopping',
         amount: 33.0,
       },
       {
-        id: 't077',
-        date: '14/05/2025',
+        id: tid('t077'),
+        date: '14/04/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
         description: 'Uber - faculdade',
@@ -682,36 +680,34 @@ export const mockData = [
 
       // Compra por impulso semana 2
       {
-        id: 't078',
-        date: '11/05/2025',
+        id: tid('t078'),
+        date: '11/04/2026',
         category: 'Compras',
         subcategory: 'Beleza',
         description: 'Sephora - perfume importado',
         amount: 349.0,
       },
 
-      // ━━━ SEMANA 3 (15–21/05) — Esfria mas impulso existe ━━━
-
       // Assinaturas fixas
       {
-        id: 't079',
-        date: '15/05/2025',
+        id: tid('t079'),
+        date: '15/04/2026',
         category: 'Assinaturas',
         subcategory: 'Streaming',
         description: 'Netflix',
         amount: 39.9,
       },
       {
-        id: 't080',
-        date: '15/05/2025',
+        id: tid('t080'),
+        date: '15/04/2026',
         category: 'Assinaturas',
         subcategory: 'Streaming',
         description: 'Spotify',
         amount: 21.9,
       },
       {
-        id: 't081',
-        date: '15/05/2025',
+        id: tid('t081'),
+        date: '15/04/2026',
         category: 'Assinaturas',
         subcategory: 'Serviço digital',
         description: 'iCloud 50GB',
@@ -720,8 +716,8 @@ export const mockData = [
 
       // Transporte semana 3 — caiu muito
       {
-        id: 't082',
-        date: '19/05/2025',
+        id: tid('t082'),
+        date: '19/04/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
         description: 'Uber - emergência médica',
@@ -730,8 +726,8 @@ export const mockData = [
 
       // Alimentação semana 3
       {
-        id: 't083',
-        date: '17/05/2025',
+        id: tid('t083'),
+        date: '17/04/2026',
         category: 'Alimentação',
         subcategory: 'Mercado',
         description: 'Mercado Extra - compras da semana',
@@ -740,16 +736,16 @@ export const mockData = [
 
       // Saúde
       {
-        id: 't084',
-        date: '16/05/2025',
+        id: tid('t084'),
+        date: '16/04/2026',
         category: 'Saúde',
         subcategory: 'Academia',
         description: 'Smart Fit - mensalidade',
         amount: 99.9,
       },
       {
-        id: 't085',
-        date: '20/05/2025',
+        id: tid('t085'),
+        date: '20/04/2026',
         category: 'Saúde',
         subcategory: 'Farmácia',
         description: 'Drogasil - remédio urgente',
@@ -758,8 +754,8 @@ export const mockData = [
 
       // Educação
       {
-        id: 't086',
-        date: '18/05/2025',
+        id: tid('t086'),
+        date: '18/04/2026',
         category: 'Educação',
         subcategory: 'Curso online',
         description: 'Alura - assinatura mensal',
@@ -768,20 +764,18 @@ export const mockData = [
 
       // FIX: Compra por impulso semana 3
       {
-        id: 't087',
-        date: '20/05/2025',
+        id: tid('t087'),
+        date: '20/04/2026',
         category: 'Compras',
         subcategory: 'Roupas',
         description: 'AliExpress - roupas sem necessidade',
         amount: 98.0,
       },
 
-      // ━━━ SEMANA 4 (22–31/05) — Quase nada ━━━
-
       // Alimentação básica
       {
-        id: 't088',
-        date: '26/05/2025',
+        id: tid('t088'),
+        date: '26/04/2026',
         category: 'Alimentação',
         subcategory: 'Mercado',
         description: 'Atacadão - compras do mês',
@@ -790,8 +784,8 @@ export const mockData = [
 
       // Lazer mínimo
       {
-        id: 't089',
-        date: '24/05/2025',
+        id: tid('t089'),
+        date: '24/04/2026',
         category: 'Lazer',
         subcategory: 'Bar',
         description: 'Cerveja com amigos - racha',
@@ -800,8 +794,8 @@ export const mockData = [
 
       // Compra por impulso semana 4
       {
-        id: 't090',
-        date: '28/05/2025',
+        id: tid('t090'),
+        date: '28/04/2026',
         category: 'Compras',
         subcategory: 'Eletrônicos',
         description: 'Mercado Livre - fone bluetooth impulsivo',
@@ -810,8 +804,8 @@ export const mockData = [
 
       // Transporte mínimo semana 4
       {
-        id: 't091',
-        date: '29/05/2025',
+        id: tid('t091'),
+        date: '29/04/2026',
         category: 'Transporte',
         subcategory: 'Uber/99',
         description: 'Uber - última corrida do mês',
@@ -819,4 +813,4 @@ export const mockData = [
       },
     ],
   },
-] as unknown as MonthData[]
+]

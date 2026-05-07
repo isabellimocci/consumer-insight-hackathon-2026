@@ -25,6 +25,13 @@ export default defineConfig([
         tsconfigRootDir: import.meta.dirname,
       },
     },
+    settings: {
+      'import/resolver': {
+        typescript: {
+          project: ['./tsconfig.json', './tsconfig.app.json', './tsconfig.node.json'],
+        },
+      },
+    },
     plugins: {
       'simple-import-sort': simpleImportSort,
     },
