@@ -5,14 +5,24 @@ import { TransactionCard } from '@components/TransactionCard'
 import { useMonth } from '@contexts/useMonth'
 import { getTransactionsByMonth } from '@services/transactionService'
 import { getTotalByCategory } from '@utils/aggregations'
+import { CATEGORY_ICONS } from '@utils/categoryMaps'
 import { formatMonthLabel } from '@utils/formatters'
 import { useMemo, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 
 import type { Category } from '../types'
 
+const VALID_CATEGORIES = Object.keys(CATEGORY_ICONS) as Category[]
+function parseCategory(s: string | null): Category | null {
+  return s && (VALID_CATEGORIES as string[]).includes(s) ? (s as Category) : null
+}
+
 export default function TransacoesPage() {
   const { selectedMonth } = useMonth()
-  const [selectedCategory, setSelectedCategory] = useState<Category | null>(null)
+  const [searchParams] = useSearchParams()
+  const [selectedCategory, setSelectedCategory] = useState<Category | null>(() =>
+    parseCategory(searchParams.get('categoria')),
+  )
   const [prevMonth, setPrevMonth] = useState(selectedMonth)
 
   if (prevMonth !== selectedMonth) {

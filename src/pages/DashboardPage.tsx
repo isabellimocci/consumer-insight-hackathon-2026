@@ -1,24 +1,88 @@
+import { CategoryCard } from '@components/CategoryCard'
+import { DominantCategoryBanner } from '@components/DominantCategoryBanner'
+import { DonutChart } from '@components/DonutChart'
+import { MonthVariationBanner } from '@components/MonthVariationBanner'
 import { useMonth } from '@contexts/useMonth'
+import { getAvailableMonths, getTransactionsByMonth } from '@services/transactionService'
+import { compareTwoMonths, getPercentageByCategory } from '@utils/aggregations'
+import { getDominantCategory } from '@utils/insights'
+import { useMemo } from 'react'
 
 export default function DashboardPage() {
   const { selectedMonth } = useMonth()
 
-  return (
-    <div style={{ padding: '1rem', fontFamily: 'monospace' }}>
-      <h1>Dashboard</h1>
+  const availableMonths = useMemo(() => getAvailableMonths(), [])
 
-      <div
-        style={{
-          marginTop: '1rem',
-          border: '1px solid #ccc',
-          padding: '1rem',
-          borderRadius: '8px',
-        }}
-      >
-        <p>
-          <strong>selectedMonth:</strong> {selectedMonth}
-        </p>
-      </div>
+  const previousMonth = useMemo(() => {
+    const idx = availableMonths.indexOf(selectedMonth)
+    return idx > 0 ? availableMonths[idx - 1] : null
+  }, [selectedMonth, availableMonths])
+
+  const currentTxs = useMemo(() => getTransactionsByMonth(selectedMonth), [selectedMonth])
+  const previousTxs = useMemo(
+    () => (previousMonth ? getTransactionsByMonth(previousMonth) : []),
+    [previousMonth],
+  )
+
+  const percentages = useMemo(() => getPercentageByCategory(currentTxs), [currentTxs])
+  const comparisons = useMemo(
+    () => compareTwoMonths(currentTxs, previousTxs),
+    [currentTxs, previousTxs],
+  )
+  const dominant = useMemo(() => getDominantCategory(currentTxs), [currentTxs])
+
+  const currentTotal = useMemo(() => currentTxs.reduce((s, t) => s + t.amount, 0), [currentTxs])
+  const previousTotal = useMemo(() => previousTxs.reduce((s, t) => s + t.amount, 0), [previousTxs])
+  const totalVariation = useMemo(() => {
+    if (previousTotal === 0) return 0
+    return Math.round(((currentTotal - previousTotal) / previousTotal) * 1000) / 10
+  }, [currentTotal, previousTotal])
+
+  const cardData = useMemo(
+    () =>
+      percentages.map((p) => {
+        const comp = comparisons.find((c) => c.category === p.category)
+        return {
+          category: p.category,
+          total: p.total,
+          percentage: p.percentage,
+          trend: comp?.trend ?? ('stable' as const),
+          variationPercent: comp?.variationPercent ?? 0,
+        }
+      }),
+    [percentages, comparisons],
+  )
+
+  const dominantPercentage = useMemo(() => {
+    const found = percentages.find((p) => p.category === dominant?.category)
+    return found?.percentage ?? 0
+  }, [percentages, dominant])
+
+  return (
+    <div
+      className="mx-auto flex max-w-2xl flex-col gap-[var(--spacing-md)] px-[var(--spacing-md)] py-[var(--spacing-lg)]"
+      aria-live="polite"
+    >
+      <MonthVariationBanner
+        currentTotal={currentTotal}
+        previousTotal={previousTotal}
+        variationPercent={totalVariation}
+        previousMonth={previousMonth}
+      />
+
+      <DonutChart data={percentages} />
+
+      <section aria-label="Gastos por categoria">
+        <ul role="list" className="grid grid-cols-2 gap-[var(--spacing-sm)]">
+          {cardData.map((card) => (
+            <li key={card.category} role="listitem">
+              <CategoryCard {...card} />
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {dominant && <DominantCategoryBanner dominant={dominant} percentage={dominantPercentage} />}
     </div>
   )
 }

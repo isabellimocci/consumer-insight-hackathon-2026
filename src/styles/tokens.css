@@ -12,6 +12,7 @@
   --font-size-base: 1.6rem;
   --font-size-lg: 2.1rem;
   --font-size-xl: 2.8rem;
+  --font-size-2xl: 3.6rem;
 
   --spacing-xs: 0.4rem;
   --spacing-sm: 0.8rem;
@@ -31,6 +32,7 @@
   --color-inactive-bg: oklch(92.8% 0.006 264.531);
   --color-inactive-bg-dark: oklch(87.2% 0.01 258.338);
   --color-inactive-text: oklch(55.1% 0.027 264.364);
+  --color-danger-bg: oklch(97% 0.02 29);
 
   /* Configs geradas pelo shadcn */
   --font-heading: var(--font-sans);
