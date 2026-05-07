@@ -1,11 +1,14 @@
-export type Category =
-  | 'Alimentação'
-  | 'Transporte'
-  | 'Lazer'
-  | 'Assinaturas'
-  | 'Compras'
-  | 'Saúde'
-  | 'Educação'
+export const CATEGORIES = [
+  'Alimentação',
+  'Transporte',
+  'Lazer',
+  'Assinaturas',
+  'Compras',
+  'Saúde',
+  'Educação',
+] as const
+
+export type Category = (typeof CATEGORIES)[number]
 
 export type TransactionId = string & { readonly __brand: 'TransactionId' }
 

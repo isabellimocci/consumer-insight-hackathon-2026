@@ -1,4 +1,5 @@
-import type { Category, GrowingCategoryResult, MonthData, Transaction, VilaoResult } from '../types'
+import type { GrowingCategoryResult, MonthData, Transaction, VilaoResult } from '../types'
+import { CATEGORIES } from '../types'
 import { compareTwoMonths, getTotalByCategory } from './aggregations'
 import { getEconomyCopy } from './copy'
 
@@ -30,25 +31,18 @@ export function getVilaoDoMes(
   }
 }
 
-const CATEGORIES: Category[] = [
-  'Alimentação',
-  'Transporte',
-  'Lazer',
-  'Assinaturas',
-  'Compras',
-  'Saúde',
-  'Educação',
-]
-
 export function getGrowingCategory(months: MonthData[]): GrowingCategoryResult | null {
+  if (months.length < 3) return null
+
   const last3 = months.slice(-3)
+  const monthlyTotals = last3.map(
+    (m) => new Map(getTotalByCategory(m.transactions).map((t) => [t.category, t.total])),
+  )
 
   const candidates: GrowingCategoryResult[] = []
 
   for (const category of CATEGORIES) {
-    const totals = last3.map(
-      (m) => getTotalByCategory(m.transactions).find((t) => t.category === category)?.total ?? 0,
-    )
+    const totals = monthlyTotals.map((m) => m.get(category) ?? 0)
 
     if (totals[0] === 0 || totals[1] === 0) continue
     if (!(totals[0] < totals[1] && totals[1] < totals[2])) continue
