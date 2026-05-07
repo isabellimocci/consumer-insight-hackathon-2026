@@ -1,21 +1,24 @@
-// import {
-//   getAllMonthsData,
-//   getAvailableMonths,
-//   getTransactionsByMonth,
-// } from '@services/transactionService'
-// import { getEconomyRecommendation, getVilaoDoMes } from '@utils/insights'
+import { useMonth } from '@contexts/useMonth'
 
 export default function DashboardPage() {
-  //CHAMADA DE FUNÇÕES PARA TESTE
-  // console.log('>>> getAllMonthsData', getAllMonthsData())
-  // const current = getTransactionsByMonth('04/2026')
-  // const previous = getTransactionsByMonth('03/2026')
-  // console.log(current)
-  // console.log('>>> getAvailableMonths', getAvailableMonths())
+  const { selectedMonth } = useMonth()
 
-  // const vilao = getVilaoDoMes(current, previous)
-  // console.log('>>> vilao', vilao)
-  // if (vilao) console.log('>>> getEconomyRecommendation', getEconomyRecommendation(vilao))
+  return (
+    <div style={{ padding: '1rem', fontFamily: 'monospace' }}>
+      <h1>Dashboard</h1>
 
-  return <h1>Dashboard</h1>
+      <div
+        style={{
+          marginTop: '1rem',
+          border: '1px solid #ccc',
+          padding: '1rem',
+          borderRadius: '8px',
+        }}
+      >
+        <p>
+          <strong>selectedMonth:</strong> {selectedMonth}
+        </p>
+      </div>
+    </div>
+  )
 }
