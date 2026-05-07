@@ -83,4 +83,4 @@ A detecção incorreta de rota ativa confundia o usuário sobre sua localizaçã
 - Agrupe por **funcionalidade ou componente** (ex: hero, navigation, footer, dashboard, readme).
 - Cada commit deve ter uma **intenção clara** — o leitor deve entender o que mudou sem ver o diff.
 - Evite commits com mais de 5–7 arquivos não relacionados; prefira commits menores e mais frequentes.
-- Se um arquivo tiver mudanças de naturezas muito diferentes (ex: refactor + novo estilo), use `git add -p` para fazer stage parcial e separe em dois commits.
+- Se um arquivo tiver mudanças de naturezas muito diferentes (ex: refactor + novo estilo), tente separar as mudanças em commits diferentes apenas se puderem ser isoladas por arquivos. Caso contrário, faça um único commit descrevendo as diferentes alterações.
