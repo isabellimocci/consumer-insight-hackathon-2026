@@ -27,17 +27,17 @@ export const Badge: React.FC<BadgeProps> = ({
       : color === 'success'
         ? 'bg-[var(--color-success)] text-[var(--color-surface)]'
         : color === 'warning'
-          ? 'bg-amber-200 text-[var(--color-text)]'
+          ? 'bg-[var(--color-warning)] text-[var(--color-text)]'
           : 'bg-[var(--color-surface)] text-[var(--color-text)] border border-[var(--border)] hover:bg-[var(--color-bg)]'
 
   const sizeClasses =
     size === 'md'
-      ? 'text-[var(--font-sze-base)] px-[var(--spacing-sm)]'
-      : 'text-[var(--font-sze-md)] px-[var(--spacing-xs)]'
+      ? 'text-[var(--font-size-base)] px-[var(--spacing-sm)]'
+      : 'text-[var(--font-size-md)] px-[var(--spacing-xs)]'
 
   const finalClasses = cn(baseClasses, sizeClasses, colorClasses, className)
   return (
-    <SBadge aria-label={ariaLabel} color={color} size={size} className={finalClasses} {...props}>
+    <SBadge aria-label={ariaLabel} className={finalClasses} {...props}>
       {label}
     </SBadge>
   )

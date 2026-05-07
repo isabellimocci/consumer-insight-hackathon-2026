@@ -1,4 +1,4 @@
-import { Badge } from '@components/ui/badge'
+import { Button } from '@components/ui/button'
 
 import { cn } from './lib/utils'
 
@@ -20,7 +20,7 @@ export const Chip: React.FC<ChipProps> = ({
   ariaLabel,
 }) => {
   const baseClasses =
-    'inline-flex items-center justify-center rounded-[var(--spacing-sm)] px-[var(--spacing-md)] py-[var(--spacing-sm)] text-[var(--font-size-sm)] font-medium cursor-pointer transition-all duration-200'
+    'inline-flex items-center justify-center rounded-[var(--spacing-sm)] px-[var(--spacing-sm)] py-[var(--spacing-xs)] text-[var(--font-size-sm)] cursor-pointer transition-all duration-200'
 
   const stateClasses = isActive
     ? 'bg-[var(--color-success)] text-[var(--color-text)]'
@@ -29,8 +29,8 @@ export const Chip: React.FC<ChipProps> = ({
   const finalClasses = cn(baseClasses, stateClasses, className)
 
   return (
-    <Badge className={finalClasses} aria-label={ariaLabel} onClick={onClick}>
+    <Button className={finalClasses} aria-label={ariaLabel} onClick={onClick}>
       {icon} {label}
-    </Badge>
+    </Button>
   )
 }

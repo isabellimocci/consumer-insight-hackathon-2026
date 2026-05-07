@@ -7,8 +7,9 @@
 
 @theme inline {
   /* Configs do projeto */
-  --font-sze-sm: 1.2rem;
-  --font-sze-base: 1.6rem;
+  --font-size-xs: 20rem;
+  --font-size-sm: 1.2rem;
+  --font-size-base: 1.6rem;
   --font-size-lg: 2.1rem;
   --font-size-xl: 2.8rem;
 
@@ -25,6 +26,11 @@
   --color-text: oklch(0.4364 0.0588 142.9);
   --color-danger: oklch(0.6307 0.194 29.44);
   --color-success: oklch(0.708 0.0982 132.04);
+  --color-warning: oklch(92.4% 0.12 95.746);
+  --color-highlight: oklch(92.5% 0.084 155.995);
+  --color-inactive-bg: oklch(92.8% 0.006 264.531);
+  --color-inactive-bg-dark: oklch(87.2% 0.01 258.338);
+  --color-inactive-text: oklch(55.1% 0.027 264.364);
 
   /* Configs geradas pelo shadcn */
   --font-heading: var(--font-sans);

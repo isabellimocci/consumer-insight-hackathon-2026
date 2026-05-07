@@ -36,7 +36,11 @@ export const Card: React.FC<CardProps> = ({
   const baseClasses =
     'flex bg-[var(--color-primary)] py-[var(--spacing-md)] px-[var(--spacing-sm)] rounded-[var(--spacing-sm)] text-[var(--color-text)]'
   const variantClasses =
-    variant === 'highlight' ? 'bg-green-200' : variant === 'alert' ? 'bg-amber-200' : ''
+    variant === 'highlight'
+      ? 'bg-[var(--color-highlight)]'
+      : variant === 'alert'
+        ? 'bg-[var(--color-warning)]'
+        : ''
   const finalClasses = cn(baseClasses, variantClasses, className)
 
   return (
