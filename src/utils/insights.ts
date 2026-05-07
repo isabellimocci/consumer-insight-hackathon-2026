@@ -1,4 +1,5 @@
 import type {
+  Category,
   EconomyRecommendation,
   GrowingCategoryResult,
   MonthData,
@@ -65,7 +66,7 @@ export function getGrowingCategory(months: MonthData[]): GrowingCategoryResult |
   return candidates.sort((a, b) => b.growthRate - a.growthRate)[0]
 }
 
-const ECONOMY_TEMPLATES: Record<string, (n: number, savings: string) => string> = {
+const ECONOMY_TEMPLATES: Record<Category, (n: number, savings: string) => string> = {
   Alimentação: (n, s) =>
     `Se você tivesse feito ${n} ${n === 1 ? 'pedido' : 'pedidos'} de delivery a menos, teria sobrado ${s} este mês.`,
   Transporte: (n, s) =>
