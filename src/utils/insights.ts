@@ -92,7 +92,7 @@ export function getWeeklyPattern(transactions: Transaction[]): WeeklyPattern[] {
     total: weekTotals[week],
     percentage: monthTotal === 0 ? 0 : Math.round((weekTotals[week] / monthTotal) * 1000) / 10,
   }))
-  }
+}
 const ECONOMY_TEMPLATES: Record<Category, (n: number, savings: string) => string> = {
   Alimentação: (n, s) =>
     `Se você tivesse feito ${n} ${n === 1 ? 'pedido' : 'pedidos'} de delivery a menos, teria sobrado ${s} este mês.`,

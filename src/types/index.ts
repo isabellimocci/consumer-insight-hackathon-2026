@@ -71,7 +71,7 @@ export interface WeeklyPattern {
   week: 1 | 2 | 3 | 4
   total: number
   percentage: number
-  }
+}
 export interface EconomyRecommendation {
   copy: string
   savingsAmount: number
