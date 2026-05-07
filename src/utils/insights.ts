@@ -80,7 +80,7 @@ export function getWeeklyPattern(transactions: Transaction[]): WeeklyPattern[] {
   for (const t of transactions) {
     const day = parseInt(t.date.split('/')[0], 10)
     const week: 1 | 2 | 3 | 4 = day <= 7 ? 1 : day <= 14 ? 2 : day <= 21 ? 3 : 4
-    weekTotals[week] += t.amount
+    weekTotals[week] = Math.round((weekTotals[week] + t.amount) * 100) / 100
   }
 
   const monthTotal = Object.values(weekTotals).reduce((sum, v) => sum + v, 0)
