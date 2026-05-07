@@ -6,6 +6,7 @@ import type {
   MonthData,
   Transaction,
   VilaoResult,
+  WeeklyPattern,
 } from '../types'
 import { CATEGORIES } from '../types'
 import { compareTwoMonths, getTotalByCategory } from './aggregations'
@@ -75,6 +76,23 @@ export function getGrowingCategory(months: MonthData[]): GrowingCategoryResult |
   return candidates.sort((a, b) => b.growthRate - a.growthRate)[0]
 }
 
+export function getWeeklyPattern(transactions: Transaction[]): WeeklyPattern[] {
+  const weekTotals: Record<1 | 2 | 3 | 4, number> = { 1: 0, 2: 0, 3: 0, 4: 0 }
+
+  for (const t of transactions) {
+    const day = parseInt(t.date.split('/')[0], 10)
+    const week: 1 | 2 | 3 | 4 = day <= 7 ? 1 : day <= 14 ? 2 : day <= 21 ? 3 : 4
+    weekTotals[week] = Math.round((weekTotals[week] + t.amount) * 100) / 100
+  }
+
+  const monthTotal = Object.values(weekTotals).reduce((sum, v) => sum + v, 0)
+
+  return ([1, 2, 3, 4] as const).map((week) => ({
+    week,
+    total: weekTotals[week],
+    percentage: monthTotal === 0 ? 0 : Math.round((weekTotals[week] / monthTotal) * 1000) / 10,
+  }))
+  }
 const ECONOMY_TEMPLATES: Record<Category, (n: number, savings: string) => string> = {
   Alimentação: (n, s) =>
     `Se você tivesse feito ${n} ${n === 1 ? 'pedido' : 'pedidos'} de delivery a menos, teria sobrado ${s} este mês.`,
