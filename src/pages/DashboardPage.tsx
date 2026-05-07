@@ -1,21 +1,48 @@
-// import {
-//   getAllMonthsData,
-//   getAvailableMonths,
-//   getTransactionsByMonth,
-// } from '@services/transactionService'
-// import { getEconomyRecommendation, getVilaoDoMes } from '@utils/insights'
+import { useMonth } from '@contexts/useMonth'
 
 export default function DashboardPage() {
-  //CHAMADA DE FUNÇÕES PARA TESTE
-  // console.log('>>> getAllMonthsData', getAllMonthsData())
-  // const current = getTransactionsByMonth('04/2026')
-  // const previous = getTransactionsByMonth('03/2026')
-  // console.log(current)
-  // console.log('>>> getAvailableMonths', getAvailableMonths())
+  const { selectedMonth, setSelectedMonth, availableMonths } = useMonth()
 
-  // const vilao = getVilaoDoMes(current, previous)
-  // console.log('>>> vilao', vilao)
-  // if (vilao) console.log('>>> getEconomyRecommendation', getEconomyRecommendation(vilao))
+  return (
+    <div style={{ padding: '1rem', fontFamily: 'monospace' }}>
+      <h1>Dashboard</h1>
 
-  return <h1>Dashboard</h1>
+      <div
+        style={{
+          marginTop: '1rem',
+          border: '1px solid #ccc',
+          padding: '1rem',
+          borderRadius: '8px',
+        }}
+      >
+        <p>
+          <strong>selectedMonth:</strong> {selectedMonth}
+        </p>
+        <p>
+          <strong>availableMonths:</strong> {availableMonths.join(', ')}
+        </p>
+
+        <div style={{ marginTop: '0.5rem' }}>
+          {availableMonths.map((month) => (
+            <button
+              key={month}
+              onClick={() => setSelectedMonth(month)}
+              style={{
+                marginRight: '0.5rem',
+                padding: '0.25rem 0.75rem',
+                fontWeight: selectedMonth === month ? 'bold' : 'normal',
+                background: selectedMonth === month ? '#000' : '#eee',
+                color: selectedMonth === month ? '#fff' : '#000',
+                border: 'none',
+                borderRadius: '4px',
+                cursor: 'pointer',
+              }}
+            >
+              {month}
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
 }

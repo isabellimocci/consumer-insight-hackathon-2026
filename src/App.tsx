@@ -1,3 +1,4 @@
+import { MonthProvider } from '@contexts/MonthProvider'
 import DashboardPage from '@pages/DashboardPage'
 import InsightsPage from '@pages/InsightsPage'
 import TransacoesPage from '@pages/TransacoesPage'
@@ -33,7 +34,11 @@ const router = createBrowserRouter([
 ])
 
 function App() {
-  return <RouterProvider router={router} />
+  return (
+    <MonthProvider>
+      <RouterProvider router={router} />
+    </MonthProvider>
+  )
 }
 
 export default App

@@ -14,7 +14,7 @@ export type TransactionId = string & { readonly __brand: 'TransactionId' }
 
 export interface Transaction {
   id: TransactionId
-  date: string // formato: dd/mm/aaaa
+  date: string // formato: YYYY-MM-DD
   category: Category
   subcategory: string
   description: string
@@ -22,7 +22,7 @@ export interface Transaction {
 }
 
 export interface MonthData {
-  month: string // formato: mm/aaaa
+  month: string // formato: YYYY-MM
   transactions: Transaction[]
 }
 
