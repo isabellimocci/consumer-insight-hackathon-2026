@@ -1,7 +1,8 @@
+import { MonthSelector } from '@components/MonthSelector'
 import { useMonth } from '@contexts/useMonth'
 
 export default function DashboardPage() {
-  const { selectedMonth, setSelectedMonth, availableMonths } = useMonth()
+  const { selectedMonth, availableMonths } = useMonth()
 
   return (
     <div style={{ padding: '1rem', fontFamily: 'monospace' }}>
@@ -23,24 +24,7 @@ export default function DashboardPage() {
         </p>
 
         <div style={{ marginTop: '0.5rem' }}>
-          {availableMonths.map((month) => (
-            <button
-              key={month}
-              onClick={() => setSelectedMonth(month)}
-              style={{
-                marginRight: '0.5rem',
-                padding: '0.25rem 0.75rem',
-                fontWeight: selectedMonth === month ? 'bold' : 'normal',
-                background: selectedMonth === month ? '#000' : '#eee',
-                color: selectedMonth === month ? '#fff' : '#000',
-                border: 'none',
-                borderRadius: '4px',
-                cursor: 'pointer',
-              }}
-            >
-              {month}
-            </button>
-          ))}
+          <MonthSelector />
         </div>
       </div>
     </div>
