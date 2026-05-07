@@ -1,4 +1,3 @@
-import { MonthSelector } from '@components/MonthSelector'
 import { useMonth } from '@contexts/useMonth'
 
 export default function DashboardPage() {
@@ -19,10 +18,6 @@ export default function DashboardPage() {
         <p>
           <strong>selectedMonth:</strong> {selectedMonth}
         </p>
-
-        <div style={{ marginTop: '0.5rem' }}>
-          <MonthSelector />
-        </div>
       </div>
     </div>
   )
