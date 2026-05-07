@@ -1,4 +1,4 @@
-import type { Category,CategoryTotal, Transaction } from '../types';
+import type { Category, CategoryPercentage, CategoryTotal, Transaction } from '../types';
 
 export function getTotalByCategory(
   transactions: Transaction[],
@@ -22,4 +22,19 @@ export function getTotalByCategory(
   return Array.from(map.values()).sort(
     (a, b) => b.total - a.total || a.category.localeCompare(b.category),
   );
+}
+
+export function getPercentageByCategory(
+  transactions: Transaction[],
+): CategoryPercentage[] {
+  const totals = getTotalByCategory(transactions);
+  if (totals.length === 0) return [];
+
+  const grandTotal = totals.reduce((sum, t) => sum + t.total, 0);
+
+  return totals.map((t) => ({
+    category: t.category,
+    total: t.total,
+    percentage: Math.round((t.total / grandTotal) * 1000) / 10,
+  }));
 }

@@ -33,3 +33,9 @@ export interface CategoryTotal {
   total: number;
   count: number;
 }
+
+export interface CategoryPercentage {
+  category: Category;
+  total: number;
+  percentage: number; // 0-100, 1 casa decimal
+}
