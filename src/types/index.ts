@@ -57,3 +57,9 @@ export interface VilaoResult {
   economyCopy: string
   savingsIfReduced20: number
 }
+
+export interface GrowingCategoryResult {
+  category: Category
+  totals: number[] // [mês1, mês2, mês3]
+  growthRate: number // crescimento médio percentual mês a mês
+}
