@@ -10,7 +10,8 @@
       "@types/*": ["types/*"],
       "@pages/*": ["pages/*"],
       "@styles/*": ["styles/*"],
-      "@services/*": ["services/*"]
+      "@services/*": ["services/*"],
+      "@contexts/*": ["contexts/*"]
     },
     "target": "es2023",
     "lib": ["ES2023"],
