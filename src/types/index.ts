@@ -66,3 +66,9 @@ export interface GrowingCategoryResult {
   totals: number[] // [mês1, mês2, mês3]
   growthRate: number // crescimento médio percentual mês a mês
 }
+
+export interface WeeklyPattern {
+  week: 1 | 2 | 3 | 4
+  total: number
+  percentage: number
+}
