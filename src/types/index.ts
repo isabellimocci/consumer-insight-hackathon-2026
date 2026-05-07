@@ -71,9 +71,16 @@ export interface WeeklyPattern {
   week: 1 | 2 | 3 | 4
   total: number
   percentage: number
-  }
+}
+
 export interface EconomyRecommendation {
   copy: string
   savingsAmount: number
   category: Category
+}
+
+export interface ConsumerProfile {
+  archetype: string // nome do arquétipo
+  emoji: string
+  description: string // 2 linhas de copy
 }
