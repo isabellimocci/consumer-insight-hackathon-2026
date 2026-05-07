@@ -1,6 +1,7 @@
 import type {
   Category,
   CategoryTotal,
+  ConsumerProfile,
   EconomyRecommendation,
   GrowingCategoryResult,
   MonthData,
@@ -9,8 +10,10 @@ import type {
   WeeklyPattern,
 } from '../types'
 import { CATEGORIES } from '../types'
-import { compareTwoMonths, getTotalByCategory } from './aggregations'
-import { getEconomyCopy } from './copy'
+import { compareTwoMonths, getPercentageByCategory, getTotalByCategory } from './aggregations'
+import { getArchetypeProfile, getEconomyCopy } from './copy'
+
+const DOMINANT_THRESHOLD = 30
 
 export function getVilaoDoMes(
   currentMonth: Transaction[],
@@ -93,6 +96,7 @@ export function getWeeklyPattern(transactions: Transaction[]): WeeklyPattern[] {
     percentage: monthTotal === 0 ? 0 : Math.round((weekTotals[week] / monthTotal) * 1000) / 10,
   }))
 }
+
 const ECONOMY_TEMPLATES: Record<Category, (n: number, savings: string) => string> = {
   Alimentação: (n, s) =>
     `Se você tivesse feito ${n} ${n === 1 ? 'pedido' : 'pedidos'} de delivery a menos, teria sobrado ${s} este mês.`,
@@ -121,4 +125,11 @@ export function getEconomyRecommendation(vilao: VilaoResult): EconomyRecommendat
     savingsAmount: vilao.savingsIfReduced20,
     category: vilao.category,
   }
+}
+
+export function getConsumerProfile(transactions: Transaction[]): ConsumerProfile {
+  const percentages = getPercentageByCategory(transactions)
+  const top = percentages[0]
+  const dominant = top && top.percentage >= DOMINANT_THRESHOLD ? top.category : null
+  return getArchetypeProfile(dominant)
 }
