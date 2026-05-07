@@ -47,3 +47,13 @@ export interface CategoryComparison {
   variationPercent: number // positivo = aumentou, negativo = diminuiu; 1 casa decimal. Valor especial: NEW_CATEGORY_SENTINEL (999) = categoria nova (previousTotal === 0 && currentTotal > 0)
   trend: 'up' | 'down' | 'stable' // stable se variação entre -5% e +5%
 }
+
+export interface VilaoResult {
+  category: Category
+  currentTotal: number
+  previousTotal: number
+  growthPercent: number // espelha variationPercent de CategoryComparison; NEW_CATEGORY_SENTINEL (999) se categoria nova
+  transactionCount: number
+  economyCopy: string
+  savingsIfReduced20: number
+}
