@@ -1,4 +1,4 @@
-import { MonthProvider } from '@contexts/MonthProvider'
+import { AppLayout } from '@components/AppLayout'
 import DashboardPage from '@pages/DashboardPage'
 import InsightsPage from '@pages/InsightsPage'
 import TransacoesPage from '@pages/TransacoesPage'
@@ -8,20 +8,13 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 const router = createBrowserRouter([
   {
-    path: ROUTES.DASHBOARD,
-    element: <DashboardPage />,
-  },
-  {
-    path: ROUTES.TRANSACOES,
-    element: <TransacoesPage />,
-  },
-  {
-    path: ROUTES.VILAO,
-    element: <VilaoPage />,
-  },
-  {
-    path: ROUTES.INSIGHTS,
-    element: <InsightsPage />,
+    element: <AppLayout />,
+    children: [
+      { path: ROUTES.DASHBOARD, element: <DashboardPage /> },
+      { path: ROUTES.TRANSACOES, element: <TransacoesPage /> },
+      { path: ROUTES.VILAO, element: <VilaoPage /> },
+      { path: ROUTES.INSIGHTS, element: <InsightsPage /> },
+    ],
   },
   {
     path: ROUTES.NOT_FOUND,
@@ -34,11 +27,7 @@ const router = createBrowserRouter([
 ])
 
 function App() {
-  return (
-    <MonthProvider>
-      <RouterProvider router={router} />
-    </MonthProvider>
-  )
+  return <RouterProvider router={router} />
 }
 
 export default App
