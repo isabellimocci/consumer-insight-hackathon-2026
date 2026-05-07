@@ -13,6 +13,8 @@ import { CATEGORIES } from '../types'
 import { compareTwoMonths, getPercentageByCategory, getTotalByCategory } from './aggregations'
 import { getArchetypeProfile, getEconomyCopy } from './copy'
 
+const DOMINANT_THRESHOLD = 30
+
 export function getVilaoDoMes(
   currentMonth: Transaction[],
   previousMonth: Transaction[],
@@ -128,6 +130,6 @@ export function getEconomyRecommendation(vilao: VilaoResult): EconomyRecommendat
 export function getConsumerProfile(transactions: Transaction[]): ConsumerProfile {
   const percentages = getPercentageByCategory(transactions)
   const top = percentages[0]
-  const dominant = top && top.percentage >= 30 ? top.category : null
+  const dominant = top && top.percentage >= DOMINANT_THRESHOLD ? top.category : null
   return getArchetypeProfile(dominant)
 }
