@@ -10,15 +10,17 @@ export function formatDate(dateString: string): string {
 }
 
 export function formatMonthLabel(monthStr: string): string {
+  const [year, month] = monthStr.split('-').map(Number)
   const formatted = new Intl.DateTimeFormat('pt-BR', { month: 'long', year: 'numeric' }).format(
-    new Date(monthStr + '-01T00:00:00'),
+    new Date(year, month - 1, 1),
   )
   return formatted.charAt(0).toUpperCase() + formatted.slice(1)
 }
 
 export function formatShortMonth(monthStr: string): string {
+  const [year, month] = monthStr.split('-').map(Number)
   const label = new Intl.DateTimeFormat('pt-BR', { month: 'short' }).format(
-    new Date(monthStr + '-01T00:00:00'),
+    new Date(year, month - 1, 1),
   )
   return label.replace('.', '').replace(/^./, (c) => c.toUpperCase())
 }

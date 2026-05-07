@@ -29,8 +29,8 @@ export function GrowingCategoryCard({ result, allMonthsData }: GrowingCategoryCa
         {last3.map((m, i) => (
           <span key={m.month} className="flex items-center gap-1">
             <span className="font-semibold">{formatShortMonth(m.month)}</span>
-            <span>{formatCurrency(result.totals[i])}</span>
-            {i < 2 && <span className="text-[var(--color-inactive-text)]">→</span>}
+            <span>{formatCurrency(result.totals.slice(-last3.length)[i])}</span>
+            {i < last3.length - 1 && <span className="text-[var(--color-inactive-text)]">→</span>}
           </span>
         ))}
       </div>
