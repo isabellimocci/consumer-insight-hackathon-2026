@@ -33,10 +33,10 @@ export function getVilaoDoMes(
 import type { CategoryTotal, Transaction } from '../types'
 import { getTotalByCategory } from './aggregations'
 
-export function getDominantCategory(transactions: Transaction[]): CategoryTotal {
+export function getDominantCategory(transactions: Transaction[]): CategoryTotal | null {
   const totals = getTotalByCategory(transactions)
   if (totals.length === 0) {
-    throw new Error('Nenhuma transação fornecida')
+    return null
   }
   return totals[0]
 }
