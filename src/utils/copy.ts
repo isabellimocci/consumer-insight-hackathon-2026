@@ -1,4 +1,5 @@
 import type { Category } from '../types'
+import { NEW_CATEGORY_SENTINEL } from './aggregations'
 
 const COPIES: Record<Category, (growth: number) => string> = {
   Alimentação: (g) =>
@@ -12,6 +13,6 @@ const COPIES: Record<Category, (growth: number) => string> = {
 }
 
 export function getEconomyCopy(category: Category, growthPercent: number): string {
-  const growth = growthPercent === 999 ? 100 : growthPercent
+  const growth = growthPercent === NEW_CATEGORY_SENTINEL ? 100 : growthPercent
   return COPIES[category](growth)
 }

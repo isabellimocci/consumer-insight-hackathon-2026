@@ -5,8 +5,9 @@ import { getEconomyCopy } from './copy'
 export function getVilaoDoMes(
   currentMonth: Transaction[],
   previousMonth: Transaction[],
-): VilaoResult {
+): VilaoResult | null {
   const comparisons = compareTwoMonths(currentMonth, previousMonth)
+  if (comparisons.length === 0) return null
   const currentTotals = getTotalByCategory(currentMonth)
 
   const growing = comparisons.filter((c) => c.variationPercent > 0)
