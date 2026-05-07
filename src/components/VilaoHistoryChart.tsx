@@ -1,25 +1,10 @@
 import type { ChartConfig } from '@components/ui/chart'
 import { ChartContainer } from '@components/ui/chart'
 import { CATEGORY_COLORS } from '@utils/categoryMaps'
-import { formatCurrency } from '@utils/formatters'
+import { formatCurrency, formatShortMonth } from '@utils/formatters'
 import { Bar, BarChart, Cell, LabelList, XAxis, YAxis } from 'recharts'
 
 import type { Category } from '../types'
-
-const MONTH_ABBR: Record<string, string> = {
-  '01': 'Jan',
-  '02': 'Fev',
-  '03': 'Mar',
-  '04': 'Abr',
-  '05': 'Mai',
-  '06': 'Jun',
-  '07': 'Jul',
-  '08': 'Ago',
-  '09': 'Set',
-  '10': 'Out',
-  '11': 'Nov',
-  '12': 'Dez',
-}
 
 interface MonthTotal {
   month: string
@@ -46,7 +31,7 @@ export function VilaoHistoryChart({
   const data = monthlyTotals.map(({ month, total }) => ({
     month,
     total,
-    label: MONTH_ABBR[month.split('-')[1]] ?? month,
+    label: formatShortMonth(month),
     fill: month === selectedMonth ? categoryColor : 'var(--color-inactive-bg-dark)',
   }))
 

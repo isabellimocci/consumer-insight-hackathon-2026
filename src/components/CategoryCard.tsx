@@ -40,7 +40,7 @@ export function CategoryCard({
       ? 'Novo'
       : `${variationPercent > 0 ? '+' : ''}${variationPercent.toFixed(1)}%`
 
-  const iconBg = CATEGORY_COLORS[category] + '25'
+  const iconBg = `color-mix(in srgb, ${CATEGORY_COLORS[category]}, transparent 85%)`
 
   return (
     <button

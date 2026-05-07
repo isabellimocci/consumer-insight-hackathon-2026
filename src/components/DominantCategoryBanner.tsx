@@ -23,7 +23,7 @@ export function DominantCategoryBanner({ dominant, percentage }: DominantCategor
         <span className="text-4xl">{CATEGORY_ICONS[dominant.category]}</span>
         <div className="flex-1">
           <p className="text-[length:var(--font-size-base)] font-semibold text-[var(--color-text)]">
-            {CATEGORY_ICONS[dominant.category]} {dominant.category} foi sua maior categoria
+            {dominant.category} foi sua maior categoria
           </p>
           <p className="text-[length:var(--font-size-sm)] text-[var(--color-inactive-text)]">
             {formatCurrency(dominant.total)} · {percentage}% do mês
