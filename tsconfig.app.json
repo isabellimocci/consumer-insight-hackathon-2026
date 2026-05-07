@@ -4,43 +4,20 @@
     "ignoreDeprecations": "6.0",
     "baseUrl": "src",
     "paths": {
-      "@components/*": [
-        "components/*"
-      ],
-      "@utils/*": [
-        "utils/*"
-      ],
-      "@data": [
-        "data/index"
-      ],
-      "@data/*": [
-        "data/*"
-      ],
-      "@services": [
-        "services/index"
-      ],
-      "@types/*": [
-        "types/*"
-      ],
-      "@pages/*": [
-        "pages/*"
-      ],
-      "@styles/*": [
-        "styles/*"
-      ],
-      "@services/*": [
-        "services/*"
-      ]
+      "@components/*": ["components/*"],
+      "@utils/*": ["utils/*"],
+      "@data": ["data/index"],
+      "@data/*": ["data/*"],
+      "@services": ["services/index"],
+      "@types/*": ["types/*"],
+      "@pages/*": ["pages/*"],
+      "@styles/*": ["styles/*"],
+      "@services/*": ["services/*"]
     },
     "target": "es2023",
-    "lib": [
-      "ES2023",
-      "DOM"
-    ],
+    "lib": ["ES2023", "DOM"],
     "module": "esnext",
-    "types": [
-      "vite/client"
-    ],
+    "types": ["vite/client"],
     "skipLibCheck": true,
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -55,7 +32,5 @@
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src"]
 }

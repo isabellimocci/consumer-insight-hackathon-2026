@@ -3,30 +3,14 @@
     "ignoreDeprecations": "6.0",
     "baseUrl": "src",
     "paths": {
-      "@components/*": [
-        "components/*"
-      ],
-      "@utils/*": [
-        "utils/*"
-      ],
-      "@data/*": [
-        "data/*"
-      ],
-      "@services": [
-        "services/index"
-      ],
-      "@types/*": [
-        "types/*"
-      ],
-      "@pages/*": [
-        "pages/*"
-      ],
-      "@styles/*": [
-        "styles/*"
-      ],
-      "@services/*": [
-        "services/*"
-      ]
+      "@components/*": ["components/*"],
+      "@utils/*": ["utils/*"],
+      "@data/*": ["data/*"],
+      "@services": ["services/index"],
+      "@types/*": ["types/*"],
+      "@pages/*": ["pages/*"],
+      "@styles/*": ["styles/*"],
+      "@services/*": ["services/*"]
     }
   },
   "files": [],
