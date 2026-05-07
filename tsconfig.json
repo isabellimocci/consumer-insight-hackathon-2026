@@ -4,6 +4,7 @@
     "baseUrl": "src",
     "paths": {
       "@components/*": ["components/*"],
+      "@utils": ["utils/index.ts"],
       "@utils/*": ["utils/*"],
       "@data/*": ["data/*"],
       "@services": ["services/index"],
