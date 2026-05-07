@@ -14,7 +14,14 @@ export function Navbar() {
     <header>
       <nav aria-label="Navegação principal">
         {NAV_LINKS.map(({ to, label }) => (
-          <NavLink key={to} to={to} end={to === ROUTES.DASHBOARD}>
+          <NavLink
+            key={to}
+            to={to}
+            end={to === ROUTES.DASHBOARD}
+            className={({ isActive }) =>
+              isActive ? 'text-primary font-semibold' : 'text-muted-foreground'
+            }
+          >
             {label}
           </NavLink>
         ))}
