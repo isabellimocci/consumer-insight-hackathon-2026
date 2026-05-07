@@ -2,11 +2,11 @@ import { useMonth } from '@contexts/useMonth'
 
 import { cn } from './lib/utils'
 
+const monthFormatter = new Intl.DateTimeFormat('pt-BR', { month: 'long' })
+
 function formatMonth(monthStr: string): string {
   const [year, month] = monthStr.split('-').map(Number)
-  const label = new Intl.DateTimeFormat('pt-BR', { month: 'long' }).format(
-    new Date(year, month - 1),
-  )
+  const label = monthFormatter.format(new Date(year, month - 1))
   return label.charAt(0).toUpperCase() + label.slice(1)
 }
 
@@ -32,6 +32,7 @@ export const MonthSelector: React.FC = () => {
 
         return (
           <button
+            type="button"
             key={month}
             onClick={() => setSelectedMonth(month)}
             className={cn(baseClasses, stateClasses)}

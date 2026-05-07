@@ -2,7 +2,7 @@ import { MonthSelector } from '@components/MonthSelector'
 import { useMonth } from '@contexts/useMonth'
 
 export default function DashboardPage() {
-  const { selectedMonth, availableMonths } = useMonth()
+  const { selectedMonth } = useMonth()
 
   return (
     <div style={{ padding: '1rem', fontFamily: 'monospace' }}>
@@ -18,9 +18,6 @@ export default function DashboardPage() {
       >
         <p>
           <strong>selectedMonth:</strong> {selectedMonth}
-        </p>
-        <p>
-          <strong>availableMonths:</strong> {availableMonths.join(', ')}
         </p>
 
         <div style={{ marginTop: '0.5rem' }}>
