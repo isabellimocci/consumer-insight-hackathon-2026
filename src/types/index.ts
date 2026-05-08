@@ -88,6 +88,14 @@ export interface MonthlyBudget {
 
 export type BudgetAdjustments = Partial<Record<Category, number>>
 
+export interface BudgetGoal {
+  id: string
+  category: Category
+  percentage: number
+  startsAt: string // "YYYY-MM"
+  endsAt: string | null // null = vigente
+}
+
 export interface GrowingCategoryResult {
   category: Category
   totals: number[] // [mês1, mês2, mês3]

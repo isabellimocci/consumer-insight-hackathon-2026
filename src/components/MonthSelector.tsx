@@ -7,7 +7,8 @@ const monthFormatter = new Intl.DateTimeFormat('pt-BR', { month: 'long' })
 function formatMonth(monthStr: string): string {
   const [year, month] = monthStr.split('-').map(Number)
   const label = monthFormatter.format(new Date(year, month - 1))
-  return label.charAt(0).toUpperCase() + label.slice(1)
+  const shortYear = String(year).slice(-2)
+  return `${label.charAt(0).toUpperCase() + label.slice(1)}/${shortYear}`
 }
 
 export const MonthSelector: React.FC = () => {

@@ -21,12 +21,12 @@ export default function RendaPage() {
   }
 
   return (
-    <div className="mx-auto flex min-h-[80vh] max-w-sm flex-col items-center justify-center gap-[var(--spacing-lg)] px-[var(--spacing-md)]">
+    <div className="mx-auto flex min-h-[80vh] max-w-2xl flex-col items-center justify-center gap-[var(--spacing-lg)] px-[var(--spacing-md)]">
       <div className="text-5xl">💰</div>
 
       <div className="text-center">
         <h1 className="text-2xl font-bold text-[var(--color-text)]">
-          Qual é a sua renda em {formatMonthLabel(selectedMonth)}?
+          Qual foi a sua renda em {formatMonthLabel(selectedMonth)}?
         </h1>
         <p className="mt-2 text-sm text-[var(--color-inactive-text)]">
           Informe o valor líquido (já descontado impostos)

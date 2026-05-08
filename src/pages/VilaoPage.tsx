@@ -15,7 +15,7 @@ import { useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 export default function VilaoPage() {
-  const { selectedMonth } = useMonth()
+  const { selectedMonth, transactionsVersion } = useMonth()
   const { currentBudget, isConfigured } = useBudget()
   const navigate = useNavigate()
 
@@ -28,7 +28,8 @@ export default function VilaoPage() {
 
   const previousTxs = useMemo(
     () => (previousMonth ? getTransactionsByMonth(previousMonth) : []),
-    [previousMonth],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [previousMonth, transactionsVersion],
   )
 
   const vilaoResult = useMemo(
@@ -56,7 +57,8 @@ export default function VilaoPage() {
       const found = totals.find((t) => t.category === vilaoResult.category)
       return { month, total: found?.total ?? 0 }
     })
-  }, [availableMonths, selectedMonth, vilaoResult])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [availableMonths, selectedMonth, vilaoResult, transactionsVersion])
 
   if (!isConfigured) {
     return (
@@ -87,7 +89,7 @@ export default function VilaoPage() {
       aria-live="polite"
     >
       <VilaoHeroCard vilao={vilaoResult} />
-      <VilaoNarrativeCopy copy={vilaoPhrase} category={vilaoResult.category} />
+      <VilaoNarrativeCopy copy={vilaoPhrase ?? ''} category={vilaoResult.category} />
       <VilaoHistoryChart
         category={vilaoResult.category}
         monthlyTotals={monthlyTotals}

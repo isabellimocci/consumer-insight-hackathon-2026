@@ -3,6 +3,14 @@ import { Button } from '@components/Button'
 import { CategorySliderItem } from '@components/CategorySliderItem'
 import { IncomeInput } from '@components/IncomeInput'
 import { SuggestedBudgetCard } from '@components/SuggestedBudgetCard'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@components/ui/dialog'
 import { useBudget } from '@contexts/useBudget'
 import { useMonth } from '@contexts/useMonth'
 import { getSuggestedBudget } from '@services/budgetService'
@@ -16,7 +24,7 @@ import { CATEGORIES } from '../types'
 export default function OrcamentoPage() {
   const { selectedMonth } = useMonth()
   const {
-    currentBudget,
+    activeGoalPercents,
     income,
     setIncome,
     updateCategoryPercent,
@@ -26,24 +34,23 @@ export default function OrcamentoPage() {
   const navigate = useNavigate()
 
   const [localIncome, setLocalIncome] = useState(income?.amount ?? 0)
+  const [showDialog, setShowDialog] = useState(false)
+  const [startMonth, setStartMonth] = useState(selectedMonth)
 
   const suggested = useMemo(() => getSuggestedBudget(), [])
 
   const derivedPercents = useMemo<BudgetAdjustments>(
-    () =>
-      currentBudget
-        ? Object.fromEntries(currentBudget.categories.map((c) => [c.category, c.userPercent]))
-        : { ...suggested },
-    [currentBudget, suggested],
+    () => ({ ...suggested, ...activeGoalPercents }),
+    [activeGoalPercents, suggested],
   )
 
   const [localPercents, setLocalPercents] = useState<BudgetAdjustments>(derivedPercents)
-  const [prevMonth, setPrevMonth] = useState(selectedMonth)
+  const [prevMonthState, setPrevMonthState] = useState(selectedMonth)
   const [prevDerived, setPrevDerived] = useState(derivedPercents)
 
-  if (prevDerived !== derivedPercents || prevMonth !== selectedMonth) {
+  if (prevDerived !== derivedPercents || prevMonthState !== selectedMonth) {
     setPrevDerived(derivedPercents)
-    setPrevMonth(selectedMonth)
+    setPrevMonthState(selectedMonth)
     setLocalPercents(derivedPercents)
   }
 
@@ -59,8 +66,14 @@ export default function OrcamentoPage() {
   }
 
   const handleApply = () => {
+    setStartMonth(selectedMonth)
+    setShowDialog(true)
+  }
+
+  const handleConfirm = () => {
     setIncome(localIncome)
-    applyBudget()
+    applyBudget(startMonth)
+    setShowDialog(false)
     void navigate(ROUTES.DASHBOARD)
   }
 
@@ -68,7 +81,7 @@ export default function OrcamentoPage() {
     <div className="mx-auto flex max-w-2xl flex-col gap-[var(--spacing-md)] px-[var(--spacing-md)] py-[var(--spacing-lg)]">
       <div className="flex flex-col gap-[var(--spacing-xs)]">
         <h1 className="text-[length:var(--font-size-xl)] font-bold text-[var(--color-text)]">
-          💰 Planejamento financeiro
+          💰 Definir Orçamento
         </h1>
         <p className="text-[length:var(--font-size-sm)] text-[var(--color-inactive-text)]">
           Defina sua renda e distribua seu orçamento por categoria. Vamos juntas acompanhar o que
@@ -107,6 +120,28 @@ export default function OrcamentoPage() {
         disabled={totalAllocated !== 100 || localIncome <= 0}
         className="w-full"
       />
+
+      <Dialog open={showDialog} onOpenChange={setShowDialog}>
+        <DialogContent className="!h-full !max-w-full rounded-none md:!h-auto md:!max-w-2xl md:rounded-xl">
+          <DialogHeader>
+            <DialogTitle>A partir de qual mês?</DialogTitle>
+            <DialogDescription>
+              A alteração nas metas entrará em vigor a partir do mês selecionado. Meses anteriores
+              manterão as metas anteriores.
+            </DialogDescription>
+          </DialogHeader>
+          <input
+            type="month"
+            value={startMonth}
+            onChange={(e) => setStartMonth(e.target.value)}
+            className="w-full rounded border p-2"
+          />
+          <DialogFooter>
+            <Button variant="ghost" label="Cancelar" onClick={() => setShowDialog(false)} />
+            <Button variant="primary" label="Confirmar" onClick={handleConfirm} />
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }
