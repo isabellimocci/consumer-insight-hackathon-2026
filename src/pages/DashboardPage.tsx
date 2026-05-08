@@ -4,6 +4,7 @@ import { DominantCategoryBanner } from '@components/DominantCategoryBanner'
 import { DonutChart } from '@components/DonutChart'
 import { MonthSelector } from '@components/MonthSelector'
 import { MonthVariationBanner } from '@components/MonthVariationBanner'
+import { TopCategoryCard } from '@components/TopCategoryCard'
 import { useMonth } from '@contexts/useMonth'
 import { getAvailableMonths, getTransactionsByMonth } from '@services/transactionService'
 import { compareTwoMonths, getPercentageByCategory } from '@utils/aggregations'
@@ -27,6 +28,7 @@ export default function DashboardPage() {
   )
 
   const percentages = useMemo(() => getPercentageByCategory(currentTxs), [currentTxs])
+  const top3Categories = useMemo(() => percentages.slice(0, 3), [percentages])
   const comparisons = useMemo(
     () => compareTwoMonths(currentTxs, previousTxs),
     [currentTxs, previousTxs],
@@ -65,9 +67,9 @@ export default function DashboardPage() {
       className="mx-10 flex gap-[var(--spacing-md)] px-[var(--spacing-md)] py-[var(--spacing-lg)]"
       aria-live="polite"
     >
-      <section className='flex flex-col flex-2'>
+      <section className="flex flex-2 flex-col">
         <section className="flex gap-5">
-          <div className="gap flex flex-col flex-1">
+          <div className="gap flex flex-1 flex-col">
             <span className="pb-4">
               <MonthSelector />
             </span>
@@ -80,6 +82,31 @@ export default function DashboardPage() {
           </div>
           <img src="https://placecats.com/bella/200/200" alt="" />
         </section>
+
+        {top3Categories.length > 0 && (
+          <section
+            aria-label="Top 3 categorias do mês"
+            className="flex items-end gap-[var(--spacing-sm)]"
+          >
+            {(
+              [
+                { data: top3Categories[1], rank: 2 as const },
+                { data: top3Categories[0], rank: 1 as const },
+                { data: top3Categories[2], rank: 3 as const },
+              ] as const
+            )
+              .filter(({ data }) => data != null)
+              .map(({ data: item, rank }) => (
+                <TopCategoryCard
+                  key={item.category}
+                  category={item.category}
+                  total={item.total}
+                  rank={rank}
+                  maxTotal={top3Categories[0].total}
+                />
+              ))}
+          </section>
+        )}
 
         <DonutChart data={percentages} />
 
@@ -95,8 +122,8 @@ export default function DashboardPage() {
 
         {dominant && <DominantCategoryBanner dominant={dominant} percentage={dominantPercentage} />}
       </section>
-      <section className='flex flex-col flex-1'>
-          <Card />
+      <section className="flex flex-1 flex-col">
+        <Card children={undefined} />
       </section>
     </div>
   )
