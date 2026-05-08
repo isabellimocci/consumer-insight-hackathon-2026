@@ -11,11 +11,11 @@ interface VilaoNarrativeCopyProps {
 export function VilaoNarrativeCopy({ copy, category }: VilaoNarrativeCopyProps) {
   return (
     <Card ariaLabel="Análise do vilão do mês">
-      <div className="flex items-start gap-[var(--spacing-sm)]" aria-live="polite">
+      <div className="gap-sm flex items-start" aria-live="polite">
         <span aria-hidden="true" style={{ fontSize: 28, lineHeight: 1.4, flexShrink: 0 }}>
           {CATEGORY_ICONS[category]}
         </span>
-        <p className="text-[length:var(--font-size-lg)] text-[var(--color-text)]">{copy}</p>
+        <p className="text-text text-(length:--font-size-lg)">{copy}</p>
       </div>
     </Card>
   )

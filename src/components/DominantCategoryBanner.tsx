@@ -16,22 +16,22 @@ export function DominantCategoryBanner({ dominant, percentage }: DominantCategor
 
   return (
     <div
-      className="rounded-2xl bg-[var(--color-highlight)] p-[var(--spacing-md)]"
+      className="bg-highlight p-md rounded-2xl"
       style={{ borderLeft: `4px solid ${CATEGORY_COLORS[dominant.category]}` }}
     >
-      <div className="flex items-center gap-[var(--spacing-sm)]">
+      <div className="gap-sm flex items-center">
         <span className="text-4xl">{CATEGORY_ICONS[dominant.category]}</span>
         <div className="flex-1">
-          <p className="text-[length:var(--font-size-base)] font-semibold text-[var(--color-text)]">
+          <p className="text-text text-(length:--font-size-base) font-semibold">
             {dominant.category} foi sua maior categoria
           </p>
-          <p className="text-[length:var(--font-size-sm)] text-[var(--color-inactive-text)]">
+          <p className="text-(length:--font-size-sm) text-(--color-inactive-text)">
             {formatCurrency(dominant.total)} · {percentage}% do mês
           </p>
         </div>
       </div>
 
-      <div className="mt-[var(--spacing-sm)]">
+      <div className="mt-sm">
         <Button
           variant="primary"
           label="Ver Vilão do Mês →"

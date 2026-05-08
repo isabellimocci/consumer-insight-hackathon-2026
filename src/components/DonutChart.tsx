@@ -88,19 +88,13 @@ export function DonutChart({ data, totalBudget }: DonutChartProps) {
 
                   return (
                     <text x={cx} y={cy} textAnchor="middle" dominantBaseline="middle">
-                      <tspan
-                        x={cx}
-                        y={cy - 8}
-                        className="fill-[var(--color-text)]"
-                        fontSize={11}
-                        fontWeight={500}
-                      >
+                      <tspan x={cx} y={cy - 8} className="fill-text" fontSize={11} fontWeight={500}>
                         Total
                       </tspan>
                       <tspan
                         x={cx}
                         y={cy + 10}
-                        className="fill-[var(--color-text)]"
+                        className="fill-text"
                         fontSize={13}
                         fontWeight={700}
                       >
@@ -115,22 +109,19 @@ export function DonutChart({ data, totalBudget }: DonutChartProps) {
         </PieChart>
       </ChartContainer>
 
-      <ul
-        role="list"
-        className="mt-[var(--spacing-sm)] flex flex-wrap justify-center gap-x-[var(--spacing-md)] gap-y-[var(--spacing-xs)]"
-      >
+      <ul role="list" className="mt-sm gap-x-md gap-y-xs flex flex-wrap justify-center">
         {data.map((d) => (
           <li
             key={d.category}
             role="listitem"
-            className="flex items-center gap-[var(--spacing-xs)] text-[length:var(--font-size-sm)]"
+            className="gap-xs flex items-center text-(length:--font-size-sm)"
           >
             <span
               style={{ background: CATEGORY_COLORS[d.category] }}
               className="size-3 rounded-full"
             />
             <span>{d.category}</span>
-            <span className="text-[var(--color-inactive-text)]">{d.percentage}%</span>
+            <span className="text-(--color-inactive-text)">{d.percentage}%</span>
           </li>
         ))}
       </ul>

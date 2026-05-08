@@ -27,12 +27,12 @@ export function ConcentrationInsightCard({
     : `${category}: ${percentage}% do orçamento mensal`
 
   return (
-    <div className="flex flex-col gap-3 rounded-2xl bg-[var(--color-primary)] p-[var(--spacing-md)]">
-      <span className="text-[length:var(--font-size-base)] font-semibold text-[var(--color-text)]">
+    <div className="bg-primary p-md flex flex-col gap-3 rounded-2xl">
+      <span className="text-text text-(length:--font-size-base) font-semibold">
         {getConcentrationCopy(category, percentage, budgetMode)}
       </span>
       <div className="flex items-center gap-2">
-        <div className="h-3 flex-1 overflow-hidden rounded-full bg-[var(--color-surface)]">
+        <div className="bg-surface h-3 flex-1 overflow-hidden rounded-full">
           <div
             role="progressbar"
             aria-valuenow={percentage}
@@ -46,7 +46,7 @@ export function ConcentrationInsightCard({
             }}
           />
         </div>
-        <span className="w-12 text-right text-[length:var(--font-size-sm)] font-bold text-[var(--color-text)]">
+        <span className="text-text w-12 text-right text-(length:--font-size-sm) font-bold">
           {percentage}%
         </span>
       </div>

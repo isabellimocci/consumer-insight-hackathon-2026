@@ -16,7 +16,7 @@ export function VilaoHeroCard({ vilao }: VilaoHeroCardProps) {
 
   return (
     <div
-      className="flex flex-col items-center gap-[var(--spacing-sm)] rounded-2xl p-[var(--spacing-md)] shadow-sm"
+      className="gap-sm p-md flex flex-col items-center rounded-2xl shadow-sm"
       style={{ backgroundColor: bgColor }}
       aria-label={`Vilão do mês: ${vilao.category}`}
     >
@@ -24,13 +24,11 @@ export function VilaoHeroCard({ vilao }: VilaoHeroCardProps) {
       <span aria-hidden="true" style={{ fontSize: 48, lineHeight: 1 }}>
         {CATEGORY_ICONS[vilao.category]}
       </span>
-      <p className="text-[length:var(--font-size-xl)] font-bold text-[var(--color-text)]">
-        {vilao.category}
-      </p>
-      <p className="text-[length:var(--font-size-2xl)] font-bold text-[var(--color-danger)]">
+      <p className="text-text text-(length:--font-size-xl) font-bold">{vilao.category}</p>
+      <p className="text-danger text-(length:--font-size-2xl) font-bold">
         +{formatCurrency(vilao.variance)}
       </p>
-      <p className="text-[length:var(--font-size-sm)] text-[var(--color-inactive-text)]">
+      <p className="text-(length:--font-size-sm) text-(--color-inactive-text)">
         Gastou {formatCurrency(vilao.spentAmount)} de {formatCurrency(vilao.targetAmount)}{' '}
         planejados
       </p>
