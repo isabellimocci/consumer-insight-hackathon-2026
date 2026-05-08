@@ -11,14 +11,16 @@ export function AppLayout() {
 
   return (
     <MonthProvider>
-      <BudgetProvider>
-        <Navbar />
-        <main role="main" className="pb-24">
-          <Outlet />
-        </main>
-        <FAB onOpen={() => setIsOpen(true)} />
-        <NovaTransacaoModal open={isOpen} onClose={() => setIsOpen(false)} />
-      </BudgetProvider>
+      <section className="flex h-screen bg-[var(--color-bg)]">
+        <BudgetProvider>
+          <Navbar />
+          <main role="main" className="flex-1 overflow-y-auto">
+            <Outlet />
+          </main>
+          <FAB onOpen={() => setIsOpen(true)} />
+          <NovaTransacaoModal open={isOpen} onClose={() => setIsOpen(false)} />
+        </BudgetProvider>
+      </section>
     </MonthProvider>
   )
 }

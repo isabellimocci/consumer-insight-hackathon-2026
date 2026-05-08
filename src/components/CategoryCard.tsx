@@ -100,10 +100,10 @@ export function CategoryCard({
               <Badge
                 label={
                   budgetStatus === 'on-track'
-                    ? '✓ Na meta'
+                    ? '✓ Dentro da meta'
                     : budgetStatus === 'warning'
                       ? '⚠ Atenção'
-                      : '✗ Acima'
+                      : '✗ Acima da meta'
                 }
                 color={
                   budgetStatus === 'on-track'

@@ -9,13 +9,13 @@ import type {
 import { CATEGORIES } from '../types'
 
 const BASE_BUDGET: Record<Category, number> = {
-  Alimentação: 25,
+  Alimentação: 30,
   Transporte: 12,
   Lazer: 10,
   Assinaturas: 8,
   Compras: 15,
   Saúde: 10,
-  Educação: 10,
+  Educação: 15,
 }
 
 export function getSuggestedBudget(): Record<Category, number> {

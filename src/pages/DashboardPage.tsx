@@ -1,6 +1,7 @@
 import { CategoryCard } from '@components/CategoryCard'
 import { DominantCategoryBanner } from '@components/DominantCategoryBanner'
 import { DonutChart } from '@components/DonutChart'
+import { MonthSelector } from '@components/MonthSelector'
 import { MonthVariationBanner } from '@components/MonthVariationBanner'
 import { useBudget } from '@contexts/useBudget'
 import { useMonth } from '@contexts/useMonth'
@@ -77,41 +78,51 @@ export default function DashboardPage() {
 
   return (
     <div
-      className="mx-auto flex max-w-2xl flex-col gap-[var(--spacing-md)] px-[var(--spacing-md)] py-[var(--spacing-lg)]"
+      className="mx-10 flex gap-[var(--spacing-md)] px-[var(--spacing-md)] py-[var(--spacing-lg)]"
       aria-live="polite"
     >
-      {!isConfigured && (
-        <div className="rounded-2xl bg-[var(--color-danger-bg)] px-[var(--spacing-md)] py-[var(--spacing-sm)]">
-          <Link
-            to={ROUTES.ORCAMENTO}
-            className="text-[length:var(--font-size-sm)] text-[var(--color-danger)]"
-          >
-            Configure seu orçamento para ver análises completas →
-          </Link>
-        </div>
-      )}
+      <section className="flex flex-2 flex-col">
+        <section className="flex gap-5">
+          <div className="gap flex flex-1 flex-col">
+            <span className="pb-4">
+              <MonthSelector />
+            </span>
 
-      <MonthVariationBanner
-        currentTotal={currentTotal}
-        previousTotal={previousTotal}
-        variationPercent={totalVariation}
-        previousMonth={previousMonth}
-        totalBudget={isConfigured ? totalBudget : undefined}
-      />
+            {!isConfigured && (
+              <div className="rounded-2xl bg-[var(--color-danger-bg)] px-[var(--spacing-md)] py-[var(--spacing-sm)]">
+                <Link
+                  to={ROUTES.ORCAMENTO}
+                  className="text-[length:var(--font-size-sm)] text-[var(--color-danger)]"
+                >
+                  Configure seu orçamento para ver análises completas →
+                </Link>
+              </div>
+            )}
 
-      <DonutChart data={percentages} totalBudget={isConfigured ? totalBudget : undefined} />
+            <MonthVariationBanner
+              currentTotal={currentTotal}
+              previousTotal={previousTotal}
+              variationPercent={totalVariation}
+              previousMonth={previousMonth}
+              totalBudget={isConfigured ? totalBudget : undefined}
+            />
+          </div>
+          <img src="https://placecats.com/bella/200/200" alt="" />
+        </section>
 
-      <section aria-label="Gastos por categoria">
-        <ul role="list" className="grid grid-cols-2 gap-[var(--spacing-sm)]">
-          {cardData.map((card) => (
-            <li key={card.category} role="listitem">
-              <CategoryCard {...card} />
-            </li>
-          ))}
-        </ul>
+        <DonutChart data={percentages} totalBudget={isConfigured ? totalBudget : undefined} />
+
+        <section aria-label="Gastos por categoria">
+          <ul role="list" className="grid grid-cols-2 gap-[var(--spacing-sm)]">
+            {cardData.map((card) => (
+              <li key={card.category} role="listitem">
+                <CategoryCard {...card} />
+              </li>
+            ))}
+          </ul>
+        </section>
+        {dominant && <DominantCategoryBanner dominant={dominant} percentage={dominantPercentage} />}
       </section>
-
-      {dominant && <DominantCategoryBanner dominant={dominant} percentage={dominantPercentage} />}
     </div>
   )
 }

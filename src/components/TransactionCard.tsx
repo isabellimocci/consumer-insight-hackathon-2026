@@ -16,7 +16,7 @@ export const TransactionCard: React.FC<TransactionCardProps> = ({ transaction })
   return (
     <Card
       ariaLabel={`Transação: ${description}, ${formatCurrency(amount)}, ${formatDate(date)}`}
-      className="items-center gap-[var(--spacing-sm)]"
+      className="gap-[var(--spacing-sm)]"
     >
       <div
         className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-lg"
@@ -24,8 +24,9 @@ export const TransactionCard: React.FC<TransactionCardProps> = ({ transaction })
       >
         {icon}
       </div>
-      <div className="flex min-w-0 flex-1 flex-col">
-        <span className="truncate font-medium text-[var(--color-text)]">{description}</span>
+
+      <div className="flex min-w-0 flex-1 items-center justify-between">
+        <span className="truncate pt-2 font-medium text-[var(--color-text)]">{description}</span>
         <span className="text-[var(--color-inactive-text)] text-[var(--font-size-sm)]">
           {formatDate(date)}
         </span>
