@@ -2,9 +2,18 @@ import { mockData } from '@data/transactions'
 
 import type { MonthData, Transaction, TransactionId } from '../types'
 
+function parseStored(stored: string): Transaction[] | null {
+  try {
+    return JSON.parse(stored) as Transaction[]
+  } catch {
+    return null
+  }
+}
+
 export function getTransactionsByMonth(month: string): Transaction[] {
   const stored = localStorage.getItem(`transactions_${month}`)
-  if (stored) return JSON.parse(stored) as Transaction[]
+  if (stored)
+    return parseStored(stored) ?? [...(mockData.find((m) => m.month === month)?.transactions ?? [])]
   return [...(mockData.find((m) => m.month === month)?.transactions ?? [])]
 }
 
@@ -29,7 +38,7 @@ export function addTransaction(data: Omit<Transaction, 'id'>): Transaction {
   const month = data.date.slice(0, 7)
   const stored = localStorage.getItem(`transactions_${month}`)
   const base: Transaction[] = stored
-    ? (JSON.parse(stored) as Transaction[])
+    ? (parseStored(stored) ?? [...(mockData.find((m) => m.month === month)?.transactions ?? [])])
     : [...(mockData.find((m) => m.month === month)?.transactions ?? [])]
   const newTx: Transaction = {
     ...data,
@@ -42,7 +51,7 @@ export function addTransaction(data: Omit<Transaction, 'id'>): Transaction {
 export function deleteTransaction(transactionId: string, month: string): void {
   const stored = localStorage.getItem(`transactions_${month}`)
   const base: Transaction[] = stored
-    ? (JSON.parse(stored) as Transaction[])
+    ? (parseStored(stored) ?? [...(mockData.find((m) => m.month === month)?.transactions ?? [])])
     : [...(mockData.find((m) => m.month === month)?.transactions ?? [])]
   const filtered = base.filter((t) => t.id !== transactionId)
   localStorage.setItem(`transactions_${month}`, JSON.stringify(filtered))
@@ -56,13 +65,24 @@ export function updateTransaction(
   const newMonth = data.date.slice(0, 7)
   if (newMonth === oldMonth) {
     const stored = localStorage.getItem(`transactions_${oldMonth}`)
-    if (!stored) return
-    const txs = (JSON.parse(stored) as Transaction[]).map((t) =>
-      t.id === id ? { ...t, ...data } : t,
-    )
+    const base: Transaction[] = stored
+      ? (parseStored(stored) ?? [
+          ...(mockData.find((m) => m.month === oldMonth)?.transactions ?? []),
+        ])
+      : [...(mockData.find((m) => m.month === oldMonth)?.transactions ?? [])]
+    const txs = base.map((t) => (t.id === id ? { ...t, ...data } : t))
     localStorage.setItem(`transactions_${oldMonth}`, JSON.stringify(txs))
   } else {
     deleteTransaction(id, oldMonth)
-    addTransaction(data)
+    const base: Transaction[] = (() => {
+      const s = localStorage.getItem(`transactions_${newMonth}`)
+      return s
+        ? (parseStored(s) ?? [...(mockData.find((m) => m.month === newMonth)?.transactions ?? [])])
+        : [...(mockData.find((m) => m.month === newMonth)?.transactions ?? [])]
+    })()
+    localStorage.setItem(
+      `transactions_${newMonth}`,
+      JSON.stringify([...base, { ...data, id: id as TransactionId }]),
+    )
   }
 }
