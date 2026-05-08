@@ -20,7 +20,7 @@ export function UltimosLancamentos({ month }: Props) {
 
   return (
     <div className="flex h-full flex-col gap-3 overflow-hidden">
-      <p className="shrink-0 font-semibold text-(--color-text)">Últimos lançamentos</p>
+      <p className="shrink-0 text-sm font-semibold text-(--color-text)">Últimos lançamentos</p>
       <ul className="flex min-h-0 flex-1 flex-col gap-2 overflow-y-auto pr-1">
         {transactions.map((t) => (
           <li key={t.id}>

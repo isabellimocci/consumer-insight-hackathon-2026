@@ -1,5 +1,8 @@
 import { cn } from '@components/lib/utils'
+import { useBudget } from '@contexts/useBudget'
 import { formatCurrency } from '@utils/formatters'
+import { ROUTES } from '@utils/routes'
+import { Link } from 'react-router-dom'
 
 interface MonthVariationBannerProps {
   currentTotal: number
@@ -17,6 +20,7 @@ export function MonthVariationBanner({
   totalBudget,
   className,
 }: MonthVariationBannerProps) {
+  const { isConfigured } = useBudget()
   const prevMonthName = previousMonth
     ? new Intl.DateTimeFormat('pt-BR', { month: 'long' }).format(
         new Date(Number(previousMonth.split('-')[0]), Number(previousMonth.split('-')[1]) - 1, 1),
@@ -40,9 +44,22 @@ export function MonthVariationBanner({
       )}
     >
       <div className="flex flex-col justify-between">
-        <p className="text-4xl font-bold text-white">{formatCurrency(currentTotal)}</p>
-        {totalBudget !== undefined && (
-          <p className="text-sm text-white/40">de {formatCurrency(totalBudget)} planejados</p>
+        <div className="">
+          <p className="shrink-0 pb-1 text-xs font-semibold text-gray-400 uppercase">
+            Total gasto no mês
+          </p>
+          <p className="text-4xl font-bold text-white">{formatCurrency(currentTotal)}</p>
+          {totalBudget !== undefined && (
+            <p className="text-sm text-white/40">de {formatCurrency(totalBudget)} planejados</p>
+          )}
+        </div>
+        {!isConfigured && (
+          <Link
+            to={ROUTES.ORCAMENTO}
+            className="mt-3 shrink-0 rounded-sm bg-[#364935] px-3 py-2 text-(--color-primary) transition-all hover:bg-[#486147]"
+          >
+            Configure seu orçamento →
+          </Link>
         )}
       </div>
 
