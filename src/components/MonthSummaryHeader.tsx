@@ -12,14 +12,14 @@ export const MonthSummaryHeader: React.FC<MonthSummaryHeaderProps> = ({
   transactionCount,
 }) => {
   return (
-    <div className="flex flex-col gap-[var(--spacing-xs)]">
-      <span className="tracking-wide text-[var(--color-inactive-text)] text-[var(--font-size-sm)] uppercase">
+    <div className="gap-xs flex flex-col">
+      <span className="tracking-wide text-(--color-inactive-text) text-(--font-size-sm) uppercase">
         {monthLabel}
       </span>
-      <span className="font-bold text-[var(--color-text)] text-[var(--font-size-xl)]">
+      <span className="text-text font-bold text-(--font-size-xl)">
         {formatCurrency(totalAmount)}
       </span>
-      <span className="text-[var(--color-inactive-text)] text-[var(--font-size-sm)]">
+      <span className="text-(--color-inactive-text) text-(--font-size-sm)">
         {transactionCount} transações
       </span>
     </div>

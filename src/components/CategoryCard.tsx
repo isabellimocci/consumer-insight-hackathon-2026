@@ -35,10 +35,10 @@ export function CategoryCard({
   const trendArrow = trend === 'up' ? '↑' : trend === 'down' ? '↓' : '→'
   const trendColor =
     trend === 'up'
-      ? 'text-[var(--color-danger)]'
+      ? 'text-danger'
       : trend === 'down'
-        ? 'text-[var(--color-success)]'
-        : 'text-[var(--color-inactive-text)]'
+        ? 'text-success'
+        : 'text-(--color-inactive-text)'
 
   const variationLabel =
     variationPercent === NEW_CATEGORY_SENTINEL
@@ -54,10 +54,10 @@ export function CategoryCard({
       type="button"
       onClick={handleClick}
       aria-label={`Ver transações de ${category}`}
-      className="w-full cursor-pointer rounded-2xl bg-[var(--color-primary)] p-[var(--spacing-sm)] text-left transition-transform hover:scale-[1.02] focus-visible:outline-2 focus-visible:outline-[var(--color-text)]"
+      className="bg-primary p-sm focus-visible:outline-text w-full cursor-pointer rounded-2xl text-left transition-transform hover:scale-[1.02] focus-visible:outline-2"
       style={{ borderLeft: `4px solid ${CATEGORY_COLORS[category]}` }}
     >
-      <div className="flex items-center gap-[var(--spacing-sm)]">
+      <div className="gap-sm flex items-center">
         <span
           className="flex size-10 shrink-0 items-center justify-center rounded-full text-xl"
           style={{ background: iconBg }}
@@ -66,34 +66,34 @@ export function CategoryCard({
         </span>
 
         <div className="min-w-0 flex-1">
-          <p className="truncate text-[length:var(--font-size-sm)] font-semibold text-[var(--color-text)]">
+          <p className="text-text truncate text-(length:--font-size-sm) font-semibold">
             {category}
           </p>
-          <p className="text-[length:var(--font-size-sm)] text-[var(--color-inactive-text)]">
+          <p className="text-(length:--font-size-sm) text-(--color-inactive-text)">
             {percentage}% do total
           </p>
         </div>
       </div>
 
-      <div className="mt-[var(--spacing-xs)] flex items-end justify-between">
-        <span className="text-[length:var(--font-size-base)] font-bold text-[var(--color-text)]">
+      <div className="mt-xs flex items-end justify-between">
+        <span className="text-text text-(length:--font-size-base) font-bold">
           {formatCurrency(total)}
         </span>
-        <span className={`text-[length:var(--font-size-sm)] font-bold ${trendColor}`}>
+        <span className={`text-(length:--font-size-sm) font-bold ${trendColor}`}>
           {trendArrow} {variationLabel}
         </span>
       </div>
 
       {targetAmount !== undefined && (
-        <div className="mt-[var(--spacing-xs)] flex flex-col gap-[var(--spacing-xs)]">
-          <div className="h-1.5 w-full overflow-hidden rounded-full bg-[var(--color-inactive-bg)]">
+        <div className="mt-xs gap-xs flex flex-col">
+          <div className="h-1.5 w-full overflow-hidden rounded-full bg-(--color-inactive-bg)">
             <div
               className="h-full rounded-full transition-all"
               style={{ width: progressWidth, backgroundColor: CATEGORY_COLORS[category] }}
             />
           </div>
           <div className="flex items-center justify-between">
-            <p className="text-[length:var(--font-size-sm)] text-[var(--color-inactive-text)]">
+            <p className="text-(length:--font-size-sm) text-(--color-inactive-text)">
               Meta: {formatCurrency(targetAmount)}
             </p>
             {budgetStatus && (

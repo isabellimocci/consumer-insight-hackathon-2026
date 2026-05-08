@@ -23,13 +23,13 @@ export const TotalFiltered: React.FC<TotalFilteredProps> = ({
     return (
       <div
         aria-live="polite"
-        className="border-t border-[var(--border)] pt-[var(--spacing-md)] text-[length:var(--font-size-sm)]"
+        className="pt-md border-t border-(--border) text-(length:--font-size-sm)"
       >
-        <span className="text-[var(--color-inactive-text)]">
+        <span className="text-(--color-inactive-text)">
           {selectedCategory}: {formatCurrency(filteredTotal)} de {formatCurrency(targetAmount)}
         </span>
         {' | '}
-        <span className={isOver ? 'text-[var(--color-danger)]' : 'text-[var(--color-success)]'}>
+        <span className={isOver ? 'text-danger' : 'text-success'}>
           {formatCurrency(Math.abs(balance))} {isOver ? 'acima da meta' : 'disponível'}
         </span>
       </div>
@@ -40,7 +40,7 @@ export const TotalFiltered: React.FC<TotalFilteredProps> = ({
     return (
       <div
         aria-live="polite"
-        className="border-t border-[var(--border)] pt-[var(--spacing-md)] text-[length:var(--font-size-sm)] text-[var(--color-inactive-text)]"
+        className="pt-md border-t border-(--border) text-(length:--font-size-sm) text-(--color-inactive-text)"
       >
         <span>Total do mês: {formatCurrency(filteredTotal)}</span>
         {' | '}
@@ -52,7 +52,7 @@ export const TotalFiltered: React.FC<TotalFilteredProps> = ({
   return (
     <div
       aria-live="polite"
-      className="border-t border-[var(--border)] pt-[var(--spacing-md)] text-[length:var(--font-size-sm)] text-[var(--color-inactive-text)]"
+      className="pt-md border-t border-(--border) text-(length:--font-size-sm) text-(--color-inactive-text)"
     >
       {selectedCategory === null ? (
         <span>Total do mês: {formatCurrency(filteredTotal)}</span>

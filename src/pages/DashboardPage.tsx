@@ -1,3 +1,4 @@
+import { Card } from '@components/Card'
 import { CategoryCard } from '@components/CategoryCard'
 import { DominantCategoryBanner } from '@components/DominantCategoryBanner'
 import { DonutChart } from '@components/DonutChart'
@@ -77,27 +78,26 @@ export default function DashboardPage() {
   }, [percentages, dominant])
 
   return (
-    <div
-      className="mx-10 flex gap-[var(--spacing-md)] px-[var(--spacing-md)] py-[var(--spacing-lg)]"
-      aria-live="polite"
-    >
+    <div className="gap-md px-md py-lg mx-10 flex" aria-live="polite">
       <section className="flex flex-2 flex-col">
         <section className="flex gap-5">
-          <div className="gap flex flex-1 flex-col">
-            <span className="pb-4">
-              <MonthSelector />
-            </span>
+          <div className="flex flex-1 flex-col justify-between">
+            <div className={`flex ${isConfigured ? 'justify-end' : 'justify-between'}`}>
+              {!isConfigured && (
+                <div className="flex items-center">
+                  <Link
+                    to={ROUTES.ORCAMENTO}
+                    className="rounded-xl bg-(--color-danger-bg) px-(--spacing-sm) py-(--spacing-sm) text-(--color-danger) transition-all hover:bg-(--color-highlight)"
+                  >
+                    Configure seu orçamento para ver análises completas →
+                  </Link>
+                </div>
+              )}
 
-            {!isConfigured && (
-              <div className="rounded-2xl bg-[var(--color-danger-bg)] px-[var(--spacing-md)] py-[var(--spacing-sm)]">
-                <Link
-                  to={ROUTES.ORCAMENTO}
-                  className="text-[length:var(--font-size-sm)] text-[var(--color-danger)]"
-                >
-                  Configure seu orçamento para ver análises completas →
-                </Link>
-              </div>
-            )}
+              <span className="flex items-center">
+                <MonthSelector />
+              </span>
+            </div>
 
             <MonthVariationBanner
               currentTotal={currentTotal}
@@ -105,15 +105,20 @@ export default function DashboardPage() {
               variationPercent={totalVariation}
               previousMonth={previousMonth}
               totalBudget={isConfigured ? totalBudget : undefined}
+              className="min-h-[40px]"
             />
           </div>
-          <img src="https://placecats.com/bella/200/200" alt="" />
+          <img
+            src="https://placecats.com/bella/200/200"
+            alt="Cat"
+            className="h-[220px] w-[220px] shrink-0"
+          />
         </section>
 
         <DonutChart data={percentages} totalBudget={isConfigured ? totalBudget : undefined} />
 
         <section aria-label="Gastos por categoria">
-          <ul role="list" className="grid grid-cols-2 gap-[var(--spacing-sm)]">
+          <ul role="list" className="gap-sm grid grid-cols-2">
             {cardData.map((card) => (
               <li key={card.category} role="listitem">
                 <CategoryCard {...card} />
@@ -122,6 +127,9 @@ export default function DashboardPage() {
           </ul>
         </section>
         {dominant && <DominantCategoryBanner dominant={dominant} percentage={dominantPercentage} />}
+      </section>
+      <section className="flex flex-1 flex-col">
+        <Card />
       </section>
     </div>
   )

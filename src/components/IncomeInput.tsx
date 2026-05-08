@@ -28,15 +28,12 @@ export function IncomeInput({ month, value, onChange }: IncomeInputProps) {
   const displayValue = value === 0 ? '' : value.toString()
 
   return (
-    <div className="flex flex-col gap-[var(--spacing-xs)]">
-      <label
-        htmlFor="income-input"
-        className="text-[length:var(--font-size-sm)] font-medium text-[var(--color-text)]"
-      >
+    <div className="gap-xs flex flex-col">
+      <label htmlFor="income-input" className="text-text text-(length:--font-size-sm) font-medium">
         Minha renda em {formatMonthLabel(month)}
       </label>
       <div className="relative flex items-center">
-        <span className="absolute left-[var(--spacing-sm)] text-[length:var(--font-size-base)] text-[var(--color-inactive-text)]">
+        <span className="left-sm absolute text-(length:--font-size-base) text-(--color-inactive-text)">
           R$
         </span>
         <input
@@ -49,7 +46,7 @@ export function IncomeInput({ month, value, onChange }: IncomeInputProps) {
           placeholder="0,00"
           aria-label={`Renda mensal em ${formatMonthLabel(month)}`}
           aria-live="polite"
-          className="w-full rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] py-[var(--spacing-sm)] pr-[var(--spacing-sm)] pl-10 text-[length:var(--font-size-base)] text-[var(--color-text)] outline-none focus:border-[var(--color-primary)] focus:ring-2 focus:ring-[var(--color-primary)]"
+          className="border-border bg-surface py-sm pr-sm text-text focus:border-primary focus:ring-primary w-full rounded-xl border pl-10 text-(length:--font-size-base) outline-none focus:ring-2"
           style={{ transition: 'border-color 150ms ease, box-shadow 150ms ease' }}
         />
       </div>

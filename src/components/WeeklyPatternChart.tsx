@@ -48,8 +48,8 @@ export function WeeklyPatternChart({ pattern }: WeeklyPatternChartProps) {
   }))
 
   return (
-    <div className="rounded-2xl bg-[var(--color-primary)] p-[var(--spacing-md)]">
-      <p className="mb-[var(--spacing-sm)] text-[length:var(--font-size-sm)] font-semibold text-[var(--color-text)]">
+    <div className="bg-primary p-md rounded-2xl">
+      <p className="mb-sm text-text text-(length:--font-size-sm) font-semibold">
         Gastos por semana
       </p>
       <ChartContainer config={chartConfig} className="min-h-[200px] w-full">

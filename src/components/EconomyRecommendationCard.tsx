@@ -10,17 +10,13 @@ interface EconomyRecommendationCardProps {
 export function EconomyRecommendationCard({ recommendation }: EconomyRecommendationCardProps) {
   return (
     <Card variant="highlight" ariaLabel="Recomendação de economia">
-      <div className="flex flex-col gap-[var(--spacing-sm)]" aria-live="polite">
-        <p className="text-[length:var(--font-size-base)] text-[var(--color-text)]">
-          💡 {recommendation.copy}
-        </p>
-        <p className="flex items-baseline gap-[var(--spacing-xs)]">
-          <span className="text-[length:var(--font-size-xl)] font-bold text-[var(--color-success)]">
+      <div className="gap-sm flex flex-col" aria-live="polite">
+        <p className="text-text text-(length:--font-size-base)">💡 {recommendation.copy}</p>
+        <p className="gap-xs flex items-baseline">
+          <span className="text-success text-(length:--font-size-xl) font-bold">
             {formatCurrency(recommendation.savingsAmount)}
           </span>
-          <span className="text-[length:var(--font-size-sm)] text-[var(--color-inactive-text)]">
-            /mês
-          </span>
+          <span className="text-(length:--font-size-sm) text-(--color-inactive-text)">/mês</span>
         </p>
       </div>
     </Card>

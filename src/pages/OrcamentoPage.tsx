@@ -78,25 +78,23 @@ export default function OrcamentoPage() {
   }
 
   return (
-    <div className="mx-auto flex max-w-2xl flex-col gap-[var(--spacing-md)] px-[var(--spacing-md)] py-[var(--spacing-lg)]">
-      <div className="flex flex-col gap-[var(--spacing-xs)]">
-        <h1 className="text-[length:var(--font-size-xl)] font-bold text-[var(--color-text)]">
-          💰 Definir Orçamento
-        </h1>
-        <p className="text-[length:var(--font-size-sm)] text-[var(--color-inactive-text)]">
+    <div className="gap-md px-md py-lg mx-auto flex max-w-2xl flex-col">
+      <div className="gap-xs flex flex-col">
+        <h1 className="text-text text-(length:--font-size-xl) font-bold">💰 Definir Orçamento</h1>
+        <p className="text-(length:--font-size-sm) text-(--color-inactive-text)">
           Defina sua renda e distribua seu orçamento por categoria. Vamos juntas acompanhar o que
           realmente importa!
         </p>
       </div>
 
-      <div className="rounded-2xl bg-[var(--color-surface)] p-[var(--spacing-md)] shadow-sm">
+      <div className="bg-surface p-md rounded-2xl shadow-sm">
         <IncomeInput month={selectedMonth} value={localIncome} onChange={setLocalIncome} />
       </div>
 
       {localIncome > 0 && <SuggestedBudgetCard income={localIncome} suggested={suggested} />}
 
-      <div className="flex flex-col gap-[var(--spacing-md)] rounded-2xl bg-[var(--color-surface)] p-[var(--spacing-md)] shadow-sm">
-        <p className="text-[length:var(--font-size-base)] font-semibold text-[var(--color-text)]">
+      <div className="gap-md bg-surface p-md flex flex-col rounded-2xl shadow-sm">
+        <p className="text-text text-(length:--font-size-base) font-semibold">
           Ajuste por categoria
         </p>
         {CATEGORIES.map((cat) => (
@@ -122,7 +120,7 @@ export default function OrcamentoPage() {
       />
 
       <Dialog open={showDialog} onOpenChange={setShowDialog}>
-        <DialogContent className="!h-full !max-w-full rounded-none md:!h-auto md:!max-w-2xl md:rounded-xl">
+        <DialogContent className="h-full! max-w-full! rounded-none md:h-auto! md:max-w-2xl! md:rounded-xl">
           <DialogHeader>
             <DialogTitle>A partir de qual mês?</DialogTitle>
             <DialogDescription>

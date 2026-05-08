@@ -51,12 +51,12 @@ export function CategorySliderItem({
   }
 
   return (
-    <div className="flex items-center gap-[var(--spacing-sm)]">
-      <span className="flex flex-1 items-center gap-[var(--spacing-xs)] text-[length:var(--font-size-sm)] font-medium text-[var(--color-text)]">
+    <div className="gap-sm flex items-center">
+      <span className="gap-xs text-text flex flex-1 items-center text-(length:--font-size-sm) font-medium">
         <span aria-hidden="true">{CATEGORY_ICONS[category]}</span>
         {category}
       </span>
-      <span className="text-[length:var(--font-size-sm)] text-[var(--color-inactive-text)]">
+      <span className="text-(length:--font-size-sm) text-(--color-inactive-text)">
         {formatCurrency(amount)}
       </span>
       <div className="flex items-center gap-1">
@@ -67,7 +67,7 @@ export function CategorySliderItem({
           step={1}
           value={userPercent}
           onChange={handleChange}
-          className="w-16 rounded-lg border border-[var(--color-border)] bg-[var(--color-background)] px-[var(--spacing-xs)] py-1 text-right text-[length:var(--font-size-sm)] font-semibold text-[var(--color-text)] focus:ring-2 focus:ring-[var(--color-primary)] focus:outline-none"
+          className="border-border bg-background px-xs text-text focus:ring-primary w-16 rounded-lg border py-1 text-right text-(length:--font-size-sm) font-semibold focus:ring-2 focus:outline-none"
           aria-label={`Percentual de orçamento para ${category}`}
         />
         <span

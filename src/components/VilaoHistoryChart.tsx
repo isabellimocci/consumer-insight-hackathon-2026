@@ -39,7 +39,7 @@ export function VilaoHistoryChart({
 
   return (
     <div>
-      <p className="mb-[var(--spacing-sm)] text-[length:var(--font-size-sm)] text-[var(--color-inactive-text)]">
+      <p className="mb-sm text-(length:--font-size-sm) text-(--color-inactive-text)">
         Histórico dos últimos meses
       </p>
       <ChartContainer config={chartConfig} className="min-h-[200px] w-full">

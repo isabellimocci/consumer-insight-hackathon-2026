@@ -1,6 +1,9 @@
 import { useMonth } from '@contexts/useMonth'
+import { useEffect, useState } from 'react'
 
+import { Carousel } from './Carousel'
 import { cn } from './lib/utils'
+import { type CarouselApi } from './ui/carousel'
 
 const monthFormatter = new Intl.DateTimeFormat('pt-BR', { month: 'long' })
 
@@ -13,36 +16,46 @@ function formatMonth(monthStr: string): string {
 
 export const MonthSelector: React.FC = () => {
   const { selectedMonth, setSelectedMonth, availableMonths } = useMonth()
+  const [api, setApi] = useState<CarouselApi>()
+
+  useEffect(() => {
+    if (!api) return
+    const index = availableMonths.indexOf(selectedMonth)
+    if (index !== -1) api.scrollTo(index)
+  }, [api, selectedMonth, availableMonths])
+
+  useEffect(() => {
+    if (!api) return
+    const handler = () => {
+      const index = api.selectedScrollSnap()
+      setSelectedMonth(availableMonths[index])
+    }
+    api.on('select', handler)
+    return () => {
+      api.off('select', handler)
+    }
+  }, [api, availableMonths, setSelectedMonth])
 
   return (
-    <nav
+    <Carousel
       aria-label="Selecionar mês"
-      className={cn(
-        'flex gap-[var(--spacing-sm)] overflow-x-auto',
-        'scrollbar-hide', // Hide scrollbar if available
-      )}
+      setApi={setApi}
+      opts={{ align: 'center', loop: false }}
+      className={cn('w-50')}
     >
       {availableMonths.map((month) => {
-        const isActive = month === selectedMonth
-        const baseClasses =
-          'inline-flex items-center justify-center rounded-[var(--spacing-sm)] px-[var(--spacing-sm)] py-[var(--spacing-xs)] text-[var(--font-size-sm)] cursor-pointer transition-all duration-200 whitespace-nowrap border-none focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-success)]'
-
-        const stateClasses = isActive
-          ? 'bg-[var(--color-success)] text-[var(--color-text)] border-transparent'
-          : 'bg-[var(--color-surface)] text-[var(--color-text)] border border-[var(--border)] hover:bg-[var(--color-bg)]'
-
         return (
-          <button
-            type="button"
+          <div
             key={month}
-            onClick={() => setSelectedMonth(month)}
-            className={cn(baseClasses, stateClasses)}
-            aria-current={isActive ? 'true' : undefined}
+            className={cn(
+              'transition-all duration-300 select-none',
+              'w-full py-2 text-center whitespace-nowrap',
+            )}
           >
             {formatMonth(month)}
-          </button>
+          </div>
         )
       })}
-    </nav>
+    </Carousel>
   )
 }

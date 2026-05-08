@@ -20,11 +20,11 @@ export const Chip: React.FC<ChipProps> = ({
   ariaLabel,
 }) => {
   const baseClasses =
-    'inline-flex items-center justify-center rounded-[var(--spacing-sm)] px-[var(--spacing-sm)] py-[var(--spacing-xs)] text-[var(--font-size-sm)] cursor-pointer transition-all duration-200'
+    'inline-flex items-center justify-center rounded-sm px-sm py-xs text-(--font-size-sm) cursor-pointer transition-all duration-200'
 
   const stateClasses = isActive
-    ? 'bg-[var(--color-success)] text-[var(--color-text)]'
-    : 'bg-[var(--color-surface)] text-[var(--color-text)] border border-[var(--border)] hover:bg-[var(--color-bg)]'
+    ? 'bg-success text-text'
+    : 'bg-surface text-text border border-(--border) hover:bg-bg'
 
   const finalClasses = cn(baseClasses, stateClasses, className)
 
