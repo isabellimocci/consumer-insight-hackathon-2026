@@ -2,6 +2,7 @@ import { BehaviorInsightCard } from '@components/BehaviorInsightCard'
 import { ConcentrationInsightCard } from '@components/ConcentrationInsightCard'
 import { ConsumerProfileCard } from '@components/ConsumerProfileCard'
 import { GrowingCategoryCard } from '@components/GrowingCategoryCard'
+import { MonthSelector } from '@components/MonthSelector'
 import { WeeklyPatternChart } from '@components/WeeklyPatternChart'
 import { useBudget } from '@contexts/useBudget'
 import { useMonth } from '@contexts/useMonth'
@@ -93,6 +94,10 @@ export default function InsightsPage() {
       <h1 className="text-[length:var(--font-size-lg)] font-bold text-[var(--color-text)]">
         Seus Insights
       </h1>
+
+      <span className="flex items-center">
+        <MonthSelector />
+      </span>
 
       <ConsumerProfileCard
         profile={profile}

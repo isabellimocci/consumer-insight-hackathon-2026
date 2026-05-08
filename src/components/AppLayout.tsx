@@ -6,6 +6,8 @@ import { MonthProvider } from '@contexts/MonthProvider'
 import { useState } from 'react'
 import { Outlet } from 'react-router-dom'
 
+import { TooltipProvider } from './ui/tooltip'
+
 export function AppLayout() {
   const [isOpen, setIsOpen] = useState(false)
 
@@ -13,10 +15,12 @@ export function AppLayout() {
     <MonthProvider>
       <section className="flex h-screen bg-[var(--color-bg)]">
         <BudgetProvider>
-          <Navbar />
-          <main role="main" className="flex-1 overflow-y-auto">
-            <Outlet />
-          </main>
+          <TooltipProvider>
+            <Navbar />
+            <main role="main" className="flex-1 overflow-y-auto">
+              <Outlet />
+            </main>
+          </TooltipProvider>
           <FAB onOpen={() => setIsOpen(true)} />
           <NovaTransacaoModal open={isOpen} onClose={() => setIsOpen(false)} />
         </BudgetProvider>

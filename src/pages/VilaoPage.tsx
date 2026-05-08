@@ -1,5 +1,6 @@
 import { Button } from '@components/Button'
 import { EconomyRecommendationCard } from '@components/EconomyRecommendationCard'
+import { MonthSelector } from '@components/MonthSelector'
 import { VilaoHeroCard } from '@components/VilaoHeroCard'
 import { VilaoHistoryChart } from '@components/VilaoHistoryChart'
 import { VilaoNarrativeCopy } from '@components/VilaoNarrativeCopy'
@@ -88,6 +89,9 @@ export default function VilaoPage() {
       className="mx-auto flex max-w-2xl flex-col gap-[var(--spacing-md)] px-[var(--spacing-md)] py-[var(--spacing-lg)]"
       aria-live="polite"
     >
+      <span className="flex items-center">
+        <MonthSelector />
+      </span>
       <VilaoHeroCard vilao={vilaoResult} />
       <VilaoNarrativeCopy copy={vilaoPhrase ?? ''} category={vilaoResult.category} />
       <VilaoHistoryChart

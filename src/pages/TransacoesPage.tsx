@@ -1,6 +1,7 @@
 import { CategoryFilter } from '@components/CategoryFilter'
 import { ConfirmarDelecaoModal } from '@components/ConfirmarDelecaoModal'
 import { EditarTransacaoModal } from '@components/EditarTransacaoModal'
+import { MonthSelector } from '@components/MonthSelector'
 import { MonthSummaryHeader } from '@components/MonthSummaryHeader'
 import { TotalFiltered } from '@components/TotalFiltered'
 import { TransactionCard } from '@components/TransactionCard'
@@ -78,6 +79,10 @@ export default function TransacoesPage() {
 
   return (
     <div className="mx-auto flex max-w-2xl flex-col gap-[var(--spacing-md)] px-[var(--spacing-md)] py-[var(--spacing-lg)]">
+      <span className="flex items-center">
+        <MonthSelector />
+      </span>
+
       <MonthSummaryHeader
         monthLabel={formatMonthLabel(selectedMonth)}
         totalAmount={monthTotal}
