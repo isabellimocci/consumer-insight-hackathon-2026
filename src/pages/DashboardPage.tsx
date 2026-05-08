@@ -9,7 +9,7 @@ import { getDominantCategory } from '@utils/insights'
 import { useMemo } from 'react'
 
 export default function DashboardPage() {
-  const { selectedMonth } = useMonth()
+  const { selectedMonth, transactionsVersion } = useMonth()
 
   const availableMonths = useMemo(() => getAvailableMonths(), [])
 
@@ -18,10 +18,13 @@ export default function DashboardPage() {
     return idx > 0 ? availableMonths[idx - 1] : null
   }, [selectedMonth, availableMonths])
 
-  const currentTxs = useMemo(() => getTransactionsByMonth(selectedMonth), [selectedMonth])
+  const currentTxs = useMemo(
+    () => getTransactionsByMonth(selectedMonth),
+    [selectedMonth, transactionsVersion],
+  )
   const previousTxs = useMemo(
     () => (previousMonth ? getTransactionsByMonth(previousMonth) : []),
-    [previousMonth],
+    [previousMonth, transactionsVersion],
   )
 
   const percentages = useMemo(() => getPercentageByCategory(currentTxs), [currentTxs])

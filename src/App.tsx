@@ -2,6 +2,7 @@ import { AppLayout } from '@components/AppLayout'
 import DashboardPage from '@pages/DashboardPage'
 import InsightsPage from '@pages/InsightsPage'
 import OrcamentoPage from '@pages/OrcamentoPage'
+import RendaPage from '@pages/RendaPage'
 import TransacoesPage from '@pages/TransacoesPage'
 import VilaoPage from '@pages/VilaoPage'
 import { ROUTES } from '@utils/routes'
@@ -16,6 +17,7 @@ const router = createBrowserRouter([
       { path: ROUTES.VILAO, element: <VilaoPage /> },
       { path: ROUTES.INSIGHTS, element: <InsightsPage /> },
       { path: ROUTES.ORCAMENTO, element: <OrcamentoPage /> },
+      { path: ROUTES.RENDA, element: <RendaPage /> },
     ],
   },
   {

@@ -38,7 +38,7 @@ function budgetReducer(
 }
 
 export function BudgetProvider({ children }: { children: React.ReactNode }) {
-  const { selectedMonth } = useMonth()
+  const { selectedMonth, transactionsVersion } = useMonth()
   const [{ income, adjustments, currentBudget }, dispatch] = useReducer(budgetReducer, {
     income: null,
     adjustments: {},
@@ -54,7 +54,7 @@ export function BudgetProvider({ children }: { children: React.ReactNode }) {
         currentBudget: getBudgetByMonth(selectedMonth),
       },
     })
-  }, [selectedMonth])
+  }, [selectedMonth, transactionsVersion])
 
   const recalculate = useCallback(
     (inc: Income, adj: BudgetAdjustments): MonthlyBudget => {
