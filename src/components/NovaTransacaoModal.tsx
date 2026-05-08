@@ -2,7 +2,7 @@ import { Dialog, DialogContent } from '@components/ui/dialog'
 import { useMonth } from '@contexts/useMonth'
 import { addTransaction } from '@services/transactionService'
 import { autoCategorizacao } from '@utils/autoCategorize'
-import { CATEGORY_COLORS, CATEGORY_ICONS } from '@utils/categoryMaps'
+import { CATEGORY_COLORS, CATEGORY_ICONS_PI } from '@utils/categoryMaps'
 import { ROUTES } from '@utils/routes'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -121,6 +121,7 @@ export function NovaTransacaoModal({ open, onClose }: Props) {
               <div className="flex gap-2 overflow-x-auto pb-1">
                 {CATEGORIES.map((cat) => {
                   const isActive = category !== null && category === cat
+                  const IconComponent = CATEGORY_ICONS_PI[cat]
                   return (
                     <button
                       key={cat}
@@ -136,7 +137,10 @@ export function NovaTransacaoModal({ open, onClose }: Props) {
                         border: `2px solid ${isActive ? CATEGORY_COLORS[cat] : 'transparent'}`,
                       }}
                     >
-                      <span className="text-lg">{CATEGORY_ICONS[cat]}</span>
+                      <IconComponent
+                        size={20}
+                        style={{ color: isActive ? '#fff' : CATEGORY_COLORS[cat] }}
+                      />
                       <span>{cat}</span>
                     </button>
                   )

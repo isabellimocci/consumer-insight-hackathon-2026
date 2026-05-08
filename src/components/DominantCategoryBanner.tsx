@@ -1,5 +1,5 @@
 import { Button } from '@components/Button'
-import { CATEGORY_COLORS, CATEGORY_ICONS } from '@utils/categoryMaps'
+import { CATEGORY_COLORS, CATEGORY_ICONS_PI } from '@utils/categoryMaps'
 import { formatCurrency } from '@utils/formatters'
 import { ROUTES } from '@utils/routes'
 import { useNavigate } from 'react-router-dom'
@@ -13,6 +13,7 @@ interface DominantCategoryBannerProps {
 
 export function DominantCategoryBanner({ dominant, percentage }: DominantCategoryBannerProps) {
   const navigate = useNavigate()
+  const IconComponent = CATEGORY_ICONS_PI[dominant.category]
 
   return (
     <div
@@ -20,7 +21,7 @@ export function DominantCategoryBanner({ dominant, percentage }: DominantCategor
       style={{ borderLeft: `4px solid ${CATEGORY_COLORS[dominant.category]}` }}
     >
       <div className="gap-sm flex items-center">
-        <span className="text-4xl">{CATEGORY_ICONS[dominant.category]}</span>
+        <IconComponent size={36} style={{ color: CATEGORY_COLORS[dominant.category] }} />
         <div className="flex-1">
           <p className="text-text text-(length:--font-size-base) font-semibold">
             {dominant.category} foi sua maior categoria

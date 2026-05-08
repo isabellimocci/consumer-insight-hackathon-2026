@@ -2,8 +2,6 @@ import { Button } from '@components/Button'
 import { ROUTES } from '@utils/routes'
 import { useNavigate } from 'react-router-dom'
 
-import { MonthSelector } from './MonthSelector'
-
 export function VilaoVazio() {
   const navigate = useNavigate()
   return (
@@ -11,9 +9,6 @@ export function VilaoVazio() {
       className="gap-md px-md py-xl mx-auto flex max-w-2xl flex-col items-center text-center"
       aria-live="polite"
     >
-      <span className="flex items-center">
-        <MonthSelector />
-      </span>
       <span aria-hidden="true" style={{ fontSize: '4rem', lineHeight: 1 }}>
         🎉
       </span>

@@ -1,3 +1,14 @@
+import type { IconType } from 'react-icons'
+import {
+  PiBookOpenLight,
+  PiBusLight,
+  PiDeviceMobileLight,
+  PiForkKnifeLight,
+  PiGameControllerLight,
+  PiHeartbeatLight,
+  PiShoppingBagLight,
+} from 'react-icons/pi'
+
 import type { Category } from '../types'
 
 export const CATEGORY_ICONS: Record<Category, string> = {
@@ -8,6 +19,16 @@ export const CATEGORY_ICONS: Record<Category, string> = {
   Compras: '🛍️',
   Saúde: '💊',
   Educação: '📚',
+}
+
+export const CATEGORY_ICONS_PI: Record<Category, IconType> = {
+  Alimentação: PiForkKnifeLight,
+  Transporte: PiBusLight,
+  Lazer: PiGameControllerLight,
+  Assinaturas: PiDeviceMobileLight,
+  Compras: PiShoppingBagLight,
+  Saúde: PiHeartbeatLight,
+  Educação: PiBookOpenLight,
 }
 
 export const CATEGORY_COLORS: Record<Category, string> = {

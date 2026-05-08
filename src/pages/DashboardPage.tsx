@@ -1,14 +1,13 @@
-import { Card } from '@components/Card'
 import { CategoryCard } from '@components/CategoryCard'
-import { DominantCategoryBanner } from '@components/DominantCategoryBanner'
 import { DonutChart } from '@components/DonutChart'
-import { MonthSelector } from '@components/MonthSelector'
 import { MonthVariationBanner } from '@components/MonthVariationBanner'
+import { UltimosLancamentos } from '@components/UltimosLancamentos'
 import { useBudget } from '@contexts/useBudget'
 import { useMonth } from '@contexts/useMonth'
+import { useUser } from '@contexts/UserContext'
 import { getAvailableMonths, getTransactionsByMonth } from '@services/transactionService'
 import { compareTwoMonths, getPercentageByCategory } from '@utils/aggregations'
-import { getDominantCategory } from '@utils/insights'
+import { getVilaoDoMes } from '@utils/insights'
 import { ROUTES } from '@utils/routes'
 import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
@@ -16,6 +15,7 @@ import { Link } from 'react-router-dom'
 export default function DashboardPage() {
   const { selectedMonth, transactionsVersion } = useMonth()
   const { currentBudget, isConfigured } = useBudget()
+  const { name } = useUser()
 
   const availableMonths = useMemo(() => getAvailableMonths(), [])
 
@@ -40,7 +40,6 @@ export default function DashboardPage() {
     () => compareTwoMonths(currentTxs, previousTxs),
     [currentTxs, previousTxs],
   )
-  const dominant = useMemo(() => getDominantCategory(currentTxs), [currentTxs])
 
   const currentTotal = useMemo(() => currentTxs.reduce((s, t) => s + t.amount, 0), [currentTxs])
   const previousTotal = useMemo(() => previousTxs.reduce((s, t) => s + t.amount, 0), [previousTxs])
@@ -52,6 +51,11 @@ export default function DashboardPage() {
   const totalBudget = useMemo(
     () => currentBudget?.categories.reduce((s, c) => s + c.targetAmount, 0) ?? 0,
     [currentBudget],
+  )
+
+  const vilao = useMemo(
+    () => (isConfigured && currentBudget ? getVilaoDoMes(currentBudget, previousTxs) : null),
+    [isConfigured, currentBudget, previousTxs],
   )
 
   const cardData = useMemo(
@@ -72,65 +76,91 @@ export default function DashboardPage() {
     [percentages, comparisons, currentBudget],
   )
 
-  const dominantPercentage = useMemo(() => {
-    const found = percentages.find((p) => p.category === dominant?.category)
-    return found?.percentage ?? 0
-  }, [percentages, dominant])
+  const mesAtual = useMemo(
+    () =>
+      new Intl.DateTimeFormat('pt-BR', { month: 'long' }).format(
+        new Date(Number(selectedMonth.split('-')[0]), Number(selectedMonth.split('-')[1]) - 1, 1),
+      ),
+    [selectedMonth],
+  )
 
   return (
-    <div className="gap-md px-md py-lg mx-10 flex" aria-live="polite">
-      <section className="flex flex-2 flex-col">
-        <section className="flex gap-5">
-          <div className="flex flex-1 flex-col justify-between">
-            <div className={`flex ${isConfigured ? 'justify-end' : 'justify-between'}`}>
-              {!isConfigured && (
-                <div className="flex items-center">
-                  <Link
-                    to={ROUTES.ORCAMENTO}
-                    className="rounded-xl bg-(--color-danger-bg) px-(--spacing-sm) py-(--spacing-sm) text-(--color-danger) transition-all hover:bg-(--color-highlight)"
-                  >
-                    Configure seu orçamento para ver análises completas →
-                  </Link>
-                </div>
-              )}
+    <div className="px-md mx-6 flex h-full flex-col gap-4 overflow-hidden pb-8" aria-live="polite">
+      {/* Saudação — com espaçamento superior para respirar abaixo do top bar */}
+      <div className="mt-6 flex shrink-0 items-center gap-3">
+        <img
+          src="https://placecats.com/bella/200/200"
+          alt="Avatar"
+          className="h-12 w-12 shrink-0 rounded-full object-cover"
+        />
+        <div>
+          <h1 className="text-xl font-bold text-(--color-text)">Olá, {name} 👋</h1>
+          <p className="text-sm text-(--color-inactive-text)">Seu {mesAtual} em uma olhada.</p>
+        </div>
+      </div>
 
-              <span className="flex items-center">
-                <MonthSelector />
-              </span>
+      {!isConfigured && (
+        <Link
+          to={ROUTES.ORCAMENTO}
+          className="px-sm py-sm shrink-0 rounded-xl bg-(--color-danger-bg) text-(--color-danger) transition-all hover:bg-(--color-highlight)"
+        >
+          Configure seu orçamento para ver análises completas →
+        </Link>
+      )}
+
+      {/* Main layout: left (3/5) + right (2/5) */}
+      <div className="mt-6 flex min-h-0 flex-1 gap-6 overflow-hidden">
+        {/* Left column */}
+        <section className="flex min-h-0 flex-3 flex-col gap-8">
+          {/* Row 1: dark total card + donut chart */}
+          <div className="flex shrink-0 gap-4">
+            <div className="flex flex-1 flex-col gap-1">
+              <p className="shrink-0 text-sm font-semibold text-(--color-text)">
+                Total gasto no mês
+              </p>
+              <MonthVariationBanner
+                currentTotal={currentTotal}
+                previousTotal={previousTotal}
+                variationPercent={totalVariation}
+                previousMonth={previousMonth}
+                totalBudget={isConfigured ? totalBudget : undefined}
+                className="flex-1"
+              />
             </div>
-
-            <MonthVariationBanner
-              currentTotal={currentTotal}
-              previousTotal={previousTotal}
-              variationPercent={totalVariation}
-              previousMonth={previousMonth}
-              totalBudget={isConfigured ? totalBudget : undefined}
-              className="min-h-[40px]"
-            />
+            <div className="flex flex-1 flex-col gap-1">
+              <p className="shrink-0 text-sm font-semibold text-(--color-text)">Distribuição</p>
+              <div className="flex flex-1 items-center justify-center rounded-2xl bg-(--color-primary) p-4">
+                <DonutChart
+                  data={percentages}
+                  totalBudget={isConfigured ? totalBudget : undefined}
+                />
+              </div>
+            </div>
           </div>
-          <img
-            src="https://placecats.com/bella/200/200"
-            alt="Cat"
-            className="h-[220px] w-[220px] shrink-0"
-          />
+
+          {/* Row 2: últimos lançamentos — scrollable */}
+          <section className="flex min-h-0 flex-1 flex-col overflow-hidden">
+            <UltimosLancamentos month={selectedMonth} />
+          </section>
         </section>
 
-        <DonutChart data={percentages} totalBudget={isConfigured ? totalBudget : undefined} />
-
-        <section aria-label="Gastos por categoria">
-          <ul role="list" className="gap-sm grid grid-cols-2">
+        {/* Right column — category list, 1 column, scrollable */}
+        <section
+          aria-label="Gastos por categoria"
+          className="flex min-h-0 flex-2 flex-col overflow-hidden"
+        >
+          <p className="mb-2 shrink-0 text-sm font-semibold text-(--color-text)">
+            Por categoria · {cardData.length} ativas
+          </p>
+          <ul role="list" className="flex min-h-0 flex-1 flex-col gap-1.5 overflow-hidden pb-8">
             {cardData.map((card) => (
-              <li key={card.category} role="listitem">
-                <CategoryCard {...card} />
+              <li key={card.category} role="listitem" className="min-h-0 flex-1">
+                <CategoryCard {...card} isVilao={card.category === vilao?.category} />
               </li>
             ))}
           </ul>
         </section>
-        {dominant && <DominantCategoryBanner dominant={dominant} percentage={dominantPercentage} />}
-      </section>
-      <section className="flex flex-1 flex-col">
-        <Card />
-      </section>
+      </div>
     </div>
   )
 }

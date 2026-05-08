@@ -1,8 +1,8 @@
 import type { ChartConfig } from '@components/ui/chart'
 import { ChartContainer } from '@components/ui/chart'
-import { CATEGORY_COLORS } from '@utils/categoryMaps'
-import { useMemo } from 'react'
-import { Cell, Label, Pie, PieChart } from 'recharts'
+import { CATEGORY_COLORS, CATEGORY_ICONS_PI } from '@utils/categoryMaps'
+import { useState } from 'react'
+import { Cell, Label, Pie, PieChart, Tooltip } from 'recharts'
 
 import type { CategoryPercentage } from '../types'
 
@@ -22,21 +22,56 @@ const CHART_CONFIG: ChartConfig = Object.fromEntries(
   Object.entries(CATEGORY_COLORS).map(([cat, color]) => [cat, { label: cat, color }]),
 )
 
+function CustomTooltip({
+  active,
+  payload,
+}: {
+  active?: boolean
+  payload?: Array<{ payload: CategoryPercentage }>
+}) {
+  if (!active || !payload?.length) return null
+  const entry = payload[0].payload
+  const color = CATEGORY_COLORS[entry.category]
+
+  const IconComponent = CATEGORY_ICONS_PI[entry.category]
+  const iconBg = `color-mix(in srgb, ${color}, transparent 80%)`
+
+  return (
+    <div
+      className="rounded-xl bg-(--color-primary) p-3 shadow-xl ring-1 ring-(--color-inactive-bg)"
+      style={{ borderLeft: `3px solid ${color}` }}
+    >
+      <div className="mb-1.5 flex items-center gap-2">
+        <span
+          className="flex size-6 shrink-0 items-center justify-center rounded-full"
+          style={{ background: iconBg }}
+        >
+          {IconComponent && <IconComponent size={13} style={{ color }} />}
+        </span>
+        <p className="text-sm font-semibold text-(--color-text)">{entry.category}</p>
+      </div>
+      <p className="text-base font-bold text-(--color-text)">{formatBRL(entry.total)}</p>
+      <p className="mt-0.5 text-xs text-(--color-inactive-text)">{entry.percentage}% do total</p>
+    </div>
+  )
+}
+
 export function DonutChart({ data, totalBudget }: DonutChartProps) {
-  const spentTotal = useMemo(() => data.reduce((s, d) => s + d.total, 0), [data])
+  const [activeIndex, setActiveIndex] = useState<number | null>(null)
+  const spentTotal = data.reduce((s, d) => s + d.total, 0)
   const isOverBudget = totalBudget !== undefined && spentTotal > totalBudget
   const hasBudget = totalBudget !== undefined
 
   return (
-    <div>
-      <ChartContainer config={CHART_CONFIG} className="mx-auto h-[220px] w-full max-w-[320px]">
+    <div className="flex items-center gap-3">
+      <ChartContainer config={CHART_CONFIG} className="h-45 w-45 shrink-0">
         <PieChart>
           {hasBudget && (
             <Pie
               data={[{ value: totalBudget }]}
               dataKey="value"
-              outerRadius={108}
-              innerRadius={102}
+              outerRadius={88}
+              innerRadius={82}
               fill="var(--color-inactive-bg)"
               strokeWidth={0}
               startAngle={90}
@@ -48,12 +83,19 @@ export function DonutChart({ data, totalBudget }: DonutChartProps) {
             data={data}
             dataKey="total"
             nameKey="category"
-            innerRadius={hasBudget ? 65 : 70}
-            outerRadius={hasBudget ? 95 : 100}
+            innerRadius={hasBudget ? 50 : 55}
+            outerRadius={hasBudget ? 76 : 80}
             strokeWidth={2}
+            onMouseEnter={(_, index) => setActiveIndex(index)}
+            onMouseLeave={() => setActiveIndex(null)}
           >
-            {data.map((entry) => (
-              <Cell key={entry.category} fill={CATEGORY_COLORS[entry.category]} />
+            {data.map((entry, index) => (
+              <Cell
+                key={entry.category}
+                fill={CATEGORY_COLORS[entry.category]}
+                opacity={activeIndex === null || activeIndex === index ? 1 : 0.4}
+                style={{ cursor: 'pointer', transition: 'opacity 150ms' }}
+              />
             ))}
             <Label
               content={({ viewBox }) => {
@@ -61,67 +103,57 @@ export function DonutChart({ data, totalBudget }: DonutChartProps) {
                   const cx = viewBox.cx ?? 0
                   const cy = viewBox.cy ?? 0
 
-                  if (hasBudget) {
-                    return (
-                      <text x={cx} y={cy} textAnchor="middle" dominantBaseline="middle">
-                        <tspan
-                          x={cx}
-                          y={cy - 8}
-                          fill={isOverBudget ? 'var(--color-danger)' : 'var(--color-text)'}
-                          fontSize={12}
-                          fontWeight={700}
-                        >
-                          {formatBRL(spentTotal)}
-                        </tspan>
-                        <tspan
-                          x={cx}
-                          y={cy + 10}
-                          fill="var(--color-inactive-text)"
-                          fontSize={10}
-                          fontWeight={400}
-                        >
-                          / {formatBRL(totalBudget)}
-                        </tspan>
-                      </text>
-                    )
-                  }
-
                   return (
                     <text x={cx} y={cy} textAnchor="middle" dominantBaseline="middle">
-                      <tspan x={cx} y={cy - 8} className="fill-text" fontSize={11} fontWeight={500}>
-                        Total
+                      <tspan
+                        x={cx}
+                        y={cy - 14}
+                        fill="var(--color-inactive-text)"
+                        fontSize={8}
+                        fontWeight={500}
+                        letterSpacing="0.05em"
+                      >
+                        {data.length} CATEGORIAS
                       </tspan>
                       <tspan
                         x={cx}
-                        y={cy + 10}
-                        className="fill-text"
-                        fontSize={13}
+                        y={cy + 4}
+                        fill={isOverBudget ? 'var(--color-danger)' : 'var(--color-text)'}
+                        fontSize={11}
                         fontWeight={700}
                       >
                         {formatBRL(spentTotal)}
                       </tspan>
+                      {hasBudget && (
+                        <tspan
+                          x={cx}
+                          y={cy + 18}
+                          fill="var(--color-inactive-text)"
+                          fontSize={8}
+                          fontWeight={400}
+                        >
+                          / {formatBRL(totalBudget)}
+                        </tspan>
+                      )}
                     </text>
                   )
                 }
               }}
             />
           </Pie>
+          <Tooltip content={<CustomTooltip />} />
         </PieChart>
       </ChartContainer>
 
-      <ul role="list" className="mt-sm gap-x-md gap-y-xs flex flex-wrap justify-center">
+      <ul role="list" className="grid grid-cols-2 gap-x-4 gap-y-1">
         {data.map((d) => (
-          <li
-            key={d.category}
-            role="listitem"
-            className="gap-xs flex items-center text-(length:--font-size-sm)"
-          >
+          <li key={d.category} role="listitem" className="flex items-center gap-1.5 text-xs">
             <span
               style={{ background: CATEGORY_COLORS[d.category] }}
-              className="size-3 rounded-full"
+              className="size-2.5 shrink-0 rounded-full"
             />
-            <span>{d.category}</span>
-            <span className="text-(--color-inactive-text)">{d.percentage}%</span>
+            <span className="truncate text-(--color-inactive-text)">{d.category}</span>
+            <span className="shrink-0 font-medium text-(--color-text)">{d.percentage}%</span>
           </li>
         ))}
       </ul>

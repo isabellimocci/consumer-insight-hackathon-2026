@@ -4,7 +4,7 @@ import { cn } from './lib/utils'
 
 interface ChipProps {
   label: string
-  icon?: string
+  icon?: React.ReactNode
   isActive: boolean
   onClick: () => void
   className?: string

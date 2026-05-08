@@ -1,6 +1,6 @@
 import { Badge } from '@components/Badge'
 import { NEW_CATEGORY_SENTINEL } from '@utils/aggregations'
-import { CATEGORY_COLORS, CATEGORY_ICONS } from '@utils/categoryMaps'
+import { CATEGORY_COLORS, CATEGORY_ICONS_PI } from '@utils/categoryMaps'
 import { formatCurrency } from '@utils/formatters'
 import { ROUTES } from '@utils/routes'
 import { useNavigate } from 'react-router-dom'
@@ -15,6 +15,7 @@ interface CategoryCardProps {
   variationPercent: number
   targetAmount?: number
   budgetStatus?: 'on-track' | 'warning' | 'over'
+  isVilao?: boolean
 }
 
 export function CategoryCard({
@@ -25,6 +26,7 @@ export function CategoryCard({
   variationPercent,
   targetAmount,
   budgetStatus,
+  isVilao,
 }: CategoryCardProps) {
   const navigate = useNavigate()
 
@@ -46,75 +48,72 @@ export function CategoryCard({
       : `${variationPercent > 0 ? '+' : ''}${variationPercent.toFixed(1)}%`
 
   const iconBg = `color-mix(in srgb, ${CATEGORY_COLORS[category]}, transparent 85%)`
-
   const progressWidth = targetAmount ? `${Math.min((total / targetAmount) * 100, 100)}%` : undefined
+  const progressColor =
+    budgetStatus === 'over'
+      ? 'var(--color-danger)'
+      : budgetStatus === 'warning'
+        ? 'var(--color-warning)'
+        : 'var(--color-success)'
+  const IconComponent = CATEGORY_ICONS_PI[category]
+
+  const badges: { label: string; color: 'danger' | 'success' | 'warning' | 'neutral' }[] = []
+  if (isVilao) badges.push({ label: 'Vilão do Mês 🗡️', color: 'danger' })
+  if (budgetStatus === 'over' && targetAmount !== undefined) {
+    const pct = Math.round((total / targetAmount - 1) * 100)
+    badges.push({ label: `+${pct}% acima da meta`, color: 'danger' })
+  } else if (budgetStatus === 'on-track') {
+    badges.push({ label: '✓ Dentro da meta', color: 'success' })
+  } else if (budgetStatus === 'warning') {
+    badges.push({ label: '⚠ Atenção', color: 'warning' })
+  }
+  if (variationPercent === NEW_CATEGORY_SENTINEL) badges.push({ label: 'Novo', color: 'neutral' })
 
   return (
     <button
       type="button"
       onClick={handleClick}
       aria-label={`Ver transações de ${category}`}
-      className="bg-primary p-sm focus-visible:outline-text w-full cursor-pointer rounded-2xl text-left transition-transform hover:scale-[1.02] focus-visible:outline-2"
-      style={{ borderLeft: `4px solid ${CATEGORY_COLORS[category]}` }}
+      className="bg-primary focus-visible:outline-text h-full w-full cursor-pointer rounded-xl px-2.5 py-1.5 text-left focus-visible:outline-2"
     >
-      <div className="gap-sm flex items-center">
+      <div className="flex items-start gap-2.5">
         <span
-          className="flex size-10 shrink-0 items-center justify-center rounded-full text-xl"
+          className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-full"
           style={{ background: iconBg }}
         >
-          {CATEGORY_ICONS[category]}
+          <IconComponent size={15} style={{ color: CATEGORY_COLORS[category] }} />
         </span>
-
         <div className="min-w-0 flex-1">
-          <p className="text-text truncate text-(length:--font-size-sm) font-semibold">
-            {category}
-          </p>
-          <p className="text-(length:--font-size-sm) text-(--color-inactive-text)">
-            {percentage}% do total
-          </p>
+          <p className="text-text text-sm font-bold">{category}</p>
+          <p className="text-xs text-(--color-inactive-text)">{percentage}% do total</p>
+        </div>
+        <div className="flex shrink-0 flex-col items-end gap-1">
+          <p className="text-text text-sm font-bold">{formatCurrency(total)}</p>
+          {variationPercent !== NEW_CATEGORY_SENTINEL && (
+            <span className={`text-xs font-medium ${trendColor}`}>
+              {trendArrow} {variationLabel}
+            </span>
+          )}
         </div>
       </div>
 
-      <div className="mt-xs flex items-end justify-between">
-        <span className="text-text text-(length:--font-size-base) font-bold">
-          {formatCurrency(total)}
-        </span>
-        <span className={`text-(length:--font-size-sm) font-bold ${trendColor}`}>
-          {trendArrow} {variationLabel}
-        </span>
-      </div>
-
-      {targetAmount !== undefined && (
-        <div className="mt-xs gap-xs flex flex-col">
-          <div className="h-1.5 w-full overflow-hidden rounded-full bg-(--color-inactive-bg)">
-            <div
-              className="h-full rounded-full transition-all"
-              style={{ width: progressWidth, backgroundColor: CATEGORY_COLORS[category] }}
-            />
-          </div>
-          <div className="flex items-center justify-between">
-            <p className="text-(length:--font-size-sm) text-(--color-inactive-text)">
-              Meta: {formatCurrency(targetAmount)}
-            </p>
-            {budgetStatus && (
-              <Badge
-                label={
-                  budgetStatus === 'on-track'
-                    ? '✓ Dentro da meta'
-                    : budgetStatus === 'warning'
-                      ? '⚠ Atenção'
-                      : '✗ Acima da meta'
-                }
-                color={
-                  budgetStatus === 'on-track'
-                    ? 'success'
-                    : budgetStatus === 'warning'
-                      ? 'warning'
-                      : 'danger'
-                }
+      {(targetAmount !== undefined || badges.length > 0) && (
+        <div className="mt-1 flex items-center gap-2">
+          {badges.length > 0 && (
+            <div className="flex shrink-0 gap-1">
+              {badges.map((b) => (
+                <Badge key={b.label} label={b.label} color={b.color} />
+              ))}
+            </div>
+          )}
+          {targetAmount !== undefined && (
+            <div className="h-1.5 min-w-8 flex-1 overflow-hidden rounded-full bg-(--color-inactive-bg)">
+              <div
+                className="h-full rounded-full transition-all"
+                style={{ width: progressWidth, backgroundColor: progressColor }}
               />
-            )}
-          </div>
+            </div>
+          )}
         </div>
       )}
     </button>
