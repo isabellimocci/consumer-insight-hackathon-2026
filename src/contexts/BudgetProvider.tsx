@@ -42,7 +42,10 @@ function budgetReducer(
 export function BudgetProvider({ children }: { children: React.ReactNode }) {
   const { selectedMonth, transactionsVersion } = useMonth()
   useEffect(() => {
-    seedDefaultBudgetsIfNeeded(getAvailableMonths(), getTransactionsByMonth)
+    seedDefaultBudgetsIfNeeded(
+      getAvailableMonths().filter((m) => m !== '2026-04'), // Abril foi retirado apenas para demonstração, para assim que rodarem o projeto aparecer o card de configurar metas, influenciando o user a entrar no fluxo de definir metas
+      getTransactionsByMonth,
+    )
   }, [])
   const [{ income, adjustments, currentBudget }, dispatch] = useReducer(budgetReducer, {
     income: null,
