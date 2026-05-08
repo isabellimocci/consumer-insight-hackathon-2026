@@ -17,7 +17,7 @@ export function GrowingCategoryCard({ result, allMonthsData }: GrowingCategoryCa
   return (
     <div
       className="p-md flex flex-col gap-3 rounded-2xl"
-      style={{ backgroundColor: 'color-mix(in srgb, var(--color-warning) 20%, transparent)' }}
+      style={{ backgroundColor: 'color-mix(in srgb, var(--color-warning) 50%, transparent)' }}
     >
       <div className="flex items-center gap-2">
         <span className="text-xl">⚠️</span>

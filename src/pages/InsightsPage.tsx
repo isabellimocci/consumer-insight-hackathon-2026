@@ -1,6 +1,7 @@
 import { BehaviorInsightCard } from '@components/BehaviorInsightCard'
 import { ConcentrationInsightCard } from '@components/ConcentrationInsightCard'
 import { ConsumerProfileCard } from '@components/ConsumerProfileCard'
+import { DominantCategoryBanner } from '@components/DominantCategoryBanner'
 import { GrowingCategoryCard } from '@components/GrowingCategoryCard'
 import { WeeklyPatternChart } from '@components/WeeklyPatternChart'
 import { useBudget } from '@contexts/useBudget'
@@ -10,6 +11,7 @@ import { getPercentageByCategory, getTotalByCategory } from '@utils/aggregations
 import { formatCurrency, formatMonthLabel } from '@utils/formatters'
 import { getConsumerProfile, getGrowingCategory, getWeeklyPattern } from '@utils/insights'
 import { useMemo } from 'react'
+import { PiCalendar, PiHeartFill, PiRepeat, PiTicket } from 'react-icons/pi'
 
 export default function InsightsPage() {
   const { selectedMonth, transactionsVersion } = useMonth()
@@ -86,58 +88,72 @@ export default function InsightsPage() {
   const shortMonth = monthLabel.split(' ')[0]
 
   return (
-    <div className="gap-md px-md py-lg mx-auto flex max-w-2xl flex-col" aria-live="polite">
-      <h1 className="text-text text-(length:--font-size-lg) font-bold">Seus Insights</h1>
+    <div className="gap-md px-md py-sm mx-10 flex flex-col" aria-live="polite">
+      <div className="flex justify-between">
+        <div className="flex flex-col items-start">
+          <h1 className="text-text text-(length:--font-size-lg) font-bold">Seus Insights</h1>
+          <span className="text-(--color-inactive-text)">
+            Padrões que os números frios escondem.
+          </span>
+        </div>
+      </div>
 
-      <ConsumerProfileCard
-        profile={profile}
-        income={income?.amount}
-        totalSpent={isConfigured ? totalSpent : undefined}
-      />
+      <div className="gap-md flex">
+        <section className="gap-md flex flex-1 flex-col">
+          <ConsumerProfileCard
+            profile={profile}
+            income={income?.amount}
+            totalSpent={isConfigured ? totalSpent : undefined}
+          />
 
-      {dominantPercentage && (
-        <ConcentrationInsightCard
-          category={dominantPercentage.category}
-          percentage={concentrationData.percentage}
-          budgetMode={concentrationData.budgetMode}
-        />
-      )}
+          <DominantCategoryBanner dominant={dominantPercentage} />
 
-      <WeeklyPatternChart pattern={weeklyPattern} />
-
-      <GrowingCategoryCard result={growingCategory} allMonthsData={relevantMonths} />
-
-      {mostFrequent && (
-        <section aria-label="Outros comportamentos">
-          <h2 className="mb-sm text-text text-(length:--font-size-base) font-semibold">
-            Outros comportamentos
-          </h2>
-          <div className="gap-sm flex flex-col">
-            {healthData && (
-              <BehaviorInsightCard
-                icon="💚"
-                title="Saúde financeira do mês"
-                description={`${healthData.onTrack} de ${healthData.total} categorias dentro da meta`}
+          <GrowingCategoryCard result={growingCategory} allMonthsData={relevantMonths} />
+        </section>
+        <section className="flex flex-1 flex-col">
+          <div className="mb-4 flex gap-6">
+            <WeeklyPatternChart pattern={weeklyPattern} />
+            {dominantPercentage && (
+              <ConcentrationInsightCard
+                category={dominantPercentage.category}
+                percentage={concentrationData.percentage}
+                budgetMode={concentrationData.budgetMode}
               />
             )}
-            <BehaviorInsightCard
-              icon="🔁"
-              title="Categoria mais frequente"
-              description={`Você fez ${mostFrequent.count} transações de ${mostFrequent.category} em ${shortMonth} — uma média de ${(mostFrequent.count / 4).toFixed(1)} por semana`}
-            />
-            <BehaviorInsightCard
-              icon="📅"
-              title="Concentração no início do mês"
-              description={`Você gastou ${first2WeeksPct}% do orçamento nas primeiras 2 semanas`}
-            />
-            <BehaviorInsightCard
-              icon="🧾"
-              title="Ticket médio por transação"
-              description={`Seu gasto médio por transação em ${shortMonth} foi de ${formatCurrency(avgTicket)}`}
-            />
           </div>
+          {mostFrequent && (
+            <section aria-label="Outros comportamentos">
+              <h2 className="mb-sm text-text text-(length:--font-size-base) font-semibold">
+                Outros comportamentos
+              </h2>
+              <div className="gap-sm flex flex-col">
+                {healthData && (
+                  <BehaviorInsightCard
+                    icon={<PiHeartFill className="text-(--color-success)" size={30} />}
+                    title="Saúde financeira do mês"
+                    description={`${healthData.onTrack} de ${healthData.total} categorias dentro da meta`}
+                  />
+                )}
+                <BehaviorInsightCard
+                  icon={<PiRepeat className="text-(--color-success)" size={30} />}
+                  title="Categoria mais frequente"
+                  description={`Você fez ${mostFrequent.count} transações de ${mostFrequent.category} em ${shortMonth} — uma média de ${(mostFrequent.count / 4).toFixed(1)} por semana`}
+                />
+                <BehaviorInsightCard
+                  icon={<PiCalendar className="text-(--color-success)" size={30} />}
+                  title="Concentração no início do mês"
+                  description={`Você gastou ${first2WeeksPct}% do orçamento nas primeiras 2 semanas`}
+                />
+                <BehaviorInsightCard
+                  icon={<PiTicket className="text-(--color-success)" size={30} />}
+                  title="Ticket médio por transação"
+                  description={`Seu gasto médio por transação em ${shortMonth} foi de ${formatCurrency(avgTicket)}`}
+                />
+              </div>
+            </section>
+          )}
         </section>
-      )}
+      </div>
     </div>
   )
 }

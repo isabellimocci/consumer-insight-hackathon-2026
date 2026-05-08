@@ -23,7 +23,7 @@ export const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   const baseClasses =
-    'inline-flex justify-center items-center px-lg py-md text-text font-medium cursor-pointer disabled:pointer-events-none disabled:opacity-75'
+    'inline-flex justify-center items-center px-md py-md text-text font-medium cursor-pointer disabled:pointer-events-none disabled:opacity-75'
   const variantClasses =
     variant === 'primary'
       ? 'bg-surface hover:bg-success'

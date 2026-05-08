@@ -12,7 +12,8 @@ export function ConsumerProfileCard({ profile, income, totalSpent }: ConsumerPro
   const showCommitted = income !== undefined && income > 0 && totalSpent !== undefined
 
   return (
-    <div className="bg-surface px-md py-lg flex flex-col items-center gap-3 rounded-3xl text-center">
+    <div className="bg-surface px-lg py-lg flex flex-col items-center gap-3 rounded-3xl text-center">
+      <p className="text-(--color-inactive-text) uppercase">Seu arquétipo</p>
       <span style={{ fontSize: '4rem' }} aria-hidden="true">
         {profile.emoji}
       </span>
