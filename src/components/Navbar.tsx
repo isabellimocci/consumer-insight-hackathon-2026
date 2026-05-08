@@ -40,7 +40,7 @@ export function Navbar() {
               end={to === ROUTES.DASHBOARD}
               aria-label={label}
               className={({ isActive }) =>
-                `${isActive ? 'font-semibold text-[var(--color-surface)]' : 'text-muted-foreground'} my-6 flex flex-col items-center gap-2 text-xs hover:text-[var(--color-surface)]`
+                `${isActive ? 'text-surface font-semibold' : 'text-muted-foreground'} hover:text-surface my-6 flex flex-col items-center gap-2 text-xs`
               }
             >
               {icon}

@@ -13,7 +13,7 @@ export function AppLayout() {
 
   return (
     <MonthProvider>
-      <section className="flex h-screen bg-[var(--color-bg)]">
+      <section className="bg-bg flex h-screen">
         <BudgetProvider>
           <TooltipProvider>
             <Navbar />
