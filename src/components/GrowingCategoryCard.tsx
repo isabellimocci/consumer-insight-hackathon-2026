@@ -13,42 +13,44 @@ export function GrowingCategoryCard({ result, allMonthsData }: GrowingCategoryCa
 
   const last3 = allMonthsData.slice(-3)
   const IconComponent = CATEGORY_ICONS_PI[result.category]
+  const iconBg = `color-mix(in srgb, ${CATEGORY_COLORS[result.category]}, transparent 85%)`
 
   return (
-    <div
-      className="p-md flex flex-col gap-3 rounded-2xl"
-      style={{ backgroundColor: 'color-mix(in srgb, var(--color-warning) 20%, transparent)' }}
-    >
-      <div className="flex items-center gap-2">
-        <span className="text-xl">⚠️</span>
-        <span className="text-text text-(length:--font-size-base) font-bold">
-          {result.category}{' '}
-          <IconComponent
-            size={16}
-            style={{ color: CATEGORY_COLORS[result.category], display: 'inline' }}
-          />{' '}
-          crescendo
+    <div className="p-sm bg-primary relative flex h-44 w-96 flex-col justify-between rounded-xl">
+      <div className="flex items-center justify-start gap-2">
+        <span
+          className="flex size-10 shrink-0 items-center justify-center rounded-full"
+          style={{ background: iconBg }}
+        >
+          <IconComponent size={20} style={{ color: CATEGORY_COLORS[result.category] }} />
         </span>
+        <span className="text-text text-2xl font-bold">{result.category}</span>
       </div>
+      <span className="bg-text text-primary absolute top-3 right-3 rounded-full px-2 py-0.5 text-xs font-semibold">
+        ⚠️ alta
+      </span>
 
-      <div className="text-text flex flex-wrap items-center gap-1 text-(length:--font-size-sm)">
+      <div className="flex items-center justify-center gap-2 text-xs">
         {last3.map((m, i) => (
-          <span key={m.month} className="flex items-center gap-1">
-            <span className="font-semibold">{formatShortMonth(m.month)}</span>
-            <span>{formatCurrency(result.totals.slice(-last3.length)[i])}</span>
+          <>
+            <span
+              key={m.month}
+              className="flex flex-col items-center rounded-lg bg-white/20 px-3 py-1.5 leading-tight"
+            >
+              <span className="text-text font-semibold">{formatShortMonth(m.month)}</span>
+              <span className="text-(--color-inactive-text)">
+                {formatCurrency(result.totals.slice(-last3.length)[i])}
+              </span>
+            </span>
             {i < last3.length - 1 && <span className="text-(--color-inactive-text)">→</span>}
-          </span>
+          </>
         ))}
       </div>
 
-      <span className="text-text text-(length:--font-size-sm)">
-        Taxa de crescimento médio:{' '}
-        <span className="font-bold">{result.growthRate.toFixed(1)}% ao mês</span>
-      </span>
-
-      <span className="text-(length:--font-size-sm) text-(--color-inactive-text)">
-        {result.category} cresceu 3 meses seguidos. Está na hora de prestar atenção.
-      </span>
+      <p className="text-center text-xs text-(--color-inactive-text)">
+        Crescimento médio de{' '}
+        <span className="text-text font-bold">+{result.growthRate.toFixed(1)}% ao mês</span>
+      </p>
     </div>
   )
 }
