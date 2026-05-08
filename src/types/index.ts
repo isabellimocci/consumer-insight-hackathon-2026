@@ -53,13 +53,40 @@ export interface CategoryComparison {
 
 export interface VilaoResult {
   category: Category
-  currentTotal: number
-  previousTotal: number
-  growthPercent: number // espelha variationPercent de CategoryComparison; NEW_CATEGORY_SENTINEL se categoria nova
+  targetAmount: number
+  spentAmount: number
+  variance: number
+  variancePercent: number
+  growthPercent: number
   transactionCount: number
   economyCopy: string
   savingsIfReduced20: number
 }
+
+export interface Income {
+  month: string // "2025-05"
+  amount: number // sempre positivo
+}
+
+export interface BudgetCategory {
+  category: Category
+  suggestedPercent: number
+  userPercent: number
+  targetAmount: number
+  spentAmount: number
+  transactionCount: number
+  variance: number
+  status: 'on-track' | 'warning' | 'over'
+}
+
+export interface MonthlyBudget {
+  month: string
+  income: Income
+  categories: BudgetCategory[]
+  totalUserPercent: number
+}
+
+export type BudgetAdjustments = Partial<Record<Category, number>>
 
 export interface GrowingCategoryResult {
   category: Category

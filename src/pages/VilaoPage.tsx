@@ -3,6 +3,7 @@ import { EconomyRecommendationCard } from '@components/EconomyRecommendationCard
 import { VilaoHeroCard } from '@components/VilaoHeroCard'
 import { VilaoHistoryChart } from '@components/VilaoHistoryChart'
 import { VilaoNarrativeCopy } from '@components/VilaoNarrativeCopy'
+import { useBudget } from '@contexts/useBudget'
 import { useMonth } from '@contexts/useMonth'
 import { getAvailableMonths, getTransactionsByMonth } from '@services/transactionService'
 import { getTotalByCategory } from '@utils/aggregations'
@@ -13,6 +14,7 @@ import { useNavigate } from 'react-router-dom'
 
 export default function VilaoPage() {
   const { selectedMonth } = useMonth()
+  const { currentBudget, isConfigured } = useBudget()
   const navigate = useNavigate()
 
   const availableMonths = useMemo(() => getAvailableMonths(), [])
@@ -22,15 +24,14 @@ export default function VilaoPage() {
     return idx > 0 ? availableMonths[idx - 1] : null
   }, [selectedMonth, availableMonths])
 
-  const currentTxs = useMemo(() => getTransactionsByMonth(selectedMonth), [selectedMonth])
   const previousTxs = useMemo(
     () => (previousMonth ? getTransactionsByMonth(previousMonth) : []),
     [previousMonth],
   )
 
   const vilaoResult = useMemo(
-    () => getVilaoDoMes(currentTxs, previousTxs),
-    [currentTxs, previousTxs],
+    () => (currentBudget ? getVilaoDoMes(currentBudget, previousTxs) : null),
+    [currentBudget, previousTxs],
   )
 
   const economyRec = useMemo(
@@ -50,6 +51,25 @@ export default function VilaoPage() {
     })
   }, [availableMonths, selectedMonth, vilaoResult])
 
+  if (!isConfigured) {
+    return (
+      <div
+        className="mx-auto flex max-w-2xl flex-col items-center gap-[var(--spacing-md)] px-[var(--spacing-md)] py-[var(--spacing-lg)]"
+        aria-live="polite"
+      >
+        <p className="text-[length:var(--font-size-lg)] text-[var(--color-inactive-text)]">
+          Configure seu orçamento primeiro para identificar o vilão do mês.
+        </p>
+        <Button
+          variant="primary"
+          label="Configurar orçamento"
+          onClick={() => void navigate(ROUTES.ORCAMENTO)}
+          ariaLabel="Ir para configuração de orçamento"
+        />
+      </div>
+    )
+  }
+
   if (!vilaoResult || !economyRec) {
     return (
       <div
@@ -57,7 +77,7 @@ export default function VilaoPage() {
         aria-live="polite"
       >
         <p className="text-[length:var(--font-size-lg)] text-[var(--color-inactive-text)]">
-          Nenhum dado disponível para este mês.
+          Parabéns! Você ficou dentro de todas as metas esse mês 🎉
         </p>
       </div>
     )

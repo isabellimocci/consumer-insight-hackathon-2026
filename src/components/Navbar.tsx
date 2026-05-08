@@ -7,6 +7,7 @@ const NAV_LINKS = [
   { to: ROUTES.TRANSACOES, label: 'Transações' },
   { to: ROUTES.VILAO, label: 'Vilão' },
   { to: ROUTES.INSIGHTS, label: 'Insights' },
+  { to: ROUTES.ORCAMENTO, label: 'Orçamento' },
 ]
 
 export function Navbar() {
