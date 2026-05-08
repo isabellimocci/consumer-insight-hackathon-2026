@@ -24,27 +24,24 @@ export function TopCategoryCard({ category, total, rank, maxTotal }: TopCategory
 
   return (
     <div
-      className="gap-sm p-md flex cursor-default flex-col rounded-2xl transition-all duration-200 ease-out select-none"
+      className="gap-sm p-sm flex cursor-default flex-col rounded-2xl transition-all duration-200 ease-out select-none"
       style={{
-        flex: isFirst ? '1.3 1 0%' : '1 1 0%',
+        flex: isFirst ? '1.15 1 0%' : '1 1 0%',
         background: isFirst
           ? 'linear-gradient(145deg, var(--color-surface) 0%, var(--color-success) 100%)'
           : 'linear-gradient(145deg, var(--color-primary) 0%, var(--color-surface) 100%)',
         backdropFilter: 'blur(12px)',
         WebkitBackdropFilter: 'blur(12px)',
         border: isFirst ? '1px solid rgba(255, 255, 255, 0.5)' : '1px solid var(--color-surface)',
-        boxShadow: isFirst
-          ? '0 12px 40px rgba(67, 107, 68, 0.35), inset 0 1px 0 rgba(255,255,255,0.6)'
-          : '0 4px 16px rgba(67, 107, 68, 0.12), inset 0 1px 0 rgba(255,255,255,0.7)',
       }}
       aria-label={`${rank}º maior categoria: ${category}, ${formatCurrency(total)}`}
     >
       <div className="flex justify-center">
         <PiCrownSimpleLight
-          size={isFirst ? 42 : 22}
+          size={isFirst ? 32 : 20}
           style={{
             color: isFirst ? 'var(--color-text)' : 'var(--color-success)',
-            filter: isFirst ? 'drop-shadow(0 2px 6px rgba(0,0,0,0.2))' : 'none',
+            filter: 'none',
           }}
           aria-hidden="true"
         />

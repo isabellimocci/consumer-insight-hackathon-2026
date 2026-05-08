@@ -23,53 +23,35 @@ export function MonthVariationBanner({
       )
     : null
 
-  const bgClass =
-    variationPercent < -5
-      ? 'bg-highlight'
-      : variationPercent > 5
-        ? 'bg-(--color-danger-bg)'
-        : 'bg-(--color-inactive-bg)'
-
   const variationSign = variationPercent > 0 ? '↑' : variationPercent < 0 ? '↓' : '→'
-  const variationColor =
+  const badgeBg =
     variationPercent > 5
-      ? 'text-danger'
+      ? 'bg-red-900/60 text-red-300'
       : variationPercent < -5
-        ? 'text-success'
-        : 'text-(--color-inactive-text)'
-
-  const isOverBudget = totalBudget !== undefined && currentTotal > totalBudget
-  const totalTextColor = isOverBudget ? 'text-danger' : 'text-text'
+        ? 'bg-green-900/60 text-green-300'
+        : 'bg-white/10 text-white/60'
 
   return (
     <div
       aria-live="polite"
       className={cn(
-        bgClass,
-        'px-md py-md flex items-center justify-between rounded-2xl',
+        'px-md py-md flex items-center justify-between rounded-2xl bg-[#1F2A1E]',
         className,
       )}
     >
-      <div>
-        <p className="text-(length:--font-size-sm) text-(--color-inactive-text)">Total do mês</p>
-        <p className={`text-(length:--font-size-xl) font-bold ${totalTextColor}`}>
-          {formatCurrency(currentTotal)}
-        </p>
+      <div className="flex flex-col justify-between">
+        <p className="text-4xl font-bold text-white">{formatCurrency(currentTotal)}</p>
         {totalBudget !== undefined && (
-          <p className="text-(length:--font-size-sm) text-(--color-inactive-text)">
-            Orçado: {formatCurrency(totalBudget)}
-          </p>
+          <p className="text-sm text-white/40">de {formatCurrency(totalBudget)} planejados</p>
         )}
       </div>
 
       {prevMonthName && (
-        <div className="text-right">
-          <p className={`text-(length:--font-size-base) font-bold ${variationColor}`}>
+        <div className={cn('flex flex-col items-center rounded-xl px-4 py-3', badgeBg)}>
+          <p className="text-base font-bold">
             {variationSign} {Math.abs(variationPercent).toFixed(1)}%
           </p>
-          <p className="text-(length:--font-size-sm) text-(--color-inactive-text)">
-            vs {prevMonthName}
-          </p>
+          <p className="text-xs">vs {prevMonthName}</p>
         </div>
       )}
     </div>

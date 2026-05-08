@@ -1,6 +1,5 @@
-import { Card } from '@components/Card'
 import { Button } from '@components/ui/button'
-import { CATEGORY_COLORS, CATEGORY_ICONS } from '@utils/categoryMaps'
+import { CATEGORY_COLORS, CATEGORY_ICONS_PI } from '@utils/categoryMaps'
 import { formatCurrency, formatDate } from '@utils/formatters'
 import { Pencil, Trash2 } from 'lucide-react'
 
@@ -18,54 +17,50 @@ export const TransactionCard: React.FC<TransactionCardProps> = ({
   onDelete,
 }) => {
   const { category, description, date, amount } = transaction
-  const icon = CATEGORY_ICONS[category]
+  const IconComponent = CATEGORY_ICONS_PI[category]
   const color = CATEGORY_COLORS[category]
 
   return (
-    <Card
-      ariaLabel={`Transação: ${description}, ${formatCurrency(amount)}, ${formatDate(date)}`}
-      className="gap-sm"
+    <div
+      role="article"
+      aria-label={`Transação: ${description}, ${formatCurrency(amount)}, ${formatDate(date)}`}
+      className="bg-primary px-sm flex items-center gap-2 rounded-2xl py-3.5"
     >
       <div
-        className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-lg"
+        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-base"
         style={{ backgroundColor: color + '25' }}
       >
-        {icon}
+        <IconComponent size={18} style={{ color }} />
       </div>
 
-      <div className="flex min-w-0 flex-1 items-center justify-between">
-        <span className="text-text truncate pt-2 font-medium">{description}</span>
-        <span className="text-(--color-inactive-text) text-(--font-size-sm)">
-          {formatDate(date)}
-        </span>
-      </div>
-      <span className="text-text shrink-0 font-semibold">{formatCurrency(amount)}</span>
-      {(onEdit ?? onDelete) && (
-        <div className="flex shrink-0 items-center gap-1">
-          {onEdit && (
-            <Button
-              variant="ghost"
-              size="icon"
-              className="h-8 w-8"
-              onClick={onEdit}
-              aria-label="Editar transação"
-            >
-              <Pencil className="h-4 w-4" />
-            </Button>
-          )}
-          {onDelete && (
-            <Button
-              variant="ghost"
-              size="icon"
-              className="h-8 w-8 text-red-500 hover:text-red-600"
-              onClick={onDelete}
-              aria-label="Excluir transação"
-            >
-              <Trash2 className="h-4 w-4" />
-            </Button>
-          )}
-        </div>
+      <span className="text-text min-w-0 flex-1 truncate text-sm font-medium">{description}</span>
+
+      <span className="shrink-0 text-xs text-(--color-inactive-text)">{formatDate(date)}</span>
+
+      <span className="text-text shrink-0 text-sm font-semibold">{formatCurrency(amount)}</span>
+
+      {onEdit && (
+        <Button
+          variant="ghost"
+          size="icon"
+          className="h-7 w-7 shrink-0"
+          onClick={onEdit}
+          aria-label="Editar transação"
+        >
+          <Pencil className="h-3.5 w-3.5" />
+        </Button>
       )}
-    </Card>
+      {onDelete && (
+        <Button
+          variant="ghost"
+          size="icon"
+          className="h-7 w-7 shrink-0 text-red-500 hover:text-red-600"
+          onClick={onDelete}
+          aria-label="Excluir transação"
+        >
+          <Trash2 className="h-3.5 w-3.5" />
+        </Button>
+      )}
+    </div>
   )
 }

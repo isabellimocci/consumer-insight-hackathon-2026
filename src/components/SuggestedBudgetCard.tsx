@@ -1,4 +1,4 @@
-import { CATEGORY_ICONS } from '@utils/categoryMaps'
+import { CATEGORY_COLORS, CATEGORY_ICONS_PI } from '@utils/categoryMaps'
 import { formatCurrency } from '@utils/formatters'
 
 import type { Category } from '../types'
@@ -30,10 +30,15 @@ export function SuggestedBudgetCard({ income, suggested }: SuggestedBudgetCardPr
         {CATEGORY_ORDER.map((cat) => {
           const pct = suggested[cat] ?? 0
           const amount = Math.round(income * (pct / 100) * 100) / 100
+          const IconComponent = CATEGORY_ICONS_PI[cat]
           return (
             <li key={cat} className="flex items-center justify-between">
               <span className="gap-xs text-text flex items-center text-(length:--font-size-sm)">
-                <span aria-hidden="true">{CATEGORY_ICONS[cat]}</span>
+                <IconComponent
+                  size={16}
+                  aria-hidden={true}
+                  style={{ color: CATEGORY_COLORS[cat] }}
+                />
                 {cat}
               </span>
               <span className="text-(length:--font-size-sm) text-(--color-inactive-text)">

@@ -1,7 +1,6 @@
 import { CategoryFilter } from '@components/CategoryFilter'
 import { ConfirmarDelecaoModal } from '@components/ConfirmarDelecaoModal'
 import { EditarTransacaoModal } from '@components/EditarTransacaoModal'
-import { MonthSelector } from '@components/MonthSelector'
 import { MonthSummaryHeader } from '@components/MonthSummaryHeader'
 import { TotalFiltered } from '@components/TotalFiltered'
 import { TransactionCard } from '@components/TransactionCard'
@@ -9,14 +8,14 @@ import { useBudget } from '@contexts/useBudget'
 import { useMonth } from '@contexts/useMonth'
 import { getTransactionsByMonth } from '@services/transactionService'
 import { getTotalByCategory } from '@utils/aggregations'
-import { CATEGORY_ICONS } from '@utils/categoryMaps'
+import { CATEGORY_ICONS_PI } from '@utils/categoryMaps'
 import { formatMonthLabel } from '@utils/formatters'
 import { useMemo, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
 import type { Category, Transaction } from '../types'
 
-const VALID_CATEGORIES = Object.keys(CATEGORY_ICONS) as Category[]
+const VALID_CATEGORIES = Object.keys(CATEGORY_ICONS_PI) as Category[]
 function parseCategory(s: string | null): Category | null {
   return s && (VALID_CATEGORIES as string[]).includes(s) ? (s as Category) : null
 }
@@ -39,6 +38,7 @@ export default function TransacoesPage() {
 
   const transactions = useMemo(
     () => getTransactionsByMonth(selectedMonth),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [selectedMonth, transactionsVersion],
   )
 
@@ -79,10 +79,6 @@ export default function TransacoesPage() {
 
   return (
     <div className="gap-md px-md py-lg mx-auto flex max-w-2xl flex-col">
-      <span className="flex items-center">
-        <MonthSelector />
-      </span>
-
       <MonthSummaryHeader
         monthLabel={formatMonthLabel(selectedMonth)}
         totalAmount={monthTotal}

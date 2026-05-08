@@ -1,4 +1,4 @@
-import { CATEGORY_ICONS } from '@utils/categoryMaps'
+import { CATEGORY_COLORS, CATEGORY_ICONS_PI } from '@utils/categoryMaps'
 import { formatCurrency } from '@utils/formatters'
 
 import type { BudgetCategory, Category } from '../types'
@@ -39,6 +39,7 @@ export function CategorySliderItem({
   const amount = Math.round(income * (userPercent / 100) * 100) / 100
   const statusColor = STATUS_COLORS[status]
   const statusBgColor = STATUS_BG_COLORS[status]
+  const IconComponent = CATEGORY_ICONS_PI[category]
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const raw = e.target.value
@@ -53,7 +54,7 @@ export function CategorySliderItem({
   return (
     <div className="gap-sm flex items-center">
       <span className="gap-xs text-text flex flex-1 items-center text-(length:--font-size-sm) font-medium">
-        <span aria-hidden="true">{CATEGORY_ICONS[category]}</span>
+        <IconComponent size={20} aria-hidden={true} style={{ color: CATEGORY_COLORS[category] }} />
         {category}
       </span>
       <span className="text-(length:--font-size-sm) text-(--color-inactive-text)">

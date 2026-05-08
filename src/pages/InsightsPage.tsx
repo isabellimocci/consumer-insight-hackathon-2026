@@ -2,7 +2,6 @@ import { BehaviorInsightCard } from '@components/BehaviorInsightCard'
 import { ConcentrationInsightCard } from '@components/ConcentrationInsightCard'
 import { ConsumerProfileCard } from '@components/ConsumerProfileCard'
 import { GrowingCategoryCard } from '@components/GrowingCategoryCard'
-import { MonthSelector } from '@components/MonthSelector'
 import { WeeklyPatternChart } from '@components/WeeklyPatternChart'
 import { useBudget } from '@contexts/useBudget'
 import { useMonth } from '@contexts/useMonth'
@@ -89,10 +88,6 @@ export default function InsightsPage() {
   return (
     <div className="gap-md px-md py-lg mx-auto flex max-w-2xl flex-col" aria-live="polite">
       <h1 className="text-text text-(length:--font-size-lg) font-bold">Seus Insights</h1>
-
-      <span className="flex items-center">
-        <MonthSelector />
-      </span>
 
       <ConsumerProfileCard
         profile={profile}

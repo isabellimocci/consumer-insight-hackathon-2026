@@ -25,7 +25,7 @@ export const Badge: React.FC<BadgeProps> = ({
     color === 'danger'
       ? 'text-primary bg-danger'
       : color === 'success'
-        ? 'bg-success text-surface'
+        ? 'bg-success text-white'
         : color === 'warning'
           ? 'bg-warning text-text'
           : 'bg-surface text-text border border-(--border) hover:bg-bg'

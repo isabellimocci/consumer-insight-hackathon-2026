@@ -1,4 +1,4 @@
-import { CATEGORY_ICONS } from '@utils/categoryMaps'
+import { CATEGORY_COLORS, CATEGORY_ICONS_PI } from '@utils/categoryMaps'
 import { formatCurrency, formatShortMonth } from '@utils/formatters'
 
 import type { GrowingCategoryResult, MonthData } from '../types'
@@ -12,6 +12,7 @@ export function GrowingCategoryCard({ result, allMonthsData }: GrowingCategoryCa
   if (!result) return null
 
   const last3 = allMonthsData.slice(-3)
+  const IconComponent = CATEGORY_ICONS_PI[result.category]
 
   return (
     <div
@@ -21,7 +22,12 @@ export function GrowingCategoryCard({ result, allMonthsData }: GrowingCategoryCa
       <div className="flex items-center gap-2">
         <span className="text-xl">⚠️</span>
         <span className="text-text text-(length:--font-size-base) font-bold">
-          {result.category} {CATEGORY_ICONS[result.category]} crescendo
+          {result.category}{' '}
+          <IconComponent
+            size={16}
+            style={{ color: CATEGORY_COLORS[result.category], display: 'inline' }}
+          />{' '}
+          crescendo
         </span>
       </div>
 

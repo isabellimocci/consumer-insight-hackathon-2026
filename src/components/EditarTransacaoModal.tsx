@@ -1,7 +1,7 @@
 import { Dialog, DialogContent } from '@components/ui/dialog'
 import { useMonth } from '@contexts/useMonth'
 import { updateTransaction } from '@services/transactionService'
-import { CATEGORY_COLORS, CATEGORY_ICONS } from '@utils/categoryMaps'
+import { CATEGORY_COLORS, CATEGORY_ICONS_PI } from '@utils/categoryMaps'
 import { useState } from 'react'
 
 import type { Category, Transaction } from '../types'
@@ -94,6 +94,7 @@ export function EditarTransacaoModal({ open, onClose, transaction, month }: Prop
               <div className="flex gap-2 overflow-x-auto pb-1">
                 {CATEGORIES.map((cat) => {
                   const isActive = category === cat
+                  const IconComponent = CATEGORY_ICONS_PI[cat]
                   return (
                     <button
                       key={cat}
@@ -106,7 +107,10 @@ export function EditarTransacaoModal({ open, onClose, transaction, month }: Prop
                         border: `2px solid ${isActive ? CATEGORY_COLORS[cat] : 'transparent'}`,
                       }}
                     >
-                      <span className="text-lg">{CATEGORY_ICONS[cat]}</span>
+                      <IconComponent
+                        size={20}
+                        style={{ color: isActive ? '#fff' : CATEGORY_COLORS[cat] }}
+                      />
                       <span>{cat}</span>
                     </button>
                   )

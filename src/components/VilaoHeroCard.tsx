@@ -1,5 +1,5 @@
 import { Badge } from '@components/Badge'
-import { CATEGORY_COLORS, CATEGORY_ICONS } from '@utils/categoryMaps'
+import { CATEGORY_COLORS, CATEGORY_ICONS_PI } from '@utils/categoryMaps'
 import { formatCurrency } from '@utils/formatters'
 
 import type { VilaoResult } from '../types'
@@ -13,6 +13,7 @@ export function VilaoHeroCard({ vilao }: VilaoHeroCardProps) {
   const varianceLabel = `+${vilao.variancePercent}% acima da meta`
   const growthLabel =
     (vilao.growthPercent > 0 ? '+' : '') + vilao.growthPercent + '% vs mês anterior'
+  const IconComponent = CATEGORY_ICONS_PI[vilao.category]
 
   return (
     <div
@@ -21,9 +22,11 @@ export function VilaoHeroCard({ vilao }: VilaoHeroCardProps) {
       aria-label={`Vilão do mês: ${vilao.category}`}
     >
       <Badge label="Vilão do Mês 🚨" color="danger" />
-      <span aria-hidden="true" style={{ fontSize: 48, lineHeight: 1 }}>
-        {CATEGORY_ICONS[vilao.category]}
-      </span>
+      <IconComponent
+        size={48}
+        aria-hidden={true}
+        style={{ color: CATEGORY_COLORS[vilao.category] }}
+      />
       <p className="text-text text-(length:--font-size-xl) font-bold">{vilao.category}</p>
       <p className="text-danger text-(length:--font-size-2xl) font-bold">
         +{formatCurrency(vilao.variance)}
