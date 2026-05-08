@@ -137,7 +137,7 @@ export default function DashboardPage() {
               ))}
           </section>
         )}
-        
+
         <DonutChart data={percentages} totalBudget={isConfigured ? totalBudget : undefined} />
 
         <section aria-label="Gastos por categoria">
