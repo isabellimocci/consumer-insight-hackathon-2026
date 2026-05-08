@@ -1,5 +1,5 @@
 import { Chip } from '@components/Chip'
-import { CATEGORY_COLORS, CATEGORY_ICONS_PI } from '@utils/categoryMaps'
+import { CATEGORY_COLORS, CATEGORY_ICONS_BOLD_PI } from '@utils/categoryMaps'
 
 import type { Category } from '../types'
 
@@ -14,20 +14,22 @@ export const CategoryFilter: React.FC<CategoryFilterProps> = ({
   selectedCategory,
   onCategorySelect,
 }) => {
+  console.log(categories.length)
   return (
     <div
       role="group"
       aria-label="Filtrar por categoria"
-      className="gap-sm pb-xs flex overflow-x-auto"
+      className="gap-sm pb-xs flex flex-col justify-between overflow-x-auto"
     >
       <Chip
         label="Todas"
         isActive={selectedCategory === null}
         onClick={() => onCategorySelect(null)}
         ariaLabel="Mostrar todas as categorias"
+        className="bg-[#1F2A1E] text-(--color-primary) hover:bg-[#486147]"
       />
       {categories.map((category) => {
-        const IconComponent = CATEGORY_ICONS_PI[category]
+        const IconComponent = CATEGORY_ICONS_BOLD_PI[category]
         return (
           <Chip
             key={category}
@@ -38,6 +40,10 @@ export const CategoryFilter: React.FC<CategoryFilterProps> = ({
               selectedCategory === category ? onCategorySelect(null) : onCategorySelect(category)
             }
             ariaLabel={`Filtrar por ${category}`}
+            className="bg-transparent hover:bg-[#486147]"
+            style={{
+              backgroundColor: ` color-mix(in srgb, ${CATEGORY_COLORS[category]} 20%, transparent`,
+            }}
           />
         )
       })}

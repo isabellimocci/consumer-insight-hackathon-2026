@@ -1,11 +1,18 @@
 import type { IconType } from 'react-icons'
 import {
+  PiBookOpenBold,
   PiBookOpenLight,
+  PiBusBold,
   PiBusLight,
+  PiDeviceMobileBold,
   PiDeviceMobileLight,
+  PiForkKnifeBold,
   PiForkKnifeLight,
+  PiGameControllerBold,
   PiGameControllerLight,
+  PiHeartbeatBold,
   PiHeartbeatLight,
+  PiShoppingBagBold,
   PiShoppingBagLight,
 } from 'react-icons/pi'
 
@@ -29,6 +36,16 @@ export const CATEGORY_ICONS_PI: Record<Category, IconType> = {
   Compras: PiShoppingBagLight,
   Saúde: PiHeartbeatLight,
   Educação: PiBookOpenLight,
+}
+
+export const CATEGORY_ICONS_BOLD_PI: Record<Category, IconType> = {
+  Alimentação: PiForkKnifeBold,
+  Transporte: PiBusBold,
+  Lazer: PiGameControllerBold,
+  Assinaturas: PiDeviceMobileBold,
+  Compras: PiShoppingBagBold,
+  Saúde: PiHeartbeatBold,
+  Educação: PiBookOpenBold,
 }
 
 export const CATEGORY_COLORS: Record<Category, string> = {

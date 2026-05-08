@@ -8,9 +8,7 @@ import { useUser } from '@contexts/UserContext'
 import { getAvailableMonths, getTransactionsByMonth } from '@services/transactionService'
 import { compareTwoMonths, getPercentageByCategory } from '@utils/aggregations'
 import { getVilaoDoMes } from '@utils/insights'
-import { ROUTES } from '@utils/routes'
 import { useMemo } from 'react'
-import { Link } from 'react-router-dom'
 
 export default function DashboardPage() {
   const { selectedMonth, transactionsVersion } = useMonth()
@@ -99,15 +97,6 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      {!isConfigured && (
-        <Link
-          to={ROUTES.ORCAMENTO}
-          className="px-sm py-sm shrink-0 rounded-xl bg-(--color-danger-bg) text-(--color-danger) transition-all hover:bg-(--color-highlight)"
-        >
-          Configure seu orçamento para ver análises completas →
-        </Link>
-      )}
-
       {/* Main layout: left (3/5) + right (2/5) */}
       <div className="mt-6 flex min-h-0 flex-1 gap-6 overflow-hidden">
         {/* Left column */}
@@ -115,9 +104,6 @@ export default function DashboardPage() {
           {/* Row 1: dark total card + donut chart */}
           <div className="flex shrink-0 gap-4">
             <div className="flex flex-1 flex-col gap-1">
-              <p className="shrink-0 text-sm font-semibold text-(--color-text)">
-                Total gasto no mês
-              </p>
               <MonthVariationBanner
                 currentTotal={currentTotal}
                 previousTotal={previousTotal}

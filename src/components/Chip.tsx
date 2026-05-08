@@ -1,9 +1,10 @@
 import { Button } from '@components/ui/button'
+import type React from 'react'
 
 import { cn } from './lib/utils'
 
 interface ChipProps {
-  label: string
+  label: string | React.ReactElement
   icon?: React.ReactNode
   isActive: boolean
   onClick: () => void
@@ -18,9 +19,10 @@ export const Chip: React.FC<ChipProps> = ({
   onClick,
   className,
   ariaLabel,
+  ...props
 }) => {
   const baseClasses =
-    'inline-flex items-center justify-center rounded-sm px-sm py-xs text-(--font-size-sm) cursor-pointer transition-all duration-200'
+    'inline-flex items-center justify-start rounded-lg px-md py-6 text-(--font-size-sm) cursor-pointer transition-all duration-200'
 
   const stateClasses = isActive
     ? 'bg-success text-text'
@@ -29,7 +31,7 @@ export const Chip: React.FC<ChipProps> = ({
   const finalClasses = cn(baseClasses, stateClasses, className)
 
   return (
-    <Button className={finalClasses} aria-label={ariaLabel} onClick={onClick}>
+    <Button className={finalClasses} aria-label={ariaLabel} onClick={onClick} {...props}>
       {icon} {label}
     </Button>
   )

@@ -12,7 +12,7 @@ export const MonthSummaryHeader: React.FC<MonthSummaryHeaderProps> = ({
   transactionCount,
 }) => {
   return (
-    <div className="gap-xs flex flex-col">
+    <div className="gap-xs flex">
       <span className="tracking-wide text-(--color-inactive-text) text-(--font-size-sm) uppercase">
         {monthLabel}
       </span>
