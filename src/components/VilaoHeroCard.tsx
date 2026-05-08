@@ -12,9 +12,7 @@ export function VilaoHeroCard({ vilao }: VilaoHeroCardProps) {
   const bgColor = CATEGORY_COLORS[vilao.category] + '1A'
   const varianceLabel = `+${vilao.variancePercent}% acima da meta`
   const growthLabel =
-    vilao.growthPercent > 0
-      ? `+${vilao.growthPercent}% vs mês anterior`
-      : `${vilao.growthPercent}% vs mês anterior`
+    (vilao.growthPercent > 0 ? '+' : '') + vilao.growthPercent + '% vs mês anterior'
 
   return (
     <div

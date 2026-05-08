@@ -29,12 +29,23 @@ export default function OrcamentoPage() {
 
   const suggested = useMemo(() => getSuggestedBudget(), [])
 
-  const [localPercents, setLocalPercents] = useState<BudgetAdjustments>(() => {
-    if (currentBudget) {
-      return Object.fromEntries(currentBudget.categories.map((c) => [c.category, c.userPercent]))
-    }
-    return { ...suggested }
-  })
+  const derivedPercents = useMemo<BudgetAdjustments>(
+    () =>
+      currentBudget
+        ? Object.fromEntries(currentBudget.categories.map((c) => [c.category, c.userPercent]))
+        : { ...suggested },
+    [currentBudget, suggested],
+  )
+
+  const [localPercents, setLocalPercents] = useState<BudgetAdjustments>(derivedPercents)
+  const [prevMonth, setPrevMonth] = useState(selectedMonth)
+  const [prevDerived, setPrevDerived] = useState(derivedPercents)
+
+  if (prevDerived !== derivedPercents || prevMonth !== selectedMonth) {
+    setPrevDerived(derivedPercents)
+    setPrevMonth(selectedMonth)
+    setLocalPercents(derivedPercents)
+  }
 
   const totalAllocated = useMemo(
     () => CATEGORIES.reduce((s, cat) => s + (localPercents[cat] ?? suggested[cat] ?? 0), 0),

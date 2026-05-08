@@ -39,7 +39,12 @@ export function getVilaoDoMes(
     targetAmount: vilao.targetAmount,
     spentAmount: vilao.spentAmount,
     variance: vilao.variance,
-    variancePercent: Math.round((vilao.variance / vilao.targetAmount) * 1000) / 10,
+    variancePercent:
+      vilao.targetAmount > 0
+        ? Math.round((vilao.variance / vilao.targetAmount) * 1000) / 10
+        : vilao.variance > 0
+          ? 100
+          : 0,
     growthPercent,
     transactionCount: vilao.transactionCount,
     economyCopy: getEconomyCopy(vilao.category, growthPercent),

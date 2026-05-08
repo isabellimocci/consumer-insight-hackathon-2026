@@ -17,6 +17,12 @@ const STATUS_COLORS: Record<BudgetCategory['status'], string> = {
   over: 'var(--color-danger)',
 }
 
+const STATUS_BG_COLORS: Record<BudgetCategory['status'], string> = {
+  'on-track': 'color-mix(in srgb, var(--color-success) 15%, transparent)',
+  warning: 'color-mix(in srgb, var(--color-warning) 15%, transparent)',
+  over: 'color-mix(in srgb, var(--color-danger) 15%, transparent)',
+}
+
 const STATUS_LABELS: Record<BudgetCategory['status'], string> = {
   'on-track': 'No limite',
   warning: 'Atenção',
@@ -32,6 +38,7 @@ export function CategorySliderItem({
 }: CategorySliderItemProps) {
   const amount = Math.round(income * (userPercent / 100) * 100) / 100
   const statusColor = STATUS_COLORS[status]
+  const statusBgColor = STATUS_BG_COLORS[status]
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const raw = e.target.value
@@ -72,7 +79,7 @@ export function CategorySliderItem({
       </div>
       <span
         className="rounded-full px-2 py-0.5 text-xs font-medium"
-        style={{ color: statusColor, backgroundColor: statusColor + '1A' }}
+        style={{ color: statusColor, backgroundColor: statusBgColor }}
       >
         {STATUS_LABELS[status]}
       </span>

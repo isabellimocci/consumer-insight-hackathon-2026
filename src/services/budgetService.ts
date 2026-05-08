@@ -32,9 +32,6 @@ export function calculateBudget(
     percents[cat] = pct
   }
 
-  const total = Object.values(percents).reduce((s, v) => s + v, 0)
-  percents['Alimentação'] = (percents['Alimentação'] ?? 0) + (100 - total)
-
   const categories: BudgetCategory[] = CATEGORIES.map((cat) => {
     const userPercent = percents[cat] ?? 0
     const targetAmount = Math.round(income.amount * (userPercent / 100) * 100) / 100
