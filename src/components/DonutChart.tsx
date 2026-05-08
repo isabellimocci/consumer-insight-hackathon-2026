@@ -10,15 +10,9 @@ interface DonutChartProps {
   data: CategoryPercentage[]
 }
 
-const CHART_CONFIG: ChartConfig = {
-  Alimentação: { label: 'Alimentação', color: CATEGORY_COLORS['Alimentação'] },
-  Transporte: { label: 'Transporte', color: CATEGORY_COLORS['Transporte'] },
-  Lazer: { label: 'Lazer', color: CATEGORY_COLORS['Lazer'] },
-  Assinaturas: { label: 'Assinaturas', color: CATEGORY_COLORS['Assinaturas'] },
-  Compras: { label: 'Compras', color: CATEGORY_COLORS['Compras'] },
-  Saúde: { label: 'Saúde', color: CATEGORY_COLORS['Saúde'] },
-  Educação: { label: 'Educação', color: CATEGORY_COLORS['Educação'] },
-}
+const CHART_CONFIG: ChartConfig = Object.fromEntries(
+  Object.entries(CATEGORY_COLORS).map(([cat, color]) => [cat, { label: cat, color }]),
+)
 
 export function DonutChart({ data }: DonutChartProps) {
   const total = useMemo(() => data.reduce((s, d) => s + d.total, 0), [data])

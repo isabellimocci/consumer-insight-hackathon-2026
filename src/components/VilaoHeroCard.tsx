@@ -1,5 +1,4 @@
 import { Badge } from '@components/Badge'
-import { NEW_CATEGORY_SENTINEL } from '@utils/aggregations'
 import { CATEGORY_COLORS, CATEGORY_ICONS } from '@utils/categoryMaps'
 import { formatCurrency } from '@utils/formatters'
 
@@ -11,11 +10,9 @@ interface VilaoHeroCardProps {
 
 export function VilaoHeroCard({ vilao }: VilaoHeroCardProps) {
   const bgColor = CATEGORY_COLORS[vilao.category] + '1A'
-  const isNew = vilao.growthPercent === NEW_CATEGORY_SENTINEL
-  const growthLabel = isNew
-    ? 'Nova categoria'
-    : `${vilao.growthPercent > 0 ? '+' : ''}${vilao.growthPercent}% vs mês anterior`
-  const growthColor = isNew ? 'neutral' : vilao.growthPercent > 0 ? 'danger' : 'success'
+  const varianceLabel = `+${vilao.variancePercent}% acima da meta`
+  const growthLabel =
+    (vilao.growthPercent > 0 ? '+' : '') + vilao.growthPercent + '% vs mês anterior'
 
   return (
     <div
@@ -31,9 +28,15 @@ export function VilaoHeroCard({ vilao }: VilaoHeroCardProps) {
         {vilao.category}
       </p>
       <p className="text-[length:var(--font-size-2xl)] font-bold text-[var(--color-danger)]">
-        {formatCurrency(vilao.currentTotal)}
+        {formatCurrency(vilao.spentAmount)}
       </p>
-      <Badge label={growthLabel} color={growthColor} />
+      <p className="text-[length:var(--font-size-sm)] text-[var(--color-inactive-text)]">
+        Meta: {formatCurrency(vilao.targetAmount)}
+      </p>
+      <Badge label={varianceLabel} color="danger" />
+      {vilao.growthPercent !== 0 && (
+        <Badge label={growthLabel} color={vilao.growthPercent > 0 ? 'danger' : 'success'} />
+      )}
     </div>
   )
 }

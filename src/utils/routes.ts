@@ -3,5 +3,6 @@ export const ROUTES = {
   TRANSACOES: '/transacoes',
   VILAO: '/vilao',
   INSIGHTS: '/insights',
+  ORCAMENTO: '/orcamento',
   NOT_FOUND: '*',
 }

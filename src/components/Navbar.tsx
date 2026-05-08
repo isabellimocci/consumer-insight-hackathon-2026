@@ -7,6 +7,7 @@ const NAV_LINKS = [
   { to: ROUTES.TRANSACOES, label: 'Transações', icon: <Wallet size={20} /> },
   { to: ROUTES.VILAO, label: 'Vilão', icon: <VenetianMask size={20} /> },
   { to: ROUTES.INSIGHTS, label: 'Insights', icon: <Brain size={20} /> },
+  { to: ROUTES.ORCAMENTO, label: 'Orçamento' },
 ]
 
 export function Navbar() {
