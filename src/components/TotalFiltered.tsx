@@ -6,19 +6,53 @@ interface TotalFilteredProps {
   filteredTotal: number
   monthTotal: number
   selectedCategory: Category | null
+  targetAmount?: number
 }
 
 export const TotalFiltered: React.FC<TotalFilteredProps> = ({
   filteredTotal,
   monthTotal,
   selectedCategory,
+  targetAmount,
 }) => {
   const percentage = monthTotal > 0 ? Math.round((filteredTotal / monthTotal) * 1000) / 10 : 0
+
+  if (selectedCategory !== null && targetAmount !== undefined) {
+    const balance = targetAmount - filteredTotal
+    const isOver = balance < 0
+    return (
+      <div
+        aria-live="polite"
+        className="border-t border-[var(--border)] pt-[var(--spacing-md)] text-[length:var(--font-size-sm)]"
+      >
+        <span className="text-[var(--color-inactive-text)]">
+          {selectedCategory}: {formatCurrency(filteredTotal)} de {formatCurrency(targetAmount)}
+        </span>
+        {' | '}
+        <span className={isOver ? 'text-[var(--color-danger)]' : 'text-[var(--color-success)]'}>
+          {formatCurrency(Math.abs(balance))} {isOver ? 'acima da meta' : 'disponível'}
+        </span>
+      </div>
+    )
+  }
+
+  if (selectedCategory === null && targetAmount !== undefined) {
+    return (
+      <div
+        aria-live="polite"
+        className="border-t border-[var(--border)] pt-[var(--spacing-md)] text-[length:var(--font-size-sm)] text-[var(--color-inactive-text)]"
+      >
+        <span>Total do mês: {formatCurrency(filteredTotal)}</span>
+        {' | '}
+        <span>Orçado: {formatCurrency(targetAmount)}</span>
+      </div>
+    )
+  }
 
   return (
     <div
       aria-live="polite"
-      className="border-t border-[var(--border)] pt-[var(--spacing-md)] text-[var(--color-inactive-text)] text-[var(--font-size-sm)]"
+      className="border-t border-[var(--border)] pt-[var(--spacing-md)] text-[length:var(--font-size-sm)] text-[var(--color-inactive-text)]"
     >
       {selectedCategory === null ? (
         <span>Total do mês: {formatCurrency(filteredTotal)}</span>

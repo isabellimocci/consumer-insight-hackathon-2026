@@ -6,27 +6,50 @@ import { Cell, Label, Pie, PieChart } from 'recharts'
 
 import type { CategoryPercentage } from '../types'
 
+const formatBRL = (amount: number) =>
+  new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+    maximumFractionDigits: 0,
+  }).format(amount)
+
 interface DonutChartProps {
   data: CategoryPercentage[]
+  totalBudget?: number
 }
 
 const CHART_CONFIG: ChartConfig = Object.fromEntries(
   Object.entries(CATEGORY_COLORS).map(([cat, color]) => [cat, { label: cat, color }]),
 )
 
-export function DonutChart({ data }: DonutChartProps) {
-  const total = useMemo(() => data.reduce((s, d) => s + d.total, 0), [data])
+export function DonutChart({ data, totalBudget }: DonutChartProps) {
+  const spentTotal = useMemo(() => data.reduce((s, d) => s + d.total, 0), [data])
+  const isOverBudget = totalBudget !== undefined && spentTotal > totalBudget
+  const hasBudget = totalBudget !== undefined
 
   return (
     <div>
       <ChartContainer config={CHART_CONFIG} className="mx-auto h-[220px] w-full max-w-[320px]">
         <PieChart>
+          {hasBudget && (
+            <Pie
+              data={[{ value: totalBudget }]}
+              dataKey="value"
+              outerRadius={108}
+              innerRadius={102}
+              fill="var(--color-inactive-bg)"
+              strokeWidth={0}
+              startAngle={90}
+              endAngle={-270}
+              isAnimationActive={false}
+            />
+          )}
           <Pie
             data={data}
             dataKey="total"
             nameKey="category"
-            innerRadius={70}
-            outerRadius={100}
+            innerRadius={hasBudget ? 65 : 70}
+            outerRadius={hasBudget ? 95 : 100}
             strokeWidth={2}
           >
             {data.map((entry) => (
@@ -35,16 +58,39 @@ export function DonutChart({ data }: DonutChartProps) {
             <Label
               content={({ viewBox }) => {
                 if (viewBox && 'cx' in viewBox && 'cy' in viewBox) {
+                  const cx = viewBox.cx ?? 0
+                  const cy = viewBox.cy ?? 0
+
+                  if (hasBudget) {
+                    return (
+                      <text x={cx} y={cy} textAnchor="middle" dominantBaseline="middle">
+                        <tspan
+                          x={cx}
+                          y={cy - 8}
+                          fill={isOverBudget ? 'var(--color-danger)' : 'var(--color-text)'}
+                          fontSize={12}
+                          fontWeight={700}
+                        >
+                          {formatBRL(spentTotal)}
+                        </tspan>
+                        <tspan
+                          x={cx}
+                          y={cy + 10}
+                          fill="var(--color-inactive-text)"
+                          fontSize={10}
+                          fontWeight={400}
+                        >
+                          / {formatBRL(totalBudget)}
+                        </tspan>
+                      </text>
+                    )
+                  }
+
                   return (
-                    <text
-                      x={viewBox.cx}
-                      y={viewBox.cy}
-                      textAnchor="middle"
-                      dominantBaseline="middle"
-                    >
+                    <text x={cx} y={cy} textAnchor="middle" dominantBaseline="middle">
                       <tspan
-                        x={viewBox.cx}
-                        y={(viewBox.cy ?? 0) - 8}
+                        x={cx}
+                        y={cy - 8}
                         className="fill-[var(--color-text)]"
                         fontSize={11}
                         fontWeight={500}
@@ -52,17 +98,13 @@ export function DonutChart({ data }: DonutChartProps) {
                         Total
                       </tspan>
                       <tspan
-                        x={viewBox.cx}
-                        y={(viewBox.cy ?? 0) + 10}
+                        x={cx}
+                        y={cy + 10}
                         className="fill-[var(--color-text)]"
                         fontSize={13}
                         fontWeight={700}
                       >
-                        {new Intl.NumberFormat('pt-BR', {
-                          style: 'currency',
-                          currency: 'BRL',
-                          maximumFractionDigits: 0,
-                        }).format(total)}
+                        {formatBRL(spentTotal)}
                       </tspan>
                     </text>
                   )

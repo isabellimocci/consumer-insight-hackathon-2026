@@ -1,5 +1,5 @@
 import { ROUTES } from '@utils/routes'
-import { Brain, CircleQuestionMark, HomeIcon,  Sparkles, VenetianMask, Wallet } from 'lucide-react'
+import { Brain, CircleQuestionMark, HomeIcon, Sparkles, VenetianMask, Wallet } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
 
 const NAV_LINKS = [
@@ -25,7 +25,7 @@ export function Navbar() {
               to={to}
               end={to === ROUTES.DASHBOARD}
               className={({ isActive }) =>
-                `${isActive ? 'text-[var(--color-surface)] font-semibold' : 'text-muted-foreground'} my-6 flex flex-col items-center gap-2 text-xs hover:text-[var(--color-surface)]`
+                `${isActive ? 'font-semibold text-[var(--color-surface)]' : 'text-muted-foreground'} my-6 flex flex-col items-center gap-2 text-xs hover:text-[var(--color-surface)]`
               }
             >
               <span
