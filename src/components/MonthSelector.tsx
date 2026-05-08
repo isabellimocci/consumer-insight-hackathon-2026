@@ -26,10 +26,14 @@ export const MonthSelector: React.FC = () => {
 
   useEffect(() => {
     if (!api) return
-    api.on('select', () => {
+    const handler = () => {
       const index = api.selectedScrollSnap()
       setSelectedMonth(availableMonths[index])
-    })
+    }
+    api.on('select', handler)
+    return () => {
+      api.off('select', handler)
+    }
   }, [api, availableMonths, setSelectedMonth])
 
   return (
@@ -37,9 +41,7 @@ export const MonthSelector: React.FC = () => {
       aria-label="Selecionar mês"
       setApi={setApi}
       opts={{ align: 'center', loop: false }}
-      className={cn(
-        'w-[200px]', // Hide scrollbar if available
-      )}
+      className={cn('w-50')}
     >
       {availableMonths.map((month) => {
         return (
