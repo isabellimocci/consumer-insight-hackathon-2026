@@ -19,21 +19,19 @@ export const Badge: React.FC<BadgeProps> = ({
   ...props
 }) => {
   const baseClasses =
-    'inline-flex items-center justify-center rounded-[var(--spacing-sm)] text-[var(--color-text)] font-medium px-[var(--spacing-xs)] py-[var(--spacing-xs)] whitespace-nowrap'
+    'inline-flex items-center justify-center rounded-sm text-text font-medium px-xs py-xs whitespace-nowrap'
 
   const colorClasses =
     color === 'danger'
-      ? 'text-[var(--color-primary)] bg-[var(--color-danger)]'
+      ? 'text-primary bg-danger'
       : color === 'success'
-        ? 'bg-[var(--color-success)] text-[var(--color-surface)]'
+        ? 'bg-success text-surface'
         : color === 'warning'
-          ? 'bg-[var(--color-warning)] text-[var(--color-text)]'
-          : 'bg-[var(--color-surface)] text-[var(--color-text)] border border-[var(--border)] hover:bg-[var(--color-bg)]'
+          ? 'bg-warning text-text'
+          : 'bg-surface text-text border border-(--border) hover:bg-bg'
 
   const sizeClasses =
-    size === 'md'
-      ? 'text-[var(--font-size-base)] px-[var(--spacing-sm)]'
-      : 'text-[var(--font-size-md)] px-[var(--spacing-xs)]'
+    size === 'md' ? 'text-(--font-size-base) px-sm' : 'text-(--font-size-md) px-xs'
 
   const finalClasses = cn(baseClasses, sizeClasses, colorClasses, className)
   return (

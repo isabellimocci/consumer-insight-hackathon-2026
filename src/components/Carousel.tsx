@@ -4,6 +4,7 @@ import {
   CarouselContent,
   CarouselItem,
   CarouselNext,
+  type CarouselOptions,
   CarouselPrevious,
 } from '@components/ui/carousel'
 import * as React from 'react'
@@ -14,26 +15,26 @@ interface CarouselProps {
   children: React.ReactNode[]
   className?: string
   setApi?: (api: CarouselApi) => void
-  opts?: string
+  opts?: CarouselOptions
 }
 
 export function Carousel({
   children,
   className,
   setApi,
-  opts = { align: 'center', loop: false },
+  opts = { align: 'center' as const, loop: false },
 }: CarouselProps) {
   return (
     <div
       className={cn(
-        'relative w-full max-w-[400px] items-center justify-center overflow-visible',
+        'relative w-full max-w-100 items-center justify-center overflow-visible',
         className,
       )}
     >
       <SCarousel
         setApi={setApi}
         opts={opts}
-        className={cn('relative flex w-full max-w-[320px]', className)}
+        className={cn('relative flex w-full max-w-80', className)}
       >
         <div className="flex items-center justify-center">
           <CarouselPrevious
@@ -52,7 +53,7 @@ export function Carousel({
                 key={index}
                 className="flex min-w-0 basis-full items-center justify-center"
               >
-                <div className="w-[150px] text-center">{child}</div>
+                <div className="w-37.5 text-center">{child}</div>
               </CarouselItem>
             ))}
           </CarouselContent>

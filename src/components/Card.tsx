@@ -14,7 +14,7 @@ import { cn } from './lib/utils'
 interface CardProps {
   title?: string
   description?: string
-  children: React.ReactNode
+  children?: React.ReactNode
   footer?: React.ReactNode
   action?: React.ReactNode
   className?: string
@@ -33,14 +33,9 @@ export const Card: React.FC<CardProps> = ({
   variant,
   ...props
 }) => {
-  const baseClasses =
-    'flex bg-[var(--color-primary)] py-[var(--spacing-md)] px-[var(--spacing-sm)] rounded-[var(--spacing-sm)] text-[var(--color-text)]'
+  const baseClasses = 'flex bg-primary py-md px-sm rounded-sm text-text'
   const variantClasses =
-    variant === 'highlight'
-      ? 'bg-[var(--color-highlight)]'
-      : variant === 'alert'
-        ? 'bg-[var(--color-warning)]'
-        : ''
+    variant === 'highlight' ? 'bg-highlight' : variant === 'alert' ? 'bg-warning' : ''
   const finalClasses = cn(baseClasses, variantClasses, className)
 
   return (

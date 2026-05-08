@@ -225,6 +225,7 @@ export {
   CarouselContent,
   CarouselItem,
   CarouselNext,
+  type CarouselOptions,
   CarouselPrevious,
   //useCarousel,
 }
