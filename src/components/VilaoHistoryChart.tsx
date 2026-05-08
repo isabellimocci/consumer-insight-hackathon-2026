@@ -2,7 +2,7 @@ import type { ChartConfig } from '@components/ui/chart'
 import { ChartContainer } from '@components/ui/chart'
 import { CATEGORY_COLORS } from '@utils/categoryMaps'
 import { formatCurrency, formatShortMonth } from '@utils/formatters'
-import { Bar, BarChart, Cell, LabelList, XAxis, YAxis } from 'recharts'
+import { Bar, BarChart, Cell, LabelList, ReferenceLine, XAxis, YAxis } from 'recharts'
 
 import type { Category } from '../types'
 
@@ -15,12 +15,14 @@ interface VilaoHistoryChartProps {
   category: Category
   monthlyTotals: MonthTotal[]
   selectedMonth: string
+  targetAmount?: number
 }
 
 export function VilaoHistoryChart({
   category,
   monthlyTotals,
   selectedMonth,
+  targetAmount,
 }: VilaoHistoryChartProps) {
   const categoryColor = CATEGORY_COLORS[category]
 
@@ -49,6 +51,19 @@ export function VilaoHistoryChart({
             tick={{ fontSize: 12, fill: 'var(--color-inactive-text)' }}
           />
           <YAxis hide />
+          {targetAmount !== undefined && (
+            <ReferenceLine
+              y={targetAmount}
+              stroke="var(--color-inactive-text)"
+              strokeDasharray="4 4"
+              label={{
+                value: 'Meta',
+                position: 'insideTopRight',
+                fontSize: 10,
+                fill: 'var(--color-inactive-text)',
+              }}
+            />
+          )}
           <Bar dataKey="total" radius={[4, 4, 0, 0]}>
             {data.map((entry) => (
               <Cell key={entry.month} fill={entry.fill} />

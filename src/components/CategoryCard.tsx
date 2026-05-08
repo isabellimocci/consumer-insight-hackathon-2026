@@ -1,3 +1,4 @@
+import { Badge } from '@components/Badge'
 import { NEW_CATEGORY_SENTINEL } from '@utils/aggregations'
 import { CATEGORY_COLORS, CATEGORY_ICONS } from '@utils/categoryMaps'
 import { formatCurrency } from '@utils/formatters'
@@ -12,6 +13,8 @@ interface CategoryCardProps {
   percentage: number
   trend: 'up' | 'down' | 'stable'
   variationPercent: number
+  targetAmount?: number
+  budgetStatus?: 'on-track' | 'warning' | 'over'
 }
 
 export function CategoryCard({
@@ -20,6 +23,8 @@ export function CategoryCard({
   percentage,
   trend,
   variationPercent,
+  targetAmount,
+  budgetStatus,
 }: CategoryCardProps) {
   const navigate = useNavigate()
 
@@ -41,6 +46,8 @@ export function CategoryCard({
       : `${variationPercent > 0 ? '+' : ''}${variationPercent.toFixed(1)}%`
 
   const iconBg = `color-mix(in srgb, ${CATEGORY_COLORS[category]}, transparent 85%)`
+
+  const progressWidth = targetAmount ? `${Math.min((total / targetAmount) * 100, 100)}%` : undefined
 
   return (
     <button
@@ -76,6 +83,40 @@ export function CategoryCard({
           {trendArrow} {variationLabel}
         </span>
       </div>
+
+      {targetAmount !== undefined && (
+        <div className="mt-[var(--spacing-xs)] flex flex-col gap-[var(--spacing-xs)]">
+          <div className="h-1.5 w-full overflow-hidden rounded-full bg-[var(--color-inactive-bg)]">
+            <div
+              className="h-full rounded-full transition-all"
+              style={{ width: progressWidth, backgroundColor: CATEGORY_COLORS[category] }}
+            />
+          </div>
+          <div className="flex items-center justify-between">
+            <p className="text-[length:var(--font-size-sm)] text-[var(--color-inactive-text)]">
+              Meta: {formatCurrency(targetAmount)}
+            </p>
+            {budgetStatus && (
+              <Badge
+                label={
+                  budgetStatus === 'on-track'
+                    ? '✓ Na meta'
+                    : budgetStatus === 'warning'
+                      ? '⚠ Atenção'
+                      : '✗ Acima'
+                }
+                color={
+                  budgetStatus === 'on-track'
+                    ? 'success'
+                    : budgetStatus === 'warning'
+                      ? 'warning'
+                      : 'danger'
+                }
+              />
+            )}
+          </div>
+        </div>
+      )}
     </button>
   )
 }

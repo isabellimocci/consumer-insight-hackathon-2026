@@ -3,6 +3,7 @@ import { ConcentrationInsightCard } from '@components/ConcentrationInsightCard'
 import { ConsumerProfileCard } from '@components/ConsumerProfileCard'
 import { GrowingCategoryCard } from '@components/GrowingCategoryCard'
 import { WeeklyPatternChart } from '@components/WeeklyPatternChart'
+import { useBudget } from '@contexts/useBudget'
 import { useMonth } from '@contexts/useMonth'
 import { getAllMonthsData, getTransactionsByMonth } from '@services/transactionService'
 import { getPercentageByCategory, getTotalByCategory } from '@utils/aggregations'
@@ -12,6 +13,7 @@ import { useMemo } from 'react'
 
 export default function InsightsPage() {
   const { selectedMonth } = useMonth()
+  const { currentBudget, isConfigured, income } = useBudget()
 
   const allMonthsData = useMemo(() => getAllMonthsData(), [])
 
@@ -51,6 +53,31 @@ export default function InsightsPage() {
     return currentTxs.length > 0 ? total / currentTxs.length : 0
   }, [currentTxs])
 
+  const totalSpent = useMemo(() => currentTxs.reduce((s, t) => s + t.amount, 0), [currentTxs])
+
+  const concentrationData = useMemo(() => {
+    if (!isConfigured || !dominantPercentage || !currentBudget) {
+      return { percentage: dominantPercentage?.percentage ?? 0, budgetMode: false }
+    }
+    const budgetCat = currentBudget.categories.find(
+      (c) => c.category === dominantPercentage.category,
+    )
+    if (!budgetCat || budgetCat.targetAmount === 0) {
+      return { percentage: dominantPercentage.percentage, budgetMode: false }
+    }
+    return {
+      percentage: Math.round((budgetCat.spentAmount / budgetCat.targetAmount) * 1000) / 10,
+      budgetMode: true,
+    }
+  }, [isConfigured, dominantPercentage, currentBudget])
+
+  const healthData = useMemo(() => {
+    if (!isConfigured || !currentBudget) return null
+    const onTrack = currentBudget.categories.filter((c) => c.status === 'on-track').length
+    const total = currentBudget.categories.length
+    return { onTrack, total }
+  }, [isConfigured, currentBudget])
+
   const monthLabel = formatMonthLabel(selectedMonth)
   const shortMonth = monthLabel.split(' ')[0]
 
@@ -63,12 +90,17 @@ export default function InsightsPage() {
         Seus Insights
       </h1>
 
-      <ConsumerProfileCard profile={profile} />
+      <ConsumerProfileCard
+        profile={profile}
+        income={income?.amount}
+        totalSpent={isConfigured ? totalSpent : undefined}
+      />
 
       {dominantPercentage && (
         <ConcentrationInsightCard
           category={dominantPercentage.category}
-          percentage={dominantPercentage.percentage}
+          percentage={concentrationData.percentage}
+          budgetMode={concentrationData.budgetMode}
         />
       )}
 
@@ -82,6 +114,13 @@ export default function InsightsPage() {
             Outros comportamentos
           </h2>
           <div className="flex flex-col gap-[var(--spacing-sm)]">
+            {healthData && (
+              <BehaviorInsightCard
+                icon="💚"
+                title="Saúde financeira do mês"
+                description={`${healthData.onTrack} de ${healthData.total} categorias dentro da meta`}
+              />
+            )}
             <BehaviorInsightCard
               icon="🔁"
               title="Categoria mais frequente"

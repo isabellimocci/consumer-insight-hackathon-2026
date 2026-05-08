@@ -28,10 +28,11 @@ export function VilaoHeroCard({ vilao }: VilaoHeroCardProps) {
         {vilao.category}
       </p>
       <p className="text-[length:var(--font-size-2xl)] font-bold text-[var(--color-danger)]">
-        {formatCurrency(vilao.spentAmount)}
+        +{formatCurrency(vilao.variance)}
       </p>
       <p className="text-[length:var(--font-size-sm)] text-[var(--color-inactive-text)]">
-        Meta: {formatCurrency(vilao.targetAmount)}
+        Gastou {formatCurrency(vilao.spentAmount)} de {formatCurrency(vilao.targetAmount)}{' '}
+        planejados
       </p>
       <Badge label={varianceLabel} color="danger" />
       {vilao.growthPercent !== 0 && (

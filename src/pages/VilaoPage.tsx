@@ -3,6 +3,7 @@ import { EconomyRecommendationCard } from '@components/EconomyRecommendationCard
 import { VilaoHeroCard } from '@components/VilaoHeroCard'
 import { VilaoHistoryChart } from '@components/VilaoHistoryChart'
 import { VilaoNarrativeCopy } from '@components/VilaoNarrativeCopy'
+import { VilaoVazio } from '@components/VilaoVazio'
 import { useBudget } from '@contexts/useBudget'
 import { useMonth } from '@contexts/useMonth'
 import { getAvailableMonths, getTransactionsByMonth } from '@services/transactionService'
@@ -71,16 +72,7 @@ export default function VilaoPage() {
   }
 
   if (!vilaoResult || !economyRec) {
-    return (
-      <div
-        className="mx-auto flex max-w-2xl flex-col items-center gap-[var(--spacing-md)] px-[var(--spacing-md)] py-[var(--spacing-lg)]"
-        aria-live="polite"
-      >
-        <p className="text-[length:var(--font-size-lg)] text-[var(--color-inactive-text)]">
-          Parabéns! Você ficou dentro de todas as metas esse mês 🎉
-        </p>
-      </div>
-    )
+    return <VilaoVazio />
   }
 
   return (
@@ -94,6 +86,7 @@ export default function VilaoPage() {
         category={vilaoResult.category}
         monthlyTotals={monthlyTotals}
         selectedMonth={selectedMonth}
+        targetAmount={vilaoResult.targetAmount}
       />
       <EconomyRecommendationCard recommendation={economyRec} />
       <Button

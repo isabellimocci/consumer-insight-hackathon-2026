@@ -2,6 +2,7 @@ import { CategoryFilter } from '@components/CategoryFilter'
 import { MonthSummaryHeader } from '@components/MonthSummaryHeader'
 import { TotalFiltered } from '@components/TotalFiltered'
 import { TransactionCard } from '@components/TransactionCard'
+import { useBudget } from '@contexts/useBudget'
 import { useMonth } from '@contexts/useMonth'
 import { getTransactionsByMonth } from '@services/transactionService'
 import { getTotalByCategory } from '@utils/aggregations'
@@ -19,6 +20,7 @@ function parseCategory(s: string | null): Category | null {
 
 export default function TransacoesPage() {
   const { selectedMonth } = useMonth()
+  const { currentBudget, isConfigured } = useBudget()
   const [searchParams] = useSearchParams()
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(() =>
     parseCategory(searchParams.get('categoria')),
@@ -51,6 +53,19 @@ export default function TransacoesPage() {
   const filteredTotal = useMemo(
     () => filteredTransactions.reduce((sum, t) => sum + t.amount, 0),
     [filteredTransactions],
+  )
+
+  const categoryTargetAmount = useMemo(() => {
+    if (!isConfigured || !selectedCategory) return undefined
+    return currentBudget?.categories.find((c) => c.category === selectedCategory)?.targetAmount
+  }, [isConfigured, selectedCategory, currentBudget])
+
+  const totalBudget = useMemo(
+    () =>
+      isConfigured
+        ? (currentBudget?.categories.reduce((s, c) => s + c.targetAmount, 0) ?? undefined)
+        : undefined,
+    [isConfigured, currentBudget],
   )
 
   return (
@@ -93,6 +108,7 @@ export default function TransacoesPage() {
         filteredTotal={filteredTotal}
         monthTotal={monthTotal}
         selectedCategory={selectedCategory}
+        targetAmount={categoryTargetAmount ?? totalBudget}
       />
     </div>
   )
