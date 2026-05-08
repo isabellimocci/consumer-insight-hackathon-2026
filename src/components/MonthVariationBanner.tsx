@@ -5,12 +5,14 @@ interface MonthVariationBannerProps {
   previousTotal: number
   variationPercent: number
   previousMonth: string | null
+  totalBudget?: number
 }
 
 export function MonthVariationBanner({
   currentTotal,
   variationPercent,
   previousMonth,
+  totalBudget,
 }: MonthVariationBannerProps) {
   const prevMonthName = previousMonth
     ? new Intl.DateTimeFormat('pt-BR', { month: 'long' }).format(
@@ -33,6 +35,9 @@ export function MonthVariationBanner({
         ? 'text-[var(--color-success)]'
         : 'text-[var(--color-inactive-text)]'
 
+  const isOverBudget = totalBudget !== undefined && currentTotal > totalBudget
+  const totalTextColor = isOverBudget ? 'text-[var(--color-danger)]' : 'text-[var(--color-text)]'
+
   return (
     <div
       aria-live="polite"
@@ -42,9 +47,14 @@ export function MonthVariationBanner({
         <p className="text-[length:var(--font-size-sm)] text-[var(--color-inactive-text)]">
           Total do mês
         </p>
-        <p className="text-[length:var(--font-size-xl)] font-bold text-[var(--color-text)]">
+        <p className={`text-[length:var(--font-size-xl)] font-bold ${totalTextColor}`}>
           {formatCurrency(currentTotal)}
         </p>
+        {totalBudget !== undefined && (
+          <p className="text-[length:var(--font-size-sm)] text-[var(--color-inactive-text)]">
+            Orçado: {formatCurrency(totalBudget)}
+          </p>
+        )}
       </div>
 
       {prevMonthName && (

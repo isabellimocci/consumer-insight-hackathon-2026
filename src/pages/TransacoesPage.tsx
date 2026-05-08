@@ -1,7 +1,10 @@
 import { CategoryFilter } from '@components/CategoryFilter'
+import { ConfirmarDelecaoModal } from '@components/ConfirmarDelecaoModal'
+import { EditarTransacaoModal } from '@components/EditarTransacaoModal'
 import { MonthSummaryHeader } from '@components/MonthSummaryHeader'
 import { TotalFiltered } from '@components/TotalFiltered'
 import { TransactionCard } from '@components/TransactionCard'
+import { useBudget } from '@contexts/useBudget'
 import { useMonth } from '@contexts/useMonth'
 import { getTransactionsByMonth } from '@services/transactionService'
 import { getTotalByCategory } from '@utils/aggregations'
@@ -10,7 +13,7 @@ import { formatMonthLabel } from '@utils/formatters'
 import { useMemo, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
-import type { Category } from '../types'
+import type { Category, Transaction } from '../types'
 
 const VALID_CATEGORIES = Object.keys(CATEGORY_ICONS) as Category[]
 function parseCategory(s: string | null): Category | null {
@@ -18,30 +21,37 @@ function parseCategory(s: string | null): Category | null {
 }
 
 export default function TransacoesPage() {
-  const { selectedMonth } = useMonth()
+  const { selectedMonth, transactionsVersion } = useMonth()
+  const { currentBudget, isConfigured } = useBudget()
   const [searchParams] = useSearchParams()
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(() =>
     parseCategory(searchParams.get('categoria')),
   )
   const [prevMonth, setPrevMonth] = useState(selectedMonth)
+  const [editingTransaction, setEditingTransaction] = useState<Transaction | null>(null)
+  const [deletingTransaction, setDeletingTransaction] = useState<Transaction | null>(null)
 
   if (prevMonth !== selectedMonth) {
     setPrevMonth(selectedMonth)
     setSelectedCategory(null)
   }
 
-  const transactions = useMemo(() => getTransactionsByMonth(selectedMonth), [selectedMonth])
+  const transactions = useMemo(
+    () => getTransactionsByMonth(selectedMonth),
+    [selectedMonth, transactionsVersion],
+  )
 
   const availableCategories = useMemo(
     () => getTotalByCategory(transactions).map((t) => t.category),
     [transactions],
   )
 
-  const filteredTransactions = useMemo(
-    () =>
-      selectedCategory ? transactions.filter((t) => t.category === selectedCategory) : transactions,
-    [transactions, selectedCategory],
-  )
+  const filteredTransactions = useMemo(() => {
+    const base = selectedCategory
+      ? transactions.filter((t) => t.category === selectedCategory)
+      : transactions
+    return [...base].sort((a, b) => b.date.localeCompare(a.date))
+  }, [transactions, selectedCategory])
 
   const monthTotal = useMemo(
     () => transactions.reduce((sum, t) => sum + t.amount, 0),
@@ -51,6 +61,19 @@ export default function TransacoesPage() {
   const filteredTotal = useMemo(
     () => filteredTransactions.reduce((sum, t) => sum + t.amount, 0),
     [filteredTransactions],
+  )
+
+  const categoryTargetAmount = useMemo(() => {
+    if (!isConfigured || !selectedCategory) return undefined
+    return currentBudget?.categories.find((c) => c.category === selectedCategory)?.targetAmount
+  }, [isConfigured, selectedCategory, currentBudget])
+
+  const totalBudget = useMemo(
+    () =>
+      isConfigured
+        ? (currentBudget?.categories.reduce((s, c) => s + c.targetAmount, 0) ?? undefined)
+        : undefined,
+    [isConfigured, currentBudget],
   )
 
   return (
@@ -83,7 +106,11 @@ export default function TransacoesPage() {
         ) : (
           filteredTransactions.map((tx) => (
             <li key={tx.id} role="listitem">
-              <TransactionCard transaction={tx} />
+              <TransactionCard
+                transaction={tx}
+                onEdit={() => setEditingTransaction(tx)}
+                onDelete={() => setDeletingTransaction(tx)}
+              />
             </li>
           ))
         )}
@@ -93,6 +120,22 @@ export default function TransacoesPage() {
         filteredTotal={filteredTotal}
         monthTotal={monthTotal}
         selectedCategory={selectedCategory}
+        targetAmount={categoryTargetAmount ?? totalBudget}
+      />
+
+      {editingTransaction && (
+        <EditarTransacaoModal
+          open
+          transaction={editingTransaction}
+          month={selectedMonth}
+          onClose={() => setEditingTransaction(null)}
+        />
+      )}
+      <ConfirmarDelecaoModal
+        open={deletingTransaction !== null}
+        transaction={deletingTransaction}
+        month={selectedMonth}
+        onClose={() => setDeletingTransaction(null)}
       />
     </div>
   )
