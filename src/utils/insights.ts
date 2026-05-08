@@ -5,41 +5,45 @@ import type {
   EconomyRecommendation,
   GrowingCategoryResult,
   MonthData,
+  MonthlyBudget,
   Transaction,
   VilaoResult,
   WeeklyPattern,
 } from '../types'
 import { CATEGORIES } from '../types'
-import { compareTwoMonths, getPercentageByCategory, getTotalByCategory } from './aggregations'
+import { getPercentageByCategory, getTotalByCategory } from './aggregations'
 import { getArchetypeProfile, getEconomyCopy } from './copy'
 
 const DOMINANT_THRESHOLD = 30
 
 export function getVilaoDoMes(
-  currentMonth: Transaction[],
-  previousMonth: Transaction[],
+  budget: MonthlyBudget,
+  previousTransactions: Transaction[] = [],
 ): VilaoResult | null {
-  const comparisons = compareTwoMonths(currentMonth, previousMonth)
-  if (comparisons.length === 0) return null
-  const currentTotals = getTotalByCategory(currentMonth)
+  const overCategories = budget.categories.filter((c) => c.status === 'over')
+  if (overCategories.length === 0) return null
 
-  const growing = comparisons.filter((c) => c.variationPercent > 0)
+  const vilao = overCategories.reduce((max, c) => (c.variance > max.variance ? c : max))
 
-  const vilao =
-    growing.length > 0
-      ? growing.reduce((max, c) => (c.variationPercent > max.variationPercent ? c : max))
-      : comparisons.reduce((max, c) => (c.currentTotal > max.currentTotal ? c : max))
-
-  const transactionCount = currentTotals.find((t) => t.category === vilao.category)?.count ?? 0
+  let growthPercent = 0
+  if (previousTransactions.length > 0) {
+    const prevTotals = getTotalByCategory(previousTransactions)
+    const prevTotal = prevTotals.find((t) => t.category === vilao.category)?.total ?? 0
+    if (prevTotal > 0) {
+      growthPercent = Math.round(((vilao.spentAmount - prevTotal) / prevTotal) * 1000) / 10
+    }
+  }
 
   return {
     category: vilao.category,
-    currentTotal: vilao.currentTotal,
-    previousTotal: vilao.previousTotal,
-    growthPercent: vilao.variationPercent,
-    transactionCount,
-    economyCopy: getEconomyCopy(vilao.category, vilao.variationPercent),
-    savingsIfReduced20: Math.round(vilao.currentTotal * 0.2 * 100) / 100,
+    targetAmount: vilao.targetAmount,
+    spentAmount: vilao.spentAmount,
+    variance: vilao.variance,
+    variancePercent: Math.round((vilao.variance / vilao.targetAmount) * 1000) / 10,
+    growthPercent,
+    transactionCount: vilao.transactionCount,
+    economyCopy: getEconomyCopy(vilao.category, growthPercent),
+    savingsIfReduced20: Math.round(vilao.spentAmount * 0.2 * 100) / 100,
   }
 }
 
