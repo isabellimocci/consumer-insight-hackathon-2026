@@ -1,6 +1,8 @@
+import { Card } from '@components/Card'
 import { CategoryCard } from '@components/CategoryCard'
 import { DominantCategoryBanner } from '@components/DominantCategoryBanner'
 import { DonutChart } from '@components/DonutChart'
+import { MonthSelector } from '@components/MonthSelector'
 import { MonthVariationBanner } from '@components/MonthVariationBanner'
 import { useMonth } from '@contexts/useMonth'
 import { getAvailableMonths, getTransactionsByMonth } from '@services/transactionService'
@@ -60,29 +62,42 @@ export default function DashboardPage() {
 
   return (
     <div
-      className="mx-auto flex max-w-2xl flex-col gap-[var(--spacing-md)] px-[var(--spacing-md)] py-[var(--spacing-lg)]"
+      className="mx-10 flex gap-[var(--spacing-md)] px-[var(--spacing-md)] py-[var(--spacing-lg)]"
       aria-live="polite"
     >
-      <MonthVariationBanner
-        currentTotal={currentTotal}
-        previousTotal={previousTotal}
-        variationPercent={totalVariation}
-        previousMonth={previousMonth}
-      />
+      <section className='flex flex-col flex-2'>
+        <section className="flex gap-5">
+          <div className="gap flex flex-col flex-1">
+            <span className="pb-4">
+              <MonthSelector />
+            </span>
+            <MonthVariationBanner
+              currentTotal={currentTotal}
+              previousTotal={previousTotal}
+              variationPercent={totalVariation}
+              previousMonth={previousMonth}
+            />
+          </div>
+          <img src="https://placecats.com/bella/200/200" alt="" />
+        </section>
 
-      <DonutChart data={percentages} />
+        <DonutChart data={percentages} />
 
-      <section aria-label="Gastos por categoria">
-        <ul role="list" className="grid grid-cols-2 gap-[var(--spacing-sm)]">
-          {cardData.map((card) => (
-            <li key={card.category} role="listitem">
-              <CategoryCard {...card} />
-            </li>
-          ))}
-        </ul>
+        <section aria-label="Gastos por categoria">
+          <ul role="list" className="grid grid-cols-2 gap-[var(--spacing-sm)]">
+            {cardData.map((card) => (
+              <li key={card.category} role="listitem">
+                <CategoryCard {...card} />
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        {dominant && <DominantCategoryBanner dominant={dominant} percentage={dominantPercentage} />}
       </section>
-
-      {dominant && <DominantCategoryBanner dominant={dominant} percentage={dominantPercentage} />}
+      <section className='flex flex-col flex-1'>
+          <Card />
+      </section>
     </div>
   )
 }
