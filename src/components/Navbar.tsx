@@ -29,9 +29,9 @@ export function Navbar() {
     <header className="flex h-screen">
       <nav
         aria-label="Navegação principal"
-        className="flex flex-col items-center justify-between gap-4 bg-[#1F2A1E] px-3 py-4 text-center"
+        className="flex flex-col items-center justify-between gap-4 bg-[#1F2A1E] px-4 py-4 text-center"
       >
-        <PiSparkleLight color="#fff" size={40} />
+        <PiSparkleLight color="#fff" size={28} />
         <section>
           {NAV_LINKS.map(({ to, label, icon }) => (
             <NavLink
@@ -40,17 +40,18 @@ export function Navbar() {
               end={to === ROUTES.DASHBOARD}
               aria-label={label}
               className={({ isActive }) =>
-                `${isActive ? 'font-semibold text-[var(--color-surface)]' : 'text-muted-foreground'} my-6 flex flex-col items-center gap-2 text-xs hover:text-[var(--color-surface)]`
+                `${isActive ? 'text-surface font-semibold' : 'text-muted-foreground'} hover:text-surface my-6 flex flex-col items-center gap-2 text-xs`
               }
             >
               {icon}
+              {label}
             </NavLink>
           ))}
         </section>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <button aria-label="Configurações" className="text-white hover:opacity-80">
-              <PiGearLight color="#fff" size={24} />
+              <PiGearLight size={28} />
             </button>
           </DropdownMenuTrigger>
           <DropdownMenuContent side="right" align="end">

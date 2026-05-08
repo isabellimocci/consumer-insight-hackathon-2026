@@ -1,3 +1,4 @@
+import { cn } from '@components/lib/utils'
 import { formatCurrency } from '@utils/formatters'
 
 interface MonthVariationBannerProps {
@@ -6,6 +7,7 @@ interface MonthVariationBannerProps {
   variationPercent: number
   previousMonth: string | null
   totalBudget?: number
+  className?: string
 }
 
 export function MonthVariationBanner({
@@ -13,6 +15,7 @@ export function MonthVariationBanner({
   variationPercent,
   previousMonth,
   totalBudget,
+  className,
 }: MonthVariationBannerProps) {
   const prevMonthName = previousMonth
     ? new Intl.DateTimeFormat('pt-BR', { month: 'long' }).format(
@@ -22,36 +25,38 @@ export function MonthVariationBanner({
 
   const bgClass =
     variationPercent < -5
-      ? 'bg-[var(--color-highlight)]'
+      ? 'bg-highlight'
       : variationPercent > 5
-        ? 'bg-[var(--color-danger-bg)]'
-        : 'bg-[var(--color-inactive-bg)]'
+        ? 'bg-(--color-danger-bg)'
+        : 'bg-(--color-inactive-bg)'
 
   const variationSign = variationPercent > 0 ? '↑' : variationPercent < 0 ? '↓' : '→'
   const variationColor =
     variationPercent > 5
-      ? 'text-[var(--color-danger)]'
+      ? 'text-danger'
       : variationPercent < -5
-        ? 'text-[var(--color-success)]'
-        : 'text-[var(--color-inactive-text)]'
+        ? 'text-success'
+        : 'text-(--color-inactive-text)'
 
   const isOverBudget = totalBudget !== undefined && currentTotal > totalBudget
-  const totalTextColor = isOverBudget ? 'text-[var(--color-danger)]' : 'text-[var(--color-text)]'
+  const totalTextColor = isOverBudget ? 'text-danger' : 'text-text'
 
   return (
     <div
       aria-live="polite"
-      className={`${bgClass} flex items-center justify-between rounded-2xl px-[var(--spacing-md)] py-[var(--spacing-md)]`}
+      className={cn(
+        bgClass,
+        'px-md py-md flex items-center justify-between rounded-2xl',
+        className,
+      )}
     >
       <div>
-        <p className="text-[length:var(--font-size-sm)] text-[var(--color-inactive-text)]">
-          Total do mês
-        </p>
-        <p className={`text-[length:var(--font-size-xl)] font-bold ${totalTextColor}`}>
+        <p className="text-(length:--font-size-sm) text-(--color-inactive-text)">Total do mês</p>
+        <p className={`text-(length:--font-size-xl) font-bold ${totalTextColor}`}>
           {formatCurrency(currentTotal)}
         </p>
         {totalBudget !== undefined && (
-          <p className="text-[length:var(--font-size-sm)] text-[var(--color-inactive-text)]">
+          <p className="text-(length:--font-size-sm) text-(--color-inactive-text)">
             Orçado: {formatCurrency(totalBudget)}
           </p>
         )}
@@ -59,10 +64,10 @@ export function MonthVariationBanner({
 
       {prevMonthName && (
         <div className="text-right">
-          <p className={`text-[length:var(--font-size-base)] font-bold ${variationColor}`}>
+          <p className={`text-(length:--font-size-base) font-bold ${variationColor}`}>
             {variationSign} {Math.abs(variationPercent).toFixed(1)}%
           </p>
-          <p className="text-[length:var(--font-size-sm)] text-[var(--color-inactive-text)]">
+          <p className="text-(length:--font-size-sm) text-(--color-inactive-text)">
             vs {prevMonthName}
           </p>
         </div>

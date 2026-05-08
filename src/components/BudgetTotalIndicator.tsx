@@ -20,7 +20,7 @@ export function BudgetTotalIndicator({ total }: BudgetTotalIndicatorProps) {
   return (
     <div
       aria-live="polite"
-      className="rounded-xl px-[var(--spacing-sm)] py-[var(--spacing-xs)] text-center text-[length:var(--font-size-sm)] font-medium"
+      className="px-sm py-xs rounded-xl text-center text-(length:--font-size-sm) font-medium"
       style={{
         color,
         backgroundColor: color + '1A',

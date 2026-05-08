@@ -1,6 +1,7 @@
 import { CategoryFilter } from '@components/CategoryFilter'
 import { ConfirmarDelecaoModal } from '@components/ConfirmarDelecaoModal'
 import { EditarTransacaoModal } from '@components/EditarTransacaoModal'
+import { MonthSelector } from '@components/MonthSelector'
 import { MonthSummaryHeader } from '@components/MonthSummaryHeader'
 import { TotalFiltered } from '@components/TotalFiltered'
 import { TransactionCard } from '@components/TransactionCard'
@@ -77,7 +78,11 @@ export default function TransacoesPage() {
   )
 
   return (
-    <div className="mx-auto flex max-w-2xl flex-col gap-[var(--spacing-md)] px-[var(--spacing-md)] py-[var(--spacing-lg)]">
+    <div className="gap-md px-md py-lg mx-auto flex max-w-2xl flex-col">
+      <span className="flex items-center">
+        <MonthSelector />
+      </span>
+
       <MonthSummaryHeader
         monthLabel={formatMonthLabel(selectedMonth)}
         totalAmount={monthTotal}
@@ -94,13 +99,10 @@ export default function TransacoesPage() {
         role="list"
         aria-label="Lista de transações"
         aria-live="polite"
-        className="flex flex-col gap-[var(--spacing-sm)]"
+        className="gap-sm flex flex-col"
       >
         {filteredTransactions.length === 0 ? (
-          <li
-            role="listitem"
-            className="py-[var(--spacing-lg)] text-center text-[var(--color-inactive-text)]"
-          >
+          <li role="listitem" className="py-lg text-center text-(--color-inactive-text)">
             Nenhuma transação em {selectedCategory} este mês.
           </li>
         ) : (

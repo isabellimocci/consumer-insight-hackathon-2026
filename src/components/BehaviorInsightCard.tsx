@@ -6,15 +6,13 @@ interface BehaviorInsightCardProps {
 
 export function BehaviorInsightCard({ icon, title, description }: BehaviorInsightCardProps) {
   return (
-    <div className="flex items-start gap-3 rounded-2xl bg-[var(--color-primary)] p-[var(--spacing-md)]">
-      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[var(--color-surface)] text-lg">
+    <div className="bg-primary p-md flex items-start gap-3 rounded-2xl">
+      <div className="bg-surface flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-lg">
         {icon}
       </div>
       <div className="flex flex-col gap-0.5">
-        <span className="text-[length:var(--font-size-base)] font-bold text-[var(--color-text)]">
-          {title}
-        </span>
-        <span className="text-[length:var(--font-size-sm)] text-[var(--color-inactive-text)]">
+        <span className="text-text text-(length:--font-size-base) font-bold">{title}</span>
+        <span className="text-(length:--font-size-sm) text-(--color-inactive-text)">
           {description}
         </span>
       </div>

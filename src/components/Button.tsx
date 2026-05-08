@@ -23,11 +23,11 @@ export const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   const baseClasses =
-    'inline-flex justify-center items-center px-[var(--spacing-lg)] py-[var(--spacing-md)] text-[var(--color-text)] font-medium cursor-pointer disabled:pointer-events-none disabled:opacity-75'
+    'inline-flex justify-center items-center px-lg py-md text-text font-medium cursor-pointer disabled:pointer-events-none disabled:opacity-75'
   const variantClasses =
     variant === 'primary'
-      ? 'bg-[var(--color-surface)] hover:bg-[var(--color-success)]'
-      : 'bg-[var(--color-inactive-bg)] text-[var(--color-inactive-text)] hover:bg-[var(--color-inactive-bg-dark)] border border-[var(--color-primary)] disabled:opacity-75'
+      ? 'bg-surface hover:bg-success'
+      : 'bg-(--color-inactive-bg) text-(--color-inactive-text) hover:bg-(--color-inactive-bg-dark) border border-primary disabled:opacity-75'
 
   const finalClasses = cn(baseClasses, variantClasses, className)
 

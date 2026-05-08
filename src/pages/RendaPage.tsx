@@ -21,24 +21,24 @@ export default function RendaPage() {
   }
 
   return (
-    <div className="mx-auto flex min-h-[80vh] max-w-2xl flex-col items-center justify-center gap-[var(--spacing-lg)] px-[var(--spacing-md)]">
+    <div className="gap-lg px-md mx-auto flex min-h-[80vh] max-w-2xl flex-col items-center justify-center">
       <div className="text-5xl">💰</div>
 
       <div className="text-center">
-        <h1 className="text-2xl font-bold text-[var(--color-text)]">
+        <h1 className="text-text text-2xl font-bold">
           Qual foi a sua renda em {formatMonthLabel(selectedMonth)}?
         </h1>
-        <p className="mt-2 text-sm text-[var(--color-inactive-text)]">
+        <p className="mt-2 text-sm text-(--color-inactive-text)">
           Informe o valor líquido (já descontado impostos)
         </p>
       </div>
 
-      <div className="w-full rounded-2xl bg-[var(--color-card)] p-[var(--spacing-lg)] shadow-sm">
-        <label className="mb-2 block text-sm font-medium text-[var(--color-inactive-text)]">
+      <div className="bg-card p-lg w-full rounded-2xl shadow-sm">
+        <label className="mb-2 block text-sm font-medium text-(--color-inactive-text)">
           Renda mensal
         </label>
         <div className="flex items-center gap-2">
-          <span className="text-lg font-semibold text-[var(--color-inactive-text)]">R$</span>
+          <span className="text-lg font-semibold text-(--color-inactive-text)">R$</span>
           <input
             type="number"
             inputMode="decimal"
@@ -46,7 +46,7 @@ export default function RendaPage() {
             placeholder="0,00"
             value={rawValue}
             onChange={(e) => setRawValue(e.target.value)}
-            className="w-full bg-transparent text-2xl font-bold text-[var(--color-text)] outline-none placeholder:text-[var(--color-inactive-text)]"
+            className="text-text w-full bg-transparent text-2xl font-bold outline-none placeholder:text-(--color-inactive-text)"
           />
         </div>
       </div>
@@ -55,13 +55,13 @@ export default function RendaPage() {
         <button
           onClick={handleContinue}
           disabled={!isValid}
-          className="w-full rounded-full bg-[var(--color-text)] px-6 py-3 font-semibold text-[var(--color-bg)] transition-opacity disabled:opacity-40"
+          className="bg-text text-bg w-full rounded-full px-6 py-3 font-semibold transition-opacity disabled:opacity-40"
         >
           Continuar →
         </button>
         <button
           onClick={() => void navigate(ROUTES.DASHBOARD)}
-          className="w-full rounded-full px-6 py-3 text-sm font-medium text-[var(--color-inactive-text)] hover:text-[var(--color-text)]"
+          className="hover:text-text w-full rounded-full px-6 py-3 text-sm font-medium text-(--color-inactive-text)"
         >
           Pular por agora
         </button>

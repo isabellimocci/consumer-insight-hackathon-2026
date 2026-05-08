@@ -18,7 +18,7 @@ export const CategoryFilter: React.FC<CategoryFilterProps> = ({
     <div
       role="group"
       aria-label="Filtrar por categoria"
-      className="flex gap-[var(--spacing-sm)] overflow-x-auto pb-[var(--spacing-xs)]"
+      className="gap-sm pb-xs flex overflow-x-auto"
     >
       <Chip
         label="Todas"
