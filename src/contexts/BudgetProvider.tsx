@@ -1,14 +1,16 @@
 import {
   calculateBudget,
-  getAdjustmentsByMonth,
+  getActiveGoalPercents,
   getBudgetByMonth,
+  getGoalsForMonth,
   getIncomeByMonth,
-  saveAdjustments,
   saveBudget,
   saveIncome,
+  seedDefaultBudgetsIfNeeded,
+  updateGoal,
 } from '@services/budgetService'
-import { getTransactionsByMonth } from '@services/transactionService'
-import { useCallback, useEffect, useMemo, useReducer } from 'react'
+import { getAvailableMonths, getTransactionsByMonth } from '@services/transactionService'
+import { useCallback, useEffect, useMemo, useReducer, useState } from 'react'
 
 import type { BudgetAdjustments, BudgetCategory, Category, Income, MonthlyBudget } from '../types'
 import { BudgetContext } from './BudgetContext'
@@ -39,6 +41,9 @@ function budgetReducer(
 
 export function BudgetProvider({ children }: { children: React.ReactNode }) {
   const { selectedMonth, transactionsVersion } = useMonth()
+  useEffect(() => {
+    seedDefaultBudgetsIfNeeded(getAvailableMonths(), getTransactionsByMonth)
+  }, [])
   const [{ income, adjustments, currentBudget }, dispatch] = useReducer(budgetReducer, {
     income: null,
     adjustments: {},
@@ -50,11 +55,15 @@ export function BudgetProvider({ children }: { children: React.ReactNode }) {
       type: 'LOAD_MONTH',
       payload: {
         income: getIncomeByMonth(selectedMonth),
-        adjustments: getAdjustmentsByMonth(selectedMonth),
+        adjustments: getGoalsForMonth(selectedMonth),
         currentBudget: getBudgetByMonth(selectedMonth),
       },
     })
   }, [selectedMonth, transactionsVersion])
+
+  const [activeGoalPercents, setActiveGoalPercents] = useState<BudgetAdjustments>(() =>
+    getActiveGoalPercents(),
+  )
 
   const recalculate = useCallback(
     (inc: Income, adj: BudgetAdjustments): MonthlyBudget => {
@@ -99,11 +108,18 @@ export function BudgetProvider({ children }: { children: React.ReactNode }) {
     [adjustments, income, recalculate],
   )
 
-  const applyBudget = useCallback(() => {
-    if (!income || !currentBudget) return
-    saveBudget(currentBudget)
-    saveAdjustments(selectedMonth, adjustments)
-  }, [income, currentBudget, selectedMonth, adjustments])
+  const applyBudget = useCallback(
+    (startsAt: string) => {
+      if (!income || !currentBudget) return
+      saveIncome(income)
+      saveBudget(currentBudget)
+      for (const [cat, pct] of Object.entries(adjustments) as [Category, number][]) {
+        updateGoal(cat, pct, startsAt)
+      }
+      setActiveGoalPercents(getActiveGoalPercents())
+    },
+    [income, currentBudget, adjustments],
+  )
 
   const getCategoryStatus = useCallback(
     (category: Category): BudgetCategory['status'] => {
@@ -134,6 +150,7 @@ export function BudgetProvider({ children }: { children: React.ReactNode }) {
       currentBudget,
       income,
       isConfigured,
+      activeGoalPercents,
       setIncome,
       updateCategoryPercent,
       applyBudget,
@@ -145,6 +162,7 @@ export function BudgetProvider({ children }: { children: React.ReactNode }) {
       currentBudget,
       income,
       isConfigured,
+      activeGoalPercents,
       setIncome,
       updateCategoryPercent,
       applyBudget,

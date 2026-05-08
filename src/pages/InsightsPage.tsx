@@ -12,12 +12,16 @@ import { getConsumerProfile, getGrowingCategory, getWeeklyPattern } from '@utils
 import { useMemo } from 'react'
 
 export default function InsightsPage() {
-  const { selectedMonth } = useMonth()
+  const { selectedMonth, transactionsVersion } = useMonth()
   const { currentBudget, isConfigured, income } = useBudget()
 
   const allMonthsData = useMemo(() => getAllMonthsData(), [])
 
-  const currentTxs = useMemo(() => getTransactionsByMonth(selectedMonth), [selectedMonth])
+  const currentTxs = useMemo(
+    () => getTransactionsByMonth(selectedMonth),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [selectedMonth, transactionsVersion],
+  )
 
   const profile = useMemo(() => getConsumerProfile(currentTxs), [currentTxs])
 
