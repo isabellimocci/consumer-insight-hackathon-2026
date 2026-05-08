@@ -10,6 +10,7 @@ interface ChipProps {
   onClick: () => void
   className?: string
   ariaLabel?: string
+  style?: React.CSSProperties
 }
 
 export const Chip: React.FC<ChipProps> = ({
@@ -19,6 +20,7 @@ export const Chip: React.FC<ChipProps> = ({
   onClick,
   className,
   ariaLabel,
+  style,
   ...props
 }) => {
   const baseClasses =
@@ -31,7 +33,13 @@ export const Chip: React.FC<ChipProps> = ({
   const finalClasses = cn(baseClasses, stateClasses, className)
 
   return (
-    <Button className={finalClasses} aria-label={ariaLabel} onClick={onClick} {...props}>
+    <Button
+      className={finalClasses}
+      aria-label={ariaLabel}
+      onClick={onClick}
+      style={style}
+      {...props}
+    >
       {icon} {label}
     </Button>
   )
