@@ -78,10 +78,7 @@ export default function DashboardPage() {
   }, [percentages, dominant])
 
   return (
-    <div
-      className="mx-10 flex gap-[var(--spacing-md)] px-[var(--spacing-md)] py-[var(--spacing-lg)]"
-      aria-live="polite"
-    >
+    <div className="gap-md px-md py-lg mx-10 flex" aria-live="polite">
       <section className="flex flex-2 flex-col">
         <section className="flex gap-5">
           <div className="flex flex-1 flex-col justify-between">
@@ -121,7 +118,7 @@ export default function DashboardPage() {
         <DonutChart data={percentages} totalBudget={isConfigured ? totalBudget : undefined} />
 
         <section aria-label="Gastos por categoria">
-          <ul role="list" className="grid grid-cols-2 gap-[var(--spacing-sm)]">
+          <ul role="list" className="gap-sm grid grid-cols-2">
             {cardData.map((card) => (
               <li key={card.category} role="listitem">
                 <CategoryCard {...card} />

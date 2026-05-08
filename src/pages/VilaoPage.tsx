@@ -64,10 +64,10 @@ export default function VilaoPage() {
   if (!isConfigured) {
     return (
       <div
-        className="mx-auto flex max-w-2xl flex-col items-center gap-[var(--spacing-md)] px-[var(--spacing-md)] py-[var(--spacing-lg)]"
+        className="gap-md px-md py-lg mx-auto flex max-w-2xl flex-col items-center"
         aria-live="polite"
       >
-        <p className="text-[length:var(--font-size-lg)] text-[var(--color-inactive-text)]">
+        <p className="text-(length:--font-size-lg) text-(--color-inactive-text)">
           Configure seu orçamento primeiro para identificar o vilão do mês.
         </p>
         <Button
@@ -85,10 +85,7 @@ export default function VilaoPage() {
   }
 
   return (
-    <div
-      className="mx-auto flex max-w-2xl flex-col gap-[var(--spacing-md)] px-[var(--spacing-md)] py-[var(--spacing-lg)]"
-      aria-live="polite"
-    >
+    <div className="gap-md px-md py-lg mx-auto flex max-w-2xl flex-col" aria-live="polite">
       <span className="flex items-center">
         <MonthSelector />
       </span>

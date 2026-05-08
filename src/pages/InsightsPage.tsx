@@ -87,13 +87,8 @@ export default function InsightsPage() {
   const shortMonth = monthLabel.split(' ')[0]
 
   return (
-    <div
-      className="mx-auto flex max-w-2xl flex-col gap-[var(--spacing-md)] px-[var(--spacing-md)] py-[var(--spacing-lg)]"
-      aria-live="polite"
-    >
-      <h1 className="text-[length:var(--font-size-lg)] font-bold text-[var(--color-text)]">
-        Seus Insights
-      </h1>
+    <div className="gap-md px-md py-lg mx-auto flex max-w-2xl flex-col" aria-live="polite">
+      <h1 className="text-text text-(length:--font-size-lg) font-bold">Seus Insights</h1>
 
       <span className="flex items-center">
         <MonthSelector />
@@ -119,10 +114,10 @@ export default function InsightsPage() {
 
       {mostFrequent && (
         <section aria-label="Outros comportamentos">
-          <h2 className="mb-[var(--spacing-sm)] text-[length:var(--font-size-base)] font-semibold text-[var(--color-text)]">
+          <h2 className="mb-sm text-text text-(length:--font-size-base) font-semibold">
             Outros comportamentos
           </h2>
-          <div className="flex flex-col gap-[var(--spacing-sm)]">
+          <div className="gap-sm flex flex-col">
             {healthData && (
               <BehaviorInsightCard
                 icon="💚"
