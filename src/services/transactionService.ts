@@ -13,3 +13,4 @@ export function getAvailableMonths(): string[] {
 export function getAllMonthsData(): MonthData[] {
   return mockData.map((m) => ({ ...m, transactions: [...m.transactions] }))
 }
+

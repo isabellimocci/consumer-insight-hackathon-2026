@@ -7,6 +7,7 @@ import { useBudget } from '@contexts/useBudget'
 import { useMonth } from '@contexts/useMonth'
 import { getAvailableMonths, getTransactionsByMonth } from '@services/transactionService'
 import { getTotalByCategory } from '@utils/aggregations'
+import { getEconomyCopy } from '@utils/copy'
 import { getEconomyRecommendation, getVilaoDoMes } from '@utils/insights'
 import { ROUTES } from '@utils/routes'
 import { useMemo } from 'react'
@@ -38,6 +39,8 @@ export default function VilaoPage() {
     () => (vilaoResult ? getEconomyRecommendation(vilaoResult) : null),
     [vilaoResult],
   )
+
+  const vilaoPhrase = useMemo(() => (vilaoResult ? getEconomyCopy(vilaoResult.category, vilaoResult.growthPercent) : null), [vilaoResult])
 
   const monthlyTotals = useMemo(() => {
     if (!vilaoResult) return []
@@ -89,7 +92,7 @@ export default function VilaoPage() {
       aria-live="polite"
     >
       <VilaoHeroCard vilao={vilaoResult} />
-      <VilaoNarrativeCopy copy={economyRec.copy} category={vilaoResult.category} />
+      <VilaoNarrativeCopy copy={vilaoPhrase} category={vilaoResult.category} />
       <VilaoHistoryChart
         category={vilaoResult.category}
         monthlyTotals={monthlyTotals}

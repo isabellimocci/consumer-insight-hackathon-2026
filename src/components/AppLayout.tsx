@@ -5,13 +5,12 @@ import { Outlet } from 'react-router-dom'
 
 export function AppLayout() {
   return (
-    <MonthProvider>
+      <section className='flex h-screen bg-[var(--color-bg)]'>
       <BudgetProvider>
         <Navbar />
-        <main role="main">
+        <main role="main" className="flex-1 overflow-y-auto">
           <Outlet />
         </main>
       </BudgetProvider>
-    </MonthProvider>
   )
 }

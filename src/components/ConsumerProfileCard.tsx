@@ -13,7 +13,7 @@ export function ConsumerProfileCard({ profile }: ConsumerProfileCardProps) {
       <span className="text-[length:var(--font-size-xl)] font-bold text-[var(--color-text)]">
         {profile.archetype}
       </span>
-      <span className="max-w-xs text-[length:var(--font-size-base)] leading-snug text-[var(--color-inactive-text)]">
+      <span className="text-[length:var(--font-size-base)] leading-snug text-[var(--color-inactive-text)]">
         {profile.description}
       </span>
     </div>
