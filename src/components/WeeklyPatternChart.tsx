@@ -13,7 +13,7 @@ const chartConfig = {
   total: { label: 'Gasto semanal' },
 } satisfies ChartConfig
 
-const WEEK_COLORS = ['var(--color-danger)', '#F97316', '#EAB308', 'var(--color-success)']
+const WEEK_COLORS = ['#14532d', '#16a34a', '#4ade80', '#bbf7d0']
 
 interface CustomTickProps {
   x?: number | string
@@ -48,12 +48,9 @@ export function WeeklyPatternChart({ pattern }: WeeklyPatternChartProps) {
   }))
 
   return (
-    <div className="bg-primary p-md rounded-2xl">
-      <p className="mb-sm text-text text-(length:--font-size-sm) font-semibold">
-        Gastos por semana
-      </p>
-      <ChartContainer config={chartConfig} className="min-h-[200px] w-full">
-        <BarChart data={chartData} margin={{ top: 28, right: 8, left: 8, bottom: 16 }}>
+    <div className="bg-primary p-sm rounded-xl">
+      <ChartContainer config={chartConfig} className="h-64 w-full">
+        <BarChart data={chartData} margin={{ top: 20, right: 8, left: 8, bottom: 8 }}>
           <XAxis
             dataKey="name"
             axisLine={false}
@@ -62,7 +59,7 @@ export function WeeklyPatternChart({ pattern }: WeeklyPatternChartProps) {
             height={40}
           />
           <YAxis hide />
-          <Bar dataKey="total" radius={[6, 6, 0, 0]}>
+          <Bar dataKey="total" radius={[6, 6, 0, 0]} barSize={80}>
             {chartData.map((entry) => (
               <Cell key={entry.name} fill={getColor(entry.total)} />
             ))}
