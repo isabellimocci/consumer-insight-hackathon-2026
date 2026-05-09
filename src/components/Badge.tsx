@@ -3,7 +3,7 @@ import { Badge as SBadge } from '@components/ui/badge'
 import { cn } from './lib/utils'
 
 interface BadgeProps {
-  label: string
+  label: string | React.ReactElement
   color: 'danger' | 'success' | 'warning' | 'neutral'
   size?: 'sm' | 'md'
   className?: string

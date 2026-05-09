@@ -1,5 +1,5 @@
 import { Card } from '@components/Card'
-import { CATEGORY_COLORS, CATEGORY_ICONS_PI } from '@utils/categoryMaps'
+import { TbAlertTriangle } from 'react-icons/tb'
 
 import type { Category } from '../types'
 
@@ -8,17 +8,15 @@ interface VilaoNarrativeCopyProps {
   category: Category
 }
 
-export function VilaoNarrativeCopy({ copy, category }: VilaoNarrativeCopyProps) {
-  const IconComponent = CATEGORY_ICONS_PI[category]
+export function VilaoNarrativeCopy({ copy }: VilaoNarrativeCopyProps) {
   return (
-    <Card ariaLabel="Análise do vilão do mês">
+    <Card
+      ariaLabel="Análise do vilão do mês"
+      style={{ backgroundColor: 'color-mix(in srgb, var(--color-warning) 40%, transparent)' }}
+    >
       <div className="gap-sm flex items-start" aria-live="polite">
-        <IconComponent
-          size={28}
-          aria-hidden={true}
-          style={{ color: CATEGORY_COLORS[category], flexShrink: 0 }}
-        />
-        <p className="text-text text-(length:--font-size-lg)">{copy}</p>
+        <TbAlertTriangle color="#d6b628" size={30} />
+        <p className="text-text text-xl">{copy}</p>
       </div>
     </Card>
   )
