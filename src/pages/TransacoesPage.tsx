@@ -121,7 +121,7 @@ export default function TransacoesPage() {
         </div>
 
         <div className="flex gap-8">
-          <section className="max-h-[300px] flex-1 flex-col gap-3">
+          <section className="max-h-75 flex-1 flex-col gap-3">
             <MonthVariationBanner
               currentTotal={currentTotal}
               previousTotal={previousTotal}
@@ -144,7 +144,10 @@ export default function TransacoesPage() {
             <p className="mb-3 shrink-0 text-sm font-semibold text-(--color-text)">
               Todas as transações · {transactions.length} transações
             </p>
-            <div className="max-h-[70vh] w-full flex-1 overflow-y-auto pr-3">
+            <div
+              className="max-h-[70vh] w-full flex-1 overflow-y-auto pr-3"
+              style={{ scrollbarColor: 'var(--color-success) transparent', scrollbarWidth: 'thin' }}
+            >
               <ul
                 role="list"
                 aria-label="Lista de transações"
