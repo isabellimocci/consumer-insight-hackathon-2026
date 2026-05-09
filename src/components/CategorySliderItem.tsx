@@ -1,4 +1,5 @@
-import { CATEGORY_COLORS, CATEGORY_ICONS_PI } from '@utils/categoryMaps'
+import { Badge } from '@components/Badge'
+import { CATEGORY_COLORS, CATEGORY_ICONS_BOLD_PI } from '@utils/categoryMaps'
 import { formatCurrency } from '@utils/formatters'
 
 import type { BudgetCategory, Category } from '../types'
@@ -11,16 +12,10 @@ interface CategorySliderItemProps {
   onChange: (pct: number) => void
 }
 
-const STATUS_COLORS: Record<BudgetCategory['status'], string> = {
-  'on-track': 'var(--color-success)',
-  warning: 'var(--color-warning)',
-  over: 'var(--color-danger)',
-}
-
-const STATUS_BG_COLORS: Record<BudgetCategory['status'], string> = {
-  'on-track': 'color-mix(in srgb, var(--color-success) 15%, transparent)',
-  warning: 'color-mix(in srgb, var(--color-warning) 15%, transparent)',
-  over: 'color-mix(in srgb, var(--color-danger) 15%, transparent)',
+const BADGE_COLORS: Record<BudgetCategory['status'], 'success' | 'warning' | 'danger'> = {
+  'on-track': 'success',
+  warning: 'warning',
+  over: 'danger',
 }
 
 const STATUS_LABELS: Record<BudgetCategory['status'], string> = {
@@ -37,9 +32,8 @@ export function CategorySliderItem({
   onChange,
 }: CategorySliderItemProps) {
   const amount = Math.round(income * (userPercent / 100) * 100) / 100
-  const statusColor = STATUS_COLORS[status]
-  const statusBgColor = STATUS_BG_COLORS[status]
-  const IconComponent = CATEGORY_ICONS_PI[category]
+  const IconComponent = CATEGORY_ICONS_BOLD_PI[category]
+  const color = CATEGORY_COLORS[category]
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const raw = e.target.value
@@ -52,38 +46,61 @@ export function CategorySliderItem({
   }
 
   return (
-    <div className="gap-sm flex items-center">
-      <span className="gap-xs text-text flex flex-1 items-center text-(length:--font-size-sm) font-medium">
-        <IconComponent size={20} aria-hidden={true} style={{ color: CATEGORY_COLORS[category] }} />
-        {category}
-      </span>
-      <span className="text-(length:--font-size-sm) text-(--color-inactive-text)">
-        {formatCurrency(amount)}
-      </span>
-      <div className="flex items-center gap-1">
-        <input
-          type="number"
-          min={0}
-          max={100}
-          step={1}
-          value={userPercent}
-          onChange={handleChange}
-          className="border-border bg-background px-xs text-text focus:ring-primary w-16 rounded-lg border py-1 text-right text-(length:--font-size-sm) font-semibold focus:ring-2 focus:outline-none"
-          aria-label={`Percentual de orçamento para ${category}`}
-        />
-        <span
-          className="rounded-full px-2 py-0.5 text-xs font-semibold"
-          style={{ color: statusColor }}
-        >
-          %
-        </span>
-      </div>
+    <div className="gap-xs flex items-center">
       <span
-        className="rounded-full px-2 py-0.5 text-xs font-medium"
-        style={{ color: statusColor, backgroundColor: statusBgColor }}
+        className="mt-0.5 flex size-8 shrink-0 items-center justify-center self-start rounded-full"
+        style={{ background: `color-mix(in srgb, ${color}, transparent 85%)` }}
       >
-        {STATUS_LABELS[status]}
+        <IconComponent size={15} aria-hidden={true} style={{ color }} />
       </span>
+
+      <div className="flex min-w-0 flex-1 flex-col gap-0.5">
+        <span className="text-text text-sm font-semibold">{category}</span>
+        <div className="h-1 overflow-hidden rounded-full bg-(--color-inactive-bg)">
+          <div
+            className="h-full rounded-full transition-all duration-150"
+            style={{ width: `${userPercent}%`, backgroundColor: color }}
+          />
+        </div>
+      </div>
+
+      <span className="text-text shrink-0 text-sm font-bold">{formatCurrency(amount)}</span>
+
+      <div className="flex shrink-0 items-center gap-1">
+        <button
+          type="button"
+          onClick={() => onChange(Math.max(0, userPercent - 1))}
+          className="bg-surface border-border text-text flex size-8 items-center justify-center rounded-lg border text-base leading-none font-bold hover:bg-(--color-inactive-bg)"
+          aria-label={`Diminuir percentual de ${category}`}
+        >
+          −
+        </button>
+        <div className="flex items-center gap-0.5">
+          <input
+            type="number"
+            min={0}
+            max={100}
+            step={1}
+            value={userPercent}
+            onChange={handleChange}
+            className="border-border bg-surface text-text focus:ring-primary w-12 [appearance:textfield] rounded-lg border py-1 text-center text-sm font-semibold focus:ring-2 focus:outline-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+            aria-label={`Percentual de orçamento para ${category}`}
+          />
+          <span className="text-xs text-(--color-inactive-text)">%</span>
+        </div>
+        <button
+          type="button"
+          onClick={() => onChange(Math.min(100, userPercent + 1))}
+          className="bg-surface border-border text-text flex size-8 items-center justify-center rounded-lg border text-base leading-none font-bold hover:bg-(--color-inactive-bg)"
+          aria-label={`Aumentar percentual de ${category}`}
+        >
+          +
+        </button>
+      </div>
+
+      <div className="flex w-20 shrink-0 justify-end">
+        <Badge label={STATUS_LABELS[status]} color={BADGE_COLORS[status]} />
+      </div>
     </div>
   )
 }

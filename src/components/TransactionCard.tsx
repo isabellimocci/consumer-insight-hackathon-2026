@@ -1,7 +1,7 @@
 import { Button } from '@components/ui/button'
 import { CATEGORY_COLORS, CATEGORY_ICONS_PI } from '@utils/categoryMaps'
 import { formatCurrency, formatDate } from '@utils/formatters'
-import { Pencil, Trash2 } from 'lucide-react'
+import { PiPencilSimpleBold, PiTrashSimpleBold } from 'react-icons/pi'
 
 import type { Transaction } from '../types'
 
@@ -47,7 +47,7 @@ export const TransactionCard: React.FC<TransactionCardProps> = ({
           onClick={onEdit}
           aria-label="Editar transação"
         >
-          <Pencil className="h-3.5 w-3.5" />
+          <PiPencilSimpleBold className="h-3.5 w-3.5" />
         </Button>
       )}
       {onDelete && (
@@ -58,7 +58,7 @@ export const TransactionCard: React.FC<TransactionCardProps> = ({
           onClick={onDelete}
           aria-label="Excluir transação"
         >
-          <Trash2 className="h-3.5 w-3.5" />
+          <PiTrashSimpleBold className="h-3.5 w-3.5" />
         </Button>
       )}
     </div>

@@ -31,29 +31,43 @@ export function Navbar() {
         className="flex flex-col items-center justify-between bg-[#1F2A1E] px-4 py-4 text-center"
       >
         <div className="flex flex-col items-center gap-4">
-          <svg
-            width="56"
-            height="56"
-            viewBox="0 0 80 80"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true"
+          <button
+            onClick={() => void navigate(ROUTES.DASHBOARD)}
+            aria-label="Ir para o início"
+            className="cursor-pointer rounded-xl transition-opacity hover:opacity-80"
           >
-            <rect width="80" height="80" rx="20" fill="#2D4A35" />
-            <ellipse cx="40" cy="40" rx="22" ry="14" fill="none" stroke="#C5E0B8" strokeWidth="3" />
-            <circle cx="40" cy="40" r="9" fill="#C5E0B8" />
-            <text
-              x="40"
-              y="45"
-              textAnchor="middle"
-              fontFamily="Inter"
-              fontWeight="900"
-              fontSize="13"
-              fill="#1F2A1E"
+            <svg
+              width="56"
+              height="56"
+              viewBox="0 0 80 80"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
             >
-              $
-            </text>
-          </svg>
+              <rect width="80" height="80" rx="20" fill="#2D4A35" />
+              <ellipse
+                cx="40"
+                cy="40"
+                rx="22"
+                ry="14"
+                fill="none"
+                stroke="#C5E0B8"
+                strokeWidth="3"
+              />
+              <circle cx="40" cy="40" r="9" fill="#C5E0B8" />
+              <text
+                x="40"
+                y="45"
+                textAnchor="middle"
+                fontFamily="Inter"
+                fontWeight="900"
+                fontSize="13"
+                fill="#1F2A1E"
+              >
+                $
+              </text>
+            </svg>
+          </button>
           <section>
             {NAV_LINKS.map(({ to, label, icon }) => (
               <NavLink
@@ -77,13 +91,26 @@ export function Navbar() {
               <PiGearLight size={28} />
             </button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent side="right" align="end">
-            <DropdownMenuItem onClick={() => void navigate(ROUTES.ORCAMENTO)}>
-              Definir Orçamento
+          <DropdownMenuContent
+            side="right"
+            align="end"
+            className="min-w-45 border border-white/15 bg-[#253323] text-white shadow-xl"
+          >
+            <DropdownMenuItem
+              onClick={() => void navigate(ROUTES.ORCAMENTO)}
+              className="cursor-pointer text-white/90 focus:bg-white/10 focus:text-white"
+            >
+              Adicionar orçamento
             </DropdownMenuItem>
-            <DropdownMenuItem disabled>Conta</DropdownMenuItem>
-            <DropdownMenuItem disabled>Configurações</DropdownMenuItem>
-            <DropdownMenuItem disabled>Log Out</DropdownMenuItem>
+            <DropdownMenuItem disabled className="text-white/35">
+              Editar conta
+            </DropdownMenuItem>
+            <DropdownMenuItem disabled className="text-white/35">
+              Configurações
+            </DropdownMenuItem>
+            <DropdownMenuItem disabled className="text-white/35">
+              Sair
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </nav>

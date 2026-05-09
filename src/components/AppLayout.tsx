@@ -25,7 +25,7 @@ export function AppLayout() {
                   <button
                     aria-label="Nova transação"
                     onClick={() => setIsOpen(true)}
-                    className="bg-text text-bg flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold shadow-sm transition-transform hover:scale-105 active:scale-95"
+                    className="bg-text text-bg flex items-center gap-2 rounded-md px-4 py-2 text-sm font-semibold shadow-sm transition-transform hover:scale-105 active:scale-95"
                   >
                     <span className="text-base leading-none font-bold">+</span>
                     <span>Nova Despesa</span>
