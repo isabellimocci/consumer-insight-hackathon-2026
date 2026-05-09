@@ -1,4 +1,5 @@
 import { Button } from '@components/Button'
+import { Card } from '@components/Card'
 import { EconomyRecommendationCard } from '@components/EconomyRecommendationCard'
 import { VilaoHeroCard } from '@components/VilaoHeroCard'
 import { VilaoHistoryChart } from '@components/VilaoHistoryChart'
@@ -12,6 +13,7 @@ import { getEconomyCopy } from '@utils/copy'
 import { getEconomyRecommendation, getVilaoDoMes } from '@utils/insights'
 import { ROUTES } from '@utils/routes'
 import { useMemo } from 'react'
+import { TbAlertTriangle } from 'react-icons/tb'
 import { useNavigate } from 'react-router-dom'
 
 export default function VilaoPage() {
@@ -63,17 +65,26 @@ export default function VilaoPage() {
   if (!isConfigured) {
     return (
       <div
-        className="gap-md px-md py-lg mx-auto flex max-w-2xl flex-col items-center"
+        className="gap-md px-md py-lg mx-auto flex h-[80vh] max-w-2xl flex-col items-center justify-center"
         aria-live="polite"
       >
-        <p className="text-(length:--font-size-lg) text-(--color-inactive-text)">
-          Configure seu orçamento primeiro para identificar o vilão do mês.
-        </p>
-        <Button
-          variant="primary"
-          label="Configurar orçamento"
-          onClick={() => void navigate(ROUTES.ORCAMENTO)}
-          ariaLabel="Ir para configuração de orçamento"
+        <Card
+          className="p-20"
+          children={
+            <div className="flex flex-col items-center gap-5 p-10">
+              <TbAlertTriangle size={50} color="#d2ce54" />
+              <p className="text-center text-2xl text-(--color-inactive-text)">
+                Configure seu orçamento primeiro para identificar o vilão do mês.
+              </p>
+              <Button
+                variant="primary"
+                label="Configurar orçamento"
+                onClick={() => void navigate(ROUTES.ORCAMENTO)}
+                ariaLabel="Ir para configuração de orçamento"
+                className="bg-[#364935] px-3 py-2 text-(--color-primary) transition-all hover:bg-[#486147]"
+              />
+            </div>
+          }
         />
       </div>
     )
@@ -84,26 +95,45 @@ export default function VilaoPage() {
   }
 
   return (
-    <div className="gap-md px-md py-lg mx-auto flex max-w-2xl flex-col" aria-live="polite">
-      <VilaoHeroCard vilao={vilaoResult} />
-      <VilaoNarrativeCopy copy={vilaoPhrase ?? ''} category={vilaoResult.category} />
-      <VilaoHistoryChart
-        category={vilaoResult.category}
-        monthlyTotals={monthlyTotals}
-        selectedMonth={selectedMonth}
-        targetAmount={vilaoResult.targetAmount}
-      />
-      <EconomyRecommendationCard recommendation={economyRec} />
-      <Button
-        variant="ghost"
-        label={`Ver todos os gastos em ${vilaoResult.category} →`}
-        onClick={() => {
-          void navigate(
-            `${ROUTES.TRANSACOES}?categoria=${encodeURIComponent(vilaoResult.category)}`,
-          )
-        }}
-        ariaLabel={`Ver todas as transações de ${vilaoResult.category}`}
-      />
+    <div className="px-md mx-6 flex h-full flex-col gap-4 overflow-hidden pb-8" aria-live="polite">
+      <div className="mb-6 flex flex-col items-start">
+        <h1 className="text-text text-2xl font-bold">Vilão do mês</h1>
+        <span className="text-(--color-inactive-text)">
+          A categoria que mais saiu do trilho. Sem julgamento, só fatos.
+        </span>
+      </div>
+
+      <section className="flex gap-6">
+        <div className="flex flex-1 flex-col gap-4">
+          <VilaoHeroCard
+            vilao={vilaoResult}
+            style={{
+              backgroundColor: 'color-mix(in srgb, var(--color-danger) 20%, transparent)',
+            }}
+          />
+          <VilaoNarrativeCopy copy={vilaoPhrase ?? ''} category={vilaoResult.category} />
+          <Button
+            variant="ghost"
+            label={`Ver todos os gastos em ${vilaoResult.category} →`}
+            onClick={() => {
+              void navigate(
+                `${ROUTES.TRANSACOES}?categoria=${encodeURIComponent(vilaoResult.category)}`,
+              )
+            }}
+            ariaLabel={`Ver todas as transações de ${vilaoResult.category}`}
+            className="bg-[#364935] px-3 py-2 text-(--color-primary) transition-all hover:bg-[#486147]"
+          />
+        </div>
+        <div className="flex flex-1 flex-col gap-4">
+          <VilaoHistoryChart
+            category={vilaoResult.category}
+            monthlyTotals={monthlyTotals}
+            selectedMonth={selectedMonth}
+            targetAmount={vilaoResult.targetAmount}
+          />
+          <EconomyRecommendationCard recommendation={economyRec} />
+        </div>
+      </section>
     </div>
   )
 }

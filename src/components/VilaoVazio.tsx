@@ -6,15 +6,13 @@ export function VilaoVazio() {
   const navigate = useNavigate()
   return (
     <div
-      className="gap-md px-md py-xl mx-auto flex max-w-2xl flex-col items-center text-center"
+      className="gap-md mx-auto flex h-[80vh] max-w-2xl flex-col items-center justify-center text-center"
       aria-live="polite"
     >
       <span aria-hidden="true" style={{ fontSize: '4rem', lineHeight: 1 }}>
         🎉
       </span>
-      <h2 className="text-text text-(length:--font-size-xl) font-bold">
-        Você ficou dentro de todas as metas!
-      </h2>
+      <h2 className="text-text text-5xl font-bold">Você ficou dentro de todas as metas!</h2>
       <p className="text-(length:--font-size-base) text-(--color-inactive-text)">
         Esse mês foi de mestre. Continue assim.
       </p>
@@ -23,6 +21,7 @@ export function VilaoVazio() {
         label="Ver meus gastos"
         onClick={() => void navigate(ROUTES.TRANSACOES)}
         ariaLabel="Ver lista de transações do mês"
+        className="bg-[#364935] px-3 py-2 text-(--color-primary) transition-all hover:bg-[#486147]"
       />
     </div>
   )

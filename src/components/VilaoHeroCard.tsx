@@ -1,15 +1,17 @@
 import { Badge } from '@components/Badge'
-import { CATEGORY_COLORS, CATEGORY_ICONS_PI } from '@utils/categoryMaps'
+import { CATEGORY_ICONS_PI } from '@utils/categoryMaps'
 import { formatCurrency } from '@utils/formatters'
+import type React from 'react'
+import { AiFillAlert } from 'react-icons/ai'
 
 import type { VilaoResult } from '../types'
 
 interface VilaoHeroCardProps {
   vilao: VilaoResult
+  style: React.CSSProperties
 }
 
-export function VilaoHeroCard({ vilao }: VilaoHeroCardProps) {
-  const bgColor = CATEGORY_COLORS[vilao.category] + '1A'
+export function VilaoHeroCard({ vilao, style }: VilaoHeroCardProps) {
   const varianceLabel = `+${vilao.variancePercent}% acima da meta`
   const growthLabel =
     (vilao.growthPercent > 0 ? '+' : '') + vilao.growthPercent + '% vs mês anterior'
@@ -18,15 +20,30 @@ export function VilaoHeroCard({ vilao }: VilaoHeroCardProps) {
   return (
     <div
       className="gap-sm p-md flex flex-col items-center rounded-2xl shadow-sm"
-      style={{ backgroundColor: bgColor }}
+      style={style}
       aria-label={`Vilão do mês: ${vilao.category}`}
     >
-      <Badge label="Vilão do Mês 🚨" color="danger" />
-      <IconComponent
-        size={48}
-        aria-hidden={true}
-        style={{ color: CATEGORY_COLORS[vilao.category] }}
+      <Badge
+        label={
+          <>
+            <p>Vilão do mês</p>
+            <AiFillAlert />
+          </>
+        }
+        color="danger"
       />
+      <div className={'flex w-full justify-center rounded-full'}>
+        <IconComponent
+          size={80}
+          aria-hidden={true}
+          style={{
+            color: 'var(--color-danger)',
+            backgroundColor: `color-mix(in srgb, #ee6a6a 20%, transparent)`,
+            padding: 15,
+            borderRadius: 1000,
+          }}
+        />
+      </div>
       <p className="text-text text-(length:--font-size-xl) font-bold">{vilao.category}</p>
       <p className="text-danger text-(length:--font-size-2xl) font-bold">
         +{formatCurrency(vilao.variance)}

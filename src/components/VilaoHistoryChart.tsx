@@ -5,6 +5,7 @@ import { formatCurrency, formatShortMonth } from '@utils/formatters'
 import { Bar, BarChart, Cell, LabelList, ReferenceLine, XAxis, YAxis } from 'recharts'
 
 import type { Category } from '../types'
+import { Card } from './Card'
 
 interface MonthTotal {
   month: string
@@ -34,49 +35,55 @@ export function VilaoHistoryChart({
     month,
     total,
     label: formatShortMonth(month),
-    fill: month === selectedMonth ? categoryColor : 'var(--color-inactive-bg-dark)',
+    fill: month === selectedMonth ? 'var(--color-text)' : 'var(--color-surface)',
   }))
 
   return (
     <div>
-      <p className="mb-sm text-(length:--font-size-sm) text-(--color-inactive-text)">
-        Histórico dos últimos meses
-      </p>
-      <ChartContainer config={chartConfig} className="min-h-[200px] w-full">
-        <BarChart data={data} margin={{ top: 28, right: 8, left: 8, bottom: 0 }}>
-          <XAxis
-            dataKey="label"
-            axisLine={false}
-            tickLine={false}
-            tick={{ fontSize: 12, fill: 'var(--color-inactive-text)' }}
-          />
-          <YAxis hide />
-          {targetAmount !== undefined && (
-            <ReferenceLine
-              y={targetAmount}
-              stroke="var(--color-inactive-text)"
-              strokeDasharray="4 4"
-              label={{
-                value: 'Meta',
-                position: 'insideTopRight',
-                fontSize: 10,
-                fill: 'var(--color-inactive-text)',
-              }}
-            />
-          )}
-          <Bar dataKey="total" radius={[4, 4, 0, 0]}>
-            {data.map((entry) => (
-              <Cell key={entry.month} fill={entry.fill} />
-            ))}
-            <LabelList
-              dataKey="total"
-              position="top"
-              formatter={(v: unknown) => (typeof v === 'number' ? formatCurrency(v) : String(v))}
-              style={{ fontSize: 10, fill: 'var(--color-text)' }}
-            />
-          </Bar>
-        </BarChart>
-      </ChartContainer>
+      <Card
+        children={
+          <>
+            <p className="shrink-0 text-sm font-semibold text-(--color-text)">Distribuição</p>
+            <ChartContainer config={chartConfig} className="min-h-[200px] w-full">
+              <BarChart data={data} margin={{ top: 28, right: 8, left: 8, bottom: 0 }}>
+                <XAxis
+                  dataKey="label"
+                  axisLine={false}
+                  tickLine={false}
+                  tick={{ fontSize: 12, fill: 'var(--color-inactive-text)' }}
+                />
+                <YAxis hide />
+                {targetAmount !== undefined && (
+                  <ReferenceLine
+                    y={targetAmount}
+                    stroke="var(--color-inactive-text)"
+                    strokeDasharray="4 4"
+                    label={{
+                      value: 'Meta',
+                      position: 'insideTopRight',
+                      fontSize: 10,
+                      fill: 'var(--color-inactive-text)',
+                    }}
+                  />
+                )}
+                <Bar dataKey="total" radius={[4, 4, 0, 0]}>
+                  {data.map((entry) => (
+                    <Cell key={entry.month} fill={entry.fill} />
+                  ))}
+                  <LabelList
+                    dataKey="total"
+                    position="top"
+                    formatter={(v: unknown) =>
+                      typeof v === 'number' ? formatCurrency(v) : String(v)
+                    }
+                    style={{ fontSize: 10, fill: 'var(--color-text)' }}
+                  />
+                </Bar>
+              </BarChart>
+            </ChartContainer>
+          </>
+        }
+      />
     </div>
   )
 }

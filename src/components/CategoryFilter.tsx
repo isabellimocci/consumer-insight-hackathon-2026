@@ -14,12 +14,11 @@ export const CategoryFilter: React.FC<CategoryFilterProps> = ({
   selectedCategory,
   onCategorySelect,
 }) => {
-  console.log(categories.length)
   return (
     <div
       role="group"
       aria-label="Filtrar por categoria"
-      className="gap-sm pb-xs flex flex-col justify-between overflow-x-auto"
+      className="gap-sm pb-xs flex flex-col justify-between overflow-y-auto"
     >
       <Chip
         label="Todas"
@@ -42,7 +41,8 @@ export const CategoryFilter: React.FC<CategoryFilterProps> = ({
             ariaLabel={`Filtrar por ${category}`}
             className="bg-transparent hover:bg-[#486147]"
             style={{
-              backgroundColor: ` color-mix(in srgb, ${CATEGORY_COLORS[category]} 20%, transparent`,
+              backgroundColor:
+                'color-mix(in srgb,' + CATEGORY_COLORS[category] + ' 20%, transparent)',
             }}
           />
         )

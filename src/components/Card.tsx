@@ -20,6 +20,7 @@ interface CardProps {
   className?: string
   ariaLabel?: string
   variant?: 'default' | 'highlight' | 'alert'
+  style?: React.CSSProperties
 }
 
 export const Card: React.FC<CardProps> = ({
@@ -31,6 +32,7 @@ export const Card: React.FC<CardProps> = ({
   className,
   ariaLabel,
   variant,
+  style,
   ...props
 }) => {
   const baseClasses = 'flex bg-primary py-md px-sm rounded-sm text-text'
@@ -39,7 +41,7 @@ export const Card: React.FC<CardProps> = ({
   const finalClasses = cn(baseClasses, variantClasses, className)
 
   return (
-    <SCard aria-label={ariaLabel ?? title} className={finalClasses} {...props}>
+    <SCard aria-label={ariaLabel ?? title} className={finalClasses} style={style} {...props}>
       {(title || description) && (
         <CardHeader>
           <CardTitle>{title}</CardTitle>
