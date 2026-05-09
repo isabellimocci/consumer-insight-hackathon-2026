@@ -1,8 +1,8 @@
 <div align="center">
 
-# 💸 Consumer Insight Intelligence
+# 💸 Delator: o melhor amigo do universitário!
 
-> App de controle financeiro universitário com análise comportamental de gastos.
+> Site de análise comportamental de gastos e controle financeiro para universitários de baixa renda.
 
 </div>
 
@@ -22,7 +22,7 @@
 
 ## 🎯 Visão Geral
 
-**Consumer Insight Intelligence** é um app de controle financeiro universitário desenvolvido para o **Hackathon Elas+Tech 2026 — Ada & Artemisia**, com foco em jovens universitários que precisam entender para onde vai seu dinheiro de forma visual, acessível e sem julgamentos.
+**Delator** é um web app de controle financeiro universitário desenvolvido para o **Hackathon Elas+ Tech 2026 — Ada & Artemisia & CAIXA**, com foco em universitários de baixa renda que precisam entender para onde vai seu dinheiro de forma visual, acessível e sem pressão.
 
 ### O Problema
 
@@ -30,7 +30,7 @@ A maioria das ferramentas financeiras existentes exibe números, não narrativas
 
 ### A Solução
 
-Fluxo transforma transações brutas em **insights comportamentais**: identifica o "vilão" do mês, classifica o perfil de consumo da usuária em arquétipos reconhecíveis, revela padrões semanais de gasto e alerta sobre categorias em crescimento consistente. Mais espelho financeiro do que calculadora.
+**Delator** transforma transações brutas em **insights comportamentais**: identifica o "vilão" do mês, classifica o perfil de consumo do usuário em arquétipos reconhecíveis, revela padrões semanais de gastos e alerta sobre categorias em crescimento.
 
 ---
 
@@ -38,7 +38,7 @@ Fluxo transforma transações brutas em **insights comportamentais**: identifica
 
 | Tela             | Funcionalidade            | Descrição                                                                |
 | ---------------- | ------------------------- | ------------------------------------------------------------------------ |
-| **Transações**   | Listagem com filtros      | Histórico mensal com filtro por categoria e busca por texto              |
+| **Transações**   | Listagem com filtros      | Histórico mensal com filtro por categoria           |
 | **Dashboard**    | Visão geral do mês        | KPIs, gráfico de pizza por categoria e destaque do vilão                 |
 | **Vilão do Mês** | Análise da pior categoria | Detalhamento da categoria que mais cresceu, com comparação mensal        |
 | **Insights**     | Perfil comportamental     | Arquétipo de consumo, padrão semanal, categoria em crescimento e alertas |
@@ -47,10 +47,15 @@ Fluxo transforma transações brutas em **insights comportamentais**: identifica
 
 ## 📸 Screenshots
 
-```
-[Dashboard]          [Vilão do Mês]
-[Transações]         [Insights]
-```
+
+### Dashboard principal com visão mensal:
+
+<img width="1914" height="864" alt="Screenshot_6" src="https://github.com/user-attachments/assets/21fbbdd1-46a9-44c5-9559-30a87ee02bb2" />
+
+### Insights do usuário alertando sobre padrões de consumo, categorias de gastos e outros alertas:
+
+<img width="1914" height="865" alt="Screenshot_7" src="https://github.com/user-attachments/assets/bb587e0d-73af-49e6-9140-227bf14ff3b4" />
+
 
 ---
 
@@ -76,39 +81,39 @@ Fluxo transforma transações brutas em **insights comportamentais**: identifica
 > [!NOTE]
 > **Nota de instalação:** Recharts funciona nativamente via `<ChartContainer>` do shadcn: basta instalar o componente de chart pelo CLI do shadcn.
 
----
-
 #### 2️⃣ Recharts
 
-Recharts foi escolhido por ser **React-first**: a API é declarativa em JSX (`<BarChart>`, `<PieChart>`) e se integra naturalmente ao modelo mental do time. Tipos TypeScript são nativos (sem `@types/recharts`), o que elimina erros de autocompletar. A biblioteca cobre todos os tipos de gráfico necessários no projeto (pizza, barras, linha) em uma única dependência, e tem a maior adoção no ecossistema React.
+Recharts foi escolhido por ser **React-first**: a API é declarativa em JSX (`<BarChart>`, `<PieChart>`) e se integra naturalmente ao modelo mental do time. Tipos TypeScript são nativos (sem `@types/recharts`), o que elimina erros de autocompletar. A biblioteca cobre todos os tipos de gráfico necessários no projeto (pizza, barras) em uma única dependência, e tem a maior adoção no ecossistema React.
 
 > [!IMPORTANT]
-> O projeto utiliza dados mockados em JSON local (`src/data/`). Não há servidor, banco de dados ou autenticação nesta versão.
+> O projeto utiliza dados mockados em módulos TypeScript local (`src/data/`). Não há servidor, banco de dados ou autenticação nesta versão.
 
 ---
 
-## � Estrutura de Pastas
+## 📂 Estrutura de Pastas
 
 ```
 src/
 ├── components/   # Componentes React reutilizáveis (botões, cards, inputs, etc.)
+│   ├── ui/       # Componentes de UI atômicos (badge, button, card, etc.)
+│   └── lib/      # Utilitários e helpers específicos de componentes
+├── contexts/     # Contextos React para gerenciamento de estado global (ex: BudgetContext, MonthContext)
+├── data/         # Dados mockados em módulos TypeScript (sem backend nesta versão)
 ├── pages/        # Telas completas da aplicação (Transações, Dashboard, Vilão, Insights)
-├── utils/        # Funções utilitárias puras (formatação, cálculos, helpers)
-├── data/         # Dados mockados em JSON (sem backend nesta versão)
-├── types/        # Interfaces e tipos TypeScript compartilhados entre módulos
+├── services/     # Serviços para lógica de negócio e manipulação de dados (ex: budgetService, transactionService)
 ├── styles/       # Tokens de design, variáveis CSS e estilos globais
+├── types/        # Interfaces e tipos TypeScript compartilhados entre módulos
+├── utils/        # Funções utilitárias puras (formatação, cálculos, helpers)
 ├── App.tsx       # Componente raiz com configuração de rotas
-├── main.tsx      # Entry point — monta o React no DOM
-└── index.css     # Reset CSS e configuração do Tailwind
-```
+└── main.tsx      # Entry point (monta o React no DOM)
 
-> Cada pasta contém um `index.ts` que serve como barrel file para re-exports futuros.
+```
 
 ---
 
-## �👩‍💻 Time
+## 👩‍💻 Time
 
-Desenvolvido com 💜 no **Hackathon Elas+Tech 2026 — Ada & Artemisia**
+Desenvolvido com 💚 no **Hackathon Elas+ Tech 2026 — Ada & Artemisia & CAIXA**
 
 | Nome                  | Papel             | GitHub                                            | LinkedIn                                                                                                         |
 | --------------------- | ----------------- | ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
