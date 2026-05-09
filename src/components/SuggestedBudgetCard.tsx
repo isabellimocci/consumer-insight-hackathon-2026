@@ -1,4 +1,4 @@
-import { CATEGORY_COLORS, CATEGORY_ICONS_PI } from '@utils/categoryMaps'
+import { CATEGORY_COLORS, CATEGORY_ICONS_BOLD_PI } from '@utils/categoryMaps'
 import { formatCurrency } from '@utils/formatters'
 
 import type { Category } from '../types'
@@ -22,28 +22,37 @@ export function SuggestedBudgetCard({ income, suggested }: SuggestedBudgetCardPr
   if (income <= 0) return null
 
   return (
-    <div className="gap-sm bg-surface p-md flex flex-col rounded-2xl shadow-sm">
-      <p className="text-text text-(length:--font-size-base) font-semibold">
-        Distribuição sugerida
-      </p>
-      <ul className="gap-xs flex flex-col">
+    <div className="gap-sm bg-primary p-md flex flex-col rounded-2xl">
+      <ul className="gap-sm flex flex-col">
         {CATEGORY_ORDER.map((cat) => {
           const pct = suggested[cat] ?? 0
           const amount = Math.round(income * (pct / 100) * 100) / 100
-          const IconComponent = CATEGORY_ICONS_PI[cat]
+
+          const IconComponent = CATEGORY_ICONS_BOLD_PI[cat]
+          const color = CATEGORY_COLORS[cat]
           return (
-            <li key={cat} className="flex items-center justify-between">
-              <span className="gap-xs text-text flex items-center text-(length:--font-size-sm)">
-                <IconComponent
-                  size={16}
-                  aria-hidden={true}
-                  style={{ color: CATEGORY_COLORS[cat] }}
-                />
-                {cat}
+            <li key={cat} className="gap-xs flex items-center">
+              <span
+                className="mt-0.5 flex size-8 shrink-0 items-center justify-center self-start rounded-full"
+                style={{ background: `color-mix(in srgb, ${color}, transparent 85%)` }}
+              >
+                <IconComponent size={15} aria-hidden={true} style={{ color }} />
               </span>
-              <span className="text-(length:--font-size-sm) text-(--color-inactive-text)">
-                {pct}% · {formatCurrency(amount)}
-              </span>
+
+              <div className="flex min-w-0 flex-1 flex-col gap-0.5">
+                <span className="text-text text-sm font-semibold">{cat}</span>
+                <div className="h-1 overflow-hidden rounded-full bg-(--color-inactive-bg)">
+                  <div
+                    className="h-full rounded-full"
+                    style={{ width: `${pct}%`, backgroundColor: color }}
+                  />
+                </div>
+              </div>
+
+              <div className="flex shrink-0 flex-col items-end">
+                <span className="text-text text-sm font-bold">{formatCurrency(amount)}</span>
+                <span className="text-xs text-(--color-inactive-text)">{pct}%</span>
+              </div>
             </li>
           )
         })}

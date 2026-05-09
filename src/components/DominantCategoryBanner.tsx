@@ -18,7 +18,7 @@ export function DominantCategoryBanner({ dominant }: DominantCategoryBannerProps
 
   return (
     <div
-      className="relative overflow-hidden rounded-xl p-[2px]"
+      className="relative overflow-hidden rounded-xl p-0.5"
       style={{ boxShadow: '0 0 16px oklch(0.4364 0.0588 142.9 / 0.25)' }}
     >
       <div

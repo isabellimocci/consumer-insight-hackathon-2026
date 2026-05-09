@@ -2,32 +2,41 @@ interface BudgetTotalIndicatorProps {
   total: number
 }
 
+const BG: Record<string, string> = {
+  success: 'color-mix(in srgb, var(--color-success) 15%, transparent)',
+  warning: 'color-mix(in srgb, var(--color-warning) 25%, transparent)',
+  danger: 'color-mix(in srgb, var(--color-danger) 15%, transparent)',
+}
+
+const FG: Record<string, string> = {
+  success: 'var(--color-success)',
+  warning: 'var(--color-text)',
+  danger: 'var(--color-danger)',
+}
+
 export function BudgetTotalIndicator({ total }: BudgetTotalIndicatorProps) {
   const isExact = total === 100
   const isClose = total >= 95 && total <= 105 && !isExact
-  const color = isExact
-    ? 'var(--color-success)'
-    : isClose
-      ? 'var(--color-warning)'
-      : 'var(--color-danger)'
+  const variant = isExact ? 'success' : isClose ? 'warning' : 'danger'
 
   const message = isExact
-    ? 'Perfeito! Total alocado: 100%'
+    ? 'Perfeito! Total alocado.'
     : total < 100
-      ? `Total alocado: ${total}% — faltam ${100 - total}% para distribuir`
-      : `Total alocado: ${total}% — reduza ${total - 100}% para continuar`
+      ? `Faltam ${100 - total}% para distribuir`
+      : `Reduza ${total - 100}% para continuar`
 
   return (
     <div
       aria-live="polite"
-      className="px-sm py-xs rounded-xl text-center text-(length:--font-size-sm) font-medium"
-      style={{
-        color,
-        backgroundColor: color + '1A',
-        transition: 'all 150ms ease',
-      }}
+      className="px-sm py-xs flex items-center justify-between rounded-xl"
+      style={{ backgroundColor: BG[variant], transition: 'all 150ms ease' }}
     >
-      {message}
+      <span className="text-xs font-medium" style={{ color: FG[variant] }}>
+        {message}
+      </span>
+      <span className="text-lg font-bold" style={{ color: FG[variant] }}>
+        {total}%
+      </span>
     </div>
   )
 }
