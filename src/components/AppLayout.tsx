@@ -15,7 +15,7 @@ export function AppLayout() {
   return (
     <MonthProvider>
       <UserProvider>
-        <section className="bg-bg flex h-screen">
+        <section className="bg-bg flex h-screen flex-col md:flex-row">
           <BudgetProvider>
             <TooltipProvider>
               <Navbar />

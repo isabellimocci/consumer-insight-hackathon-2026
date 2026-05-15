@@ -16,7 +16,7 @@ export function VilaoNarrativeCopy({ copy }: VilaoNarrativeCopyProps) {
     >
       <div className="gap-sm flex items-start" aria-live="polite">
         <TbAlertTriangle color="#d6b628" size={30} />
-        <p className="text-text text-xl">{copy}</p>
+        <p className="text-text text-base md:text-lg">{copy}</p>
       </div>
     </Card>
   )

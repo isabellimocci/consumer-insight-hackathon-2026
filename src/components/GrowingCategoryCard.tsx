@@ -16,7 +16,7 @@ export function GrowingCategoryCard({ result, allMonthsData }: GrowingCategoryCa
   const iconBg = `color-mix(in srgb, ${CATEGORY_COLORS[result.category]}, transparent 85%)`
 
   return (
-    <div className="p-sm bg-primary relative flex h-44 w-96 flex-col justify-between rounded-xl">
+    <div className="p-sm bg-primary relative flex h-44 flex-1 flex-col justify-between rounded-xl">
       <div className="flex items-center justify-start gap-2">
         <span
           className="flex size-10 shrink-0 items-center justify-center rounded-full"

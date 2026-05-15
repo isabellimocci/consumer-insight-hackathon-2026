@@ -15,34 +15,37 @@ export const CategoryFilter: React.FC<CategoryFilterProps> = ({
   onCategorySelect,
 }) => {
   return (
-    <div
-      role="group"
-      aria-label="Filtrar por categoria"
-      className="gap-sm pb-xs flex flex-col justify-between overflow-y-auto"
-    >
+    <div role="group" aria-label="Filtrar por categoria" className="flex flex-wrap gap-2 p-1">
       <Chip
         label="Todas"
         isActive={selectedCategory === null}
         onClick={() => onCategorySelect(null)}
         ariaLabel="Mostrar todas as categorias"
-        className="bg-[#1F2A1E] text-(--color-primary) hover:bg-[#486147]"
+        className={
+          selectedCategory === null
+            ? 'px-3 py-1.5 ring-2 ring-(--color-primary)'
+            : 'bg-[#1F2A1E] px-3 py-1.5 text-(--color-bg) hover:bg-[#486147]'
+        }
       />
       {categories.map((category) => {
         const IconComponent = CATEGORY_ICONS_BOLD_PI[category]
+        const isSelected = selectedCategory === category
         return (
           <Chip
             key={category}
             label={category}
             icon={<IconComponent size={14} style={{ color: CATEGORY_COLORS[category] }} />}
-            isActive={selectedCategory === category}
+            isActive={isSelected}
             onClick={() =>
               selectedCategory === category ? onCategorySelect(null) : onCategorySelect(category)
             }
             ariaLabel={`Filtrar por ${category}`}
-            className="bg-transparent hover:bg-[#486147]"
+            className="px-3 py-1.5 hover:opacity-90"
             style={{
-              backgroundColor:
-                'color-mix(in srgb,' + CATEGORY_COLORS[category] + ' 20%, transparent)',
+              backgroundColor: isSelected
+                ? `color-mix(in srgb, ${CATEGORY_COLORS[category]} 50%, transparent)`
+                : `color-mix(in srgb, ${CATEGORY_COLORS[category]} 20%, transparent)`,
+              outline: isSelected ? `2px solid ${CATEGORY_COLORS[category]}` : undefined,
             }}
           />
         )

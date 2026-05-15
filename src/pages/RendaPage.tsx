@@ -21,7 +21,7 @@ export default function RendaPage() {
   }
 
   return (
-    <div className="gap-lg px-md mx-auto flex min-h-[80vh] max-w-2xl flex-col items-center justify-center">
+    <div className="px-md mx-auto flex min-h-[80vh] max-w-2xl flex-col items-center justify-center gap-4">
       <div className="text-5xl">💰</div>
 
       <div className="text-center">

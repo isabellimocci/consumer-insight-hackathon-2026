@@ -39,7 +39,7 @@ export function MonthVariationBanner({
     <div
       aria-live="polite"
       className={cn(
-        'px-md py-md flex items-center justify-between rounded-2xl bg-[#1F2A1E]',
+        'px-md py-md gap-sm flex items-center justify-between rounded-2xl bg-[#1F2A1E]',
         className,
       )}
     >
@@ -48,7 +48,7 @@ export function MonthVariationBanner({
           <p className="shrink-0 pb-1 text-xs font-semibold text-gray-400 uppercase">
             Total gasto no mês
           </p>
-          <p className="text-4xl font-bold text-white">{formatCurrency(currentTotal)}</p>
+          <p className="text-xl font-bold text-white md:text-4xl">{formatCurrency(currentTotal)}</p>
           {totalBudget !== undefined && (
             <p className="text-sm text-white/40">de {formatCurrency(totalBudget)} planejados</p>
           )}
@@ -65,7 +65,7 @@ export function MonthVariationBanner({
 
       {prevMonthName && (
         <div className={cn('flex flex-col items-center rounded-xl px-4 py-3', badgeBg)}>
-          <p className="text-base font-bold">
+          <p className="text-sm font-bold">
             {variationSign} {Math.abs(variationPercent).toFixed(1)}%
           </p>
           <p className="text-xs">vs {prevMonthName}</p>

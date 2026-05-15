@@ -103,24 +103,29 @@ export default function TransacoesPage() {
   )
 
   return (
-    <div className="px-md mx-6 flex h-full flex-col gap-4 overflow-hidden pb-8" aria-live="polite">
-      <div className="m-2 flex flex-1 flex-col gap-1">
-        <div className="mb-8 flex flex-col items-start scroll-auto">
-          <h1 className="text-text text-2xl font-bold">Transações</h1>
-          <div className="flex">
-            <span className="text-(--color-inactive-text)">{transactions.length} transações ·</span>
-            &nbsp;
-            <TotalFiltered
-              filteredTotal={filteredTotal}
-              monthTotal={monthTotal}
-              selectedCategory={selectedCategory}
-              targetAmount={categoryTargetAmount ?? totalBudget}
-            />
-          </div>
+    <div className="flex h-full flex-col gap-4 overflow-y-auto px-4 pb-8 md:overflow-hidden md:px-6">
+      <div className="mt-4 shrink-0">
+        <h1 className="text-2xl font-bold text-(--color-text)">Transações</h1>
+        <div className="mt-1 flex flex-wrap items-center gap-x-1.5 gap-y-0.5 text-sm text-(--color-inactive-text)">
+          <span>{transactions.length} transações</span>
+          <TotalFiltered
+            filteredTotal={filteredTotal}
+            monthTotal={monthTotal}
+            selectedCategory={selectedCategory}
+            targetAmount={categoryTargetAmount ?? totalBudget}
+          />
         </div>
+      </div>
 
-        <div className="flex gap-8">
-          <section className="max-h-75 flex-1 flex-col gap-3">
+      <div className="flex flex-1 flex-col gap-6 md:min-h-0 md:flex-row md:overflow-hidden">
+        <section
+          aria-label="Resumo e filtros"
+          className="flex shrink-0 flex-col gap-4 md:w-100 md:overflow-y-auto"
+        >
+          <div>
+            <p className="mb-2 text-xs font-semibold tracking-wide text-(--color-inactive-text) uppercase">
+              Resumo do mês
+            </p>
             <MonthVariationBanner
               currentTotal={currentTotal}
               previousTotal={previousTotal}
@@ -128,50 +133,53 @@ export default function TransacoesPage() {
               previousMonth={previousMonth}
               totalBudget={isConfigured ? totalBudget : undefined}
             />
-            <div className="mt-6">
-              <p className="shrink-0 pb-4 text-sm font-semibold text-(--color-text)">
-                Filtrar por categoria
-              </p>
-              <CategoryFilter
-                categories={availableCategories}
-                selectedCategory={selectedCategory}
-                onCategorySelect={setSelectedCategory}
-              />
-            </div>
-          </section>
-          <section className="w-full flex-2 flex-col">
-            <p className="mb-3 shrink-0 text-sm font-semibold text-(--color-text)">
-              Todas as transações · {transactions.length} transações
+          </div>
+          <div>
+            <p className="mb-2 text-xs font-semibold tracking-wide text-(--color-inactive-text) uppercase">
+              Filtrar por categoria
             </p>
-            <div
-              className="max-h-[70vh] w-full flex-1 overflow-y-auto pr-3"
-              style={{ scrollbarColor: 'var(--color-success) transparent', scrollbarWidth: 'thin' }}
+            <CategoryFilter
+              categories={availableCategories}
+              selectedCategory={selectedCategory}
+              onCategorySelect={setSelectedCategory}
+            />
+          </div>
+        </section>
+
+        <section className="flex flex-1 flex-col md:min-h-0 md:overflow-hidden">
+          <p className="mb-3 shrink-0 text-xs font-semibold tracking-wide text-(--color-inactive-text) uppercase">
+            {selectedCategory
+              ? `${selectedCategory} · ${filteredTransactions.length}`
+              : `Todas as transações · ${filteredTransactions.length}`}
+          </p>
+          <div
+            className="flex-1 overflow-y-auto pr-2"
+            style={{ scrollbarColor: 'var(--color-success) transparent', scrollbarWidth: 'thin' }}
+          >
+            <ul
+              role="list"
+              aria-label="Lista de transações"
+              aria-live="polite"
+              className="flex flex-col gap-2"
             >
-              <ul
-                role="list"
-                aria-label="Lista de transações"
-                aria-live="polite"
-                className="gap-sm flex flex-col"
-              >
-                {filteredTransactions.length === 0 ? (
-                  <li role="listitem" className="py-lg text-center text-(--color-inactive-text)">
-                    Nenhuma transação em {selectedCategory} este mês.
+              {filteredTransactions.length === 0 ? (
+                <li role="listitem" className="py-lg text-center text-(--color-inactive-text)">
+                  Nenhuma transação em {selectedCategory} este mês.
+                </li>
+              ) : (
+                filteredTransactions.map((tx) => (
+                  <li key={tx.id} role="listitem">
+                    <TransactionCard
+                      transaction={tx}
+                      onEdit={() => setEditingTransaction(tx)}
+                      onDelete={() => setDeletingTransaction(tx)}
+                    />
                   </li>
-                ) : (
-                  filteredTransactions.map((tx) => (
-                    <li key={tx.id} role="listitem">
-                      <TransactionCard
-                        transaction={tx}
-                        onEdit={() => setEditingTransaction(tx)}
-                        onDelete={() => setDeletingTransaction(tx)}
-                      />
-                    </li>
-                  ))
-                )}
-              </ul>
-            </div>
-          </section>
-        </div>
+                ))
+              )}
+            </ul>
+          </div>
+        </section>
       </div>
 
       {editingTransaction && (
