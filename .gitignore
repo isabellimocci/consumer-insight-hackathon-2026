@@ -149,8 +149,3 @@ dist-ssr
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
-
-# Instructions for Claude
-.claude
-.claudeignore
-CLAUDE.md
