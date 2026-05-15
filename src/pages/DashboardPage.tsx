@@ -83,13 +83,16 @@ export default function DashboardPage() {
   )
 
   return (
-    <div className="px-md mx-6 flex h-full flex-col gap-4 overflow-hidden pb-8" aria-live="polite">
+    <div
+      className="flex h-full flex-col gap-4 overflow-y-auto px-4 pb-8 md:overflow-hidden md:px-6"
+      aria-live="polite"
+    >
       {/* Saudação — com espaçamento superior para respirar abaixo do top bar */}
-      <div className="mt-6 flex shrink-0 items-center gap-3">
+      <div className="mt-4 flex shrink-0 items-center gap-3">
         <img
           src="https://placecats.com/bella/200/200"
           alt="Avatar"
-          className="h-12 w-12 shrink-0 rounded-full object-cover"
+          className="h-14 w-14 shrink-0 rounded-full object-cover"
         />
         <div>
           <h1 className="text-xl font-bold text-(--color-text)">Olá, {name} 👋</h1>
@@ -98,11 +101,11 @@ export default function DashboardPage() {
       </div>
 
       {/* Main layout: left (3/5) + right (2/5) */}
-      <div className="mt-6 flex min-h-0 flex-1 gap-6 overflow-hidden">
+      <div className="flex flex-1 flex-col gap-6 lg:min-h-0 lg:flex-row lg:overflow-hidden">
         {/* Left column */}
-        <section className="flex min-h-0 flex-3 flex-col gap-8">
+        <section className="flex flex-col gap-6 lg:min-h-0 lg:flex-[3]">
           {/* Row 1: dark total card + donut chart */}
-          <div className="flex shrink-0 gap-4">
+          <div className="flex shrink-0 flex-col gap-4 sm:flex-row">
             <div className="flex flex-1 flex-col gap-1">
               <MonthVariationBanner
                 currentTotal={currentTotal}
@@ -114,8 +117,10 @@ export default function DashboardPage() {
               />
             </div>
             <div className="flex flex-1 flex-col gap-1">
-              <p className="shrink-0 text-sm font-semibold text-(--color-text)">Distribuição</p>
-              <div className="flex flex-1 items-center justify-center rounded-2xl bg-(--color-primary) p-4">
+              <p className="shrink-0 text-xs font-semibold tracking-wide text-(--color-inactive-text) uppercase">
+                Distribuição
+              </p>
+              <div className="flex min-h-[180px] flex-1 items-center justify-center rounded-2xl bg-(--color-primary) p-4 sm:min-h-[220px]">
                 <DonutChart
                   data={percentages}
                   totalBudget={isConfigured ? totalBudget : undefined}
@@ -125,7 +130,7 @@ export default function DashboardPage() {
           </div>
 
           {/* Row 2: últimos lançamentos — scrollable */}
-          <section className="flex min-h-0 flex-1 flex-col overflow-hidden">
+          <section className="flex flex-col lg:min-h-0 lg:flex-1 lg:overflow-hidden">
             <UltimosLancamentos month={selectedMonth} />
           </section>
         </section>
@@ -133,14 +138,17 @@ export default function DashboardPage() {
         {/* Right column — category list, 1 column, scrollable */}
         <section
           aria-label="Gastos por categoria"
-          className="flex min-h-0 flex-2 flex-col overflow-hidden"
+          className="flex flex-col border-t border-(--color-surface) pt-4 lg:min-h-0 lg:flex-[2] lg:overflow-hidden lg:border-none lg:pt-0"
         >
-          <p className="mb-2 shrink-0 text-sm font-semibold text-(--color-text)">
+          <p className="mb-2 shrink-0 text-xs font-semibold tracking-wide text-(--color-inactive-text) uppercase">
             Por categoria · {cardData.length} ativas
           </p>
-          <ul role="list" className="flex min-h-0 flex-1 flex-col gap-1.5 overflow-hidden pb-8">
+          <ul
+            role="list"
+            className="flex flex-col gap-1.5 pb-4 lg:min-h-0 lg:flex-1 lg:overflow-y-auto lg:pb-8"
+          >
             {cardData.map((card) => (
-              <li key={card.category} role="listitem" className="min-h-0 flex-1">
+              <li key={card.category} role="listitem">
                 <CategoryCard {...card} isVilao={card.category === vilao?.category} />
               </li>
             ))}

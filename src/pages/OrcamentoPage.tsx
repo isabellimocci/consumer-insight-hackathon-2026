@@ -78,20 +78,22 @@ export default function OrcamentoPage() {
   }
 
   return (
-    <div className="px-md py-sm mx-10 flex h-full flex-col gap-4 overflow-hidden pb-8">
+    <div className="flex h-full flex-col gap-4 overflow-y-auto px-4 py-4 pb-8 md:px-6 lg:px-10">
       <div className="gap-xs flex shrink-0 flex-col">
-        <h1 className="text-text text-2xl font-bold">Meu Orçamento</h1>
-        <p className="py-xs text-sm text-(--color-inactive-text)">
+        <h1 className="text-text text-xl font-bold md:text-2xl">Meu Orçamento</h1>
+        <p className="mt-1 text-xs leading-relaxed text-(--color-inactive-text) md:text-sm">
           Como usar: preencha sua renda mensal à esquerda, ajuste as porcentagens por categoria até
           o total chegar a <strong>100%</strong> e clique em <strong>Aplicar orçamento</strong> para
           salvar. A distribuição sugerida é baseada no método 50/30/20.
         </p>
       </div>
 
-      <div className="gap-md mt-4 flex min-h-0 flex-1 overflow-hidden">
-        <div className="gap-md flex min-h-0 flex-1 flex-col">
+      <div className="mt-4 flex min-h-0 flex-1 flex-col gap-4 lg:flex-row lg:overflow-hidden">
+        <div className="flex shrink-0 flex-col gap-4 lg:min-h-0 lg:flex-1">
           <div className="flex shrink-0 flex-col gap-1">
-            <h2 className="text-text text-sm font-semibold">Renda mensal</h2>
+            <h2 className="text-text text-xs font-semibold tracking-wide uppercase">
+              Renda mensal
+            </h2>
             <div className="p-md rounded-2xl bg-[#1F2A1E]">
               <IncomeInput month={selectedMonth} value={localIncome} onChange={setLocalIncome} />
             </div>
@@ -99,17 +101,21 @@ export default function OrcamentoPage() {
 
           {localIncome > 0 && (
             <div className="flex shrink-0 flex-col gap-1">
-              <h2 className="text-text text-sm font-semibold">Distribuição sugerida</h2>
+              <h2 className="text-text text-xs font-semibold tracking-wide uppercase">
+                Distribuição sugerida
+              </h2>
               <SuggestedBudgetCard income={localIncome} suggested={suggested} />
             </div>
           )}
         </div>
 
-        <div className="gap-md flex min-h-0 flex-1 flex-col">
+        <div className="flex flex-col gap-4 lg:min-h-0 lg:flex-1">
           <div className="flex min-h-0 flex-1 flex-col gap-1">
-            <h2 className="text-text text-sm font-semibold">Ajuste por categoria</h2>
-            <div className="gap-sm bg-primary p-md flex flex-col rounded-2xl">
-              <div className="gap-sm flex max-h-96 flex-col overflow-y-auto">
+            <h2 className="text-text text-xs font-semibold tracking-wide uppercase">
+              Ajuste por categoria
+            </h2>
+            <div className="bg-primary p-md mb-6 flex flex-col gap-6 rounded-2xl">
+              <div className="flex flex-col gap-2 gap-8 overflow-y-auto lg:max-h-96">
                 {CATEGORIES.map((cat) => (
                   <CategorySliderItem
                     key={cat}
@@ -136,7 +142,7 @@ export default function OrcamentoPage() {
       </div>
 
       <Dialog open={showDialog} onOpenChange={setShowDialog}>
-        <DialogContent className="h-full! max-w-full! rounded-none md:h-auto! md:max-w-2xl! md:rounded-xl">
+        <DialogContent className="h-full max-w-full rounded-none sm:h-auto sm:max-w-2xl sm:rounded-2xl">
           <DialogHeader>
             <DialogTitle>A partir de qual mês?</DialogTitle>
             <DialogDescription>
@@ -148,7 +154,7 @@ export default function OrcamentoPage() {
             type="month"
             value={startMonth}
             onChange={(e) => setStartMonth(e.target.value)}
-            className="w-full rounded border p-2"
+            className="bg-surface text-text focus:border-primary w-full rounded-xl border border-(--color-surface) px-3 py-2 text-sm focus:ring-2 focus:ring-white/20 focus:outline-none"
           />
           <DialogFooter>
             <Button variant="ghost" label="Cancelar" onClick={() => setShowDialog(false)} />

@@ -27,7 +27,7 @@ export function ConcentrationInsightCard({
     : `${category}: ${percentage}% do orçamento mensal`
 
   return (
-    <div className="bg-primary py-sm flex h-44 w-full flex-col justify-center gap-3 rounded-xl px-4">
+    <div className="bg-primary py-sm flex min-h-36 w-full flex-col justify-center gap-3 rounded-xl px-4">
       <span className="text-text text-center text-sm font-semibold">
         {getConcentrationCopy(category, percentage, budgetMode)}
       </span>

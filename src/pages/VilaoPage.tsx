@@ -21,7 +21,11 @@ export default function VilaoPage() {
   const { currentBudget, isConfigured } = useBudget()
   const navigate = useNavigate()
 
-  const availableMonths = useMemo(() => getAvailableMonths(), [])
+  const availableMonths = useMemo(
+    () => getAvailableMonths(),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [transactionsVersion],
+  )
 
   const previousMonth = useMemo(() => {
     const idx = availableMonths.indexOf(selectedMonth)
@@ -69,11 +73,11 @@ export default function VilaoPage() {
         aria-live="polite"
       >
         <Card
-          className="p-20"
+          className="p-md md:p-16"
           children={
-            <div className="flex flex-col items-center gap-5 p-10">
+            <div className="flex flex-col items-center gap-5">
               <TbAlertTriangle size={50} color="#d2ce54" />
-              <p className="text-center text-2xl text-(--color-inactive-text)">
+              <p className="text-center text-xl text-(--color-inactive-text) md:text-2xl">
                 Configure seu orçamento primeiro para identificar o vilão do mês.
               </p>
               <Button
@@ -95,16 +99,19 @@ export default function VilaoPage() {
   }
 
   return (
-    <div className="px-md mx-6 flex h-full flex-col gap-4 overflow-hidden pb-8" aria-live="polite">
-      <div className="mb-6 flex flex-col items-start">
+    <div
+      className="flex h-full flex-col gap-4 overflow-y-auto px-4 pb-8 md:px-6 lg:overflow-hidden"
+      aria-live="polite"
+    >
+      <div className="flex flex-col gap-1">
         <h1 className="text-text text-2xl font-bold">Vilão do mês</h1>
         <span className="text-(--color-inactive-text)">
           A categoria que mais saiu do trilho. Sem julgamento, só fatos.
         </span>
       </div>
 
-      <section className="flex gap-6">
-        <div className="flex flex-1 flex-col gap-4">
+      <section className="flex flex-col gap-4 md:gap-5 lg:min-h-0 lg:flex-row lg:gap-6 lg:overflow-hidden">
+        <div className="flex flex-col gap-4 lg:flex-1 lg:overflow-y-auto">
           <VilaoHeroCard
             vilao={vilaoResult}
             style={{
@@ -124,7 +131,7 @@ export default function VilaoPage() {
             className="bg-[#364935] px-3 py-2 text-(--color-primary) transition-all hover:bg-[#486147]"
           />
         </div>
-        <div className="flex flex-1 flex-col gap-4">
+        <div className="flex flex-col gap-4 lg:flex-1 lg:overflow-y-auto">
           <VilaoHistoryChart
             category={vilaoResult.category}
             monthlyTotals={monthlyTotals}

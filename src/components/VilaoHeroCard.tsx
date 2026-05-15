@@ -44,11 +44,13 @@ export function VilaoHeroCard({ vilao, style }: VilaoHeroCardProps) {
           }}
         />
       </div>
-      <p className="text-text text-(length:--font-size-xl) font-bold">{vilao.category}</p>
-      <p className="text-danger text-(length:--font-size-2xl) font-bold">
+      <p className="text-text text-xl font-bold md:text-(length:--font-size-xl)">
+        {vilao.category}
+      </p>
+      <p className="text-danger text-4xl font-bold md:text-(length:--font-size-2xl)">
         +{formatCurrency(vilao.variance)}
       </p>
-      <p className="text-(length:--font-size-sm) text-(--color-inactive-text)">
+      <p className="text-base text-(--color-inactive-text) md:text-(length:--font-size-sm)">
         Gastou {formatCurrency(vilao.spentAmount)} de {formatCurrency(vilao.targetAmount)}{' '}
         planejados
       </p>

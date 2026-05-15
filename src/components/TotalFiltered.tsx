@@ -21,7 +21,7 @@ export const TotalFiltered: React.FC<TotalFilteredProps> = ({
     const balance = targetAmount - filteredTotal
     const isOver = balance < 0
     return (
-      <div aria-live="polite" className="border-t border-(--border) text-sm">
+      <div aria-live="polite" className="text-sm">
         <span className="text-(--color-inactive-text)">
           {selectedCategory}: {formatCurrency(filteredTotal)} de {formatCurrency(targetAmount)}
         </span>
@@ -35,10 +35,7 @@ export const TotalFiltered: React.FC<TotalFilteredProps> = ({
 
   if (selectedCategory === null && targetAmount !== undefined) {
     return (
-      <div
-        aria-live="polite"
-        className="border-t border-(--border) text-sm text-(--color-inactive-text)"
-      >
+      <div aria-live="polite" className="text-sm text-(--color-inactive-text)">
         <span>Total do mês: {formatCurrency(filteredTotal)}</span>
         {' | '}
         <span>Orçado: {formatCurrency(targetAmount)}</span>
@@ -47,10 +44,7 @@ export const TotalFiltered: React.FC<TotalFilteredProps> = ({
   }
 
   return (
-    <div
-      aria-live="polite"
-      className="border-t border-(--border) text-sm text-(--color-inactive-text)"
-    >
+    <div aria-live="polite" className="text-sm text-(--color-inactive-text)">
       {selectedCategory === null ? (
         <span>Total do mês: {formatCurrency(filteredTotal)}</span>
       ) : (

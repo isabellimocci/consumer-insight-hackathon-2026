@@ -54,12 +54,15 @@ export function BudgetProvider({ children }: { children: React.ReactNode }) {
   })
 
   useEffect(() => {
+    const inc = getIncomeByMonth(selectedMonth)
+    const adj = getGoalsForMonth(selectedMonth)
+    const txs = getTransactionsByMonth(selectedMonth)
     dispatch({
       type: 'LOAD_MONTH',
       payload: {
-        income: getIncomeByMonth(selectedMonth),
-        adjustments: getGoalsForMonth(selectedMonth),
-        currentBudget: getBudgetByMonth(selectedMonth),
+        income: inc,
+        adjustments: adj,
+        currentBudget: inc ? calculateBudget(inc, txs, adj) : getBudgetByMonth(selectedMonth),
       },
     })
   }, [selectedMonth, transactionsVersion])

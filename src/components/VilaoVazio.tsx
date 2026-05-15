@@ -6,15 +6,19 @@ export function VilaoVazio() {
   const navigate = useNavigate()
   return (
     <div
-      className="gap-md mx-auto flex h-[80vh] max-w-2xl flex-col items-center justify-center text-center"
+      className="gap-md mx-auto flex h-[80vh] max-w-2xl flex-col items-center justify-center px-4 text-center"
       aria-live="polite"
     >
       <span aria-hidden="true" style={{ fontSize: '4rem', lineHeight: 1 }}>
         🎉
       </span>
-      <h2 className="text-text text-5xl font-bold">Você ficou dentro de todas as metas!</h2>
-      <p className="text-(length:--font-size-base) text-(--color-inactive-text)">
-        Esse mês foi de mestre. Continue assim.
+      <h2 className="text-text text-2xl font-bold text-balance md:text-4xl lg:text-5xl">
+        Você ficou dentro de todas as metas!
+      </h2>
+      <p className="text-base text-(--color-inactive-text) md:text-(length:--font-size-base)">
+        Esse mês foi de mestre.
+        <br />
+        Continue assim.
       </p>
       <Button
         variant="primary"

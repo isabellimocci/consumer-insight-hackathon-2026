@@ -17,7 +17,11 @@ export default function InsightsPage() {
   const { selectedMonth, transactionsVersion } = useMonth()
   const { currentBudget, isConfigured, income } = useBudget()
 
-  const allMonthsData = useMemo(() => getAllMonthsData(), [])
+  const allMonthsData = useMemo(
+    () => getAllMonthsData(),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [transactionsVersion],
+  )
 
   const currentTxs = useMemo(
     () => getTransactionsByMonth(selectedMonth),
@@ -89,27 +93,25 @@ export default function InsightsPage() {
 
   return (
     <div
-      className="gap-md px-md py-sm mx-10 flex h-full flex-col overflow-hidden pb-8"
+      className="flex h-full flex-col gap-4 overflow-y-auto px-4 py-4 md:px-6 md:py-5 lg:overflow-hidden lg:px-10 lg:py-5"
       aria-live="polite"
     >
-      <div className="flex shrink-0 justify-between">
-        <div className="flex flex-col items-start">
-          <h1 className="text-text text-2xl font-bold">Seus Insights</h1>
-          <span className="text-(--color-inactive-text)">
-            Padrões que os números frios escondem.
-          </span>
-        </div>
+      <div className="flex shrink-0 flex-col items-start gap-0.5">
+        <h1 className="text-text text-xl font-bold md:text-2xl">Seus Insights</h1>
+        <span className="text-sm text-(--color-inactive-text)">
+          Padrões que os números frios escondem.
+        </span>
       </div>
 
-      <div className="gap-md flex min-h-0 flex-1 overflow-hidden">
-        <section className="gap-md flex flex-1 flex-col overflow-y-auto">
-          <div className="flex flex-col gap-1">
-            <h2 className="text-text text-sm font-semibold">Maior categoria</h2>
+      <div className="flex flex-col gap-4 md:gap-5 lg:min-h-0 lg:flex-1 lg:flex-row lg:overflow-hidden">
+        <section className="flex flex-col gap-4 md:gap-5 lg:flex-1 lg:overflow-y-auto">
+          <div className="flex flex-col gap-2">
+            <h2 className="text-text text-sm font-semibold tracking-wide">Maior categoria</h2>
             {dominantPercentage && <DominantCategoryBanner dominant={dominantPercentage} />}
           </div>
 
-          <div className="flex flex-col gap-1">
-            <h2 className="text-text text-sm font-semibold">Conheça seu perfil</h2>
+          <div className="flex flex-col gap-2">
+            <h2 className="text-text text-sm font-semibold tracking-wide">Conheça seu perfil</h2>
             <ConsumerProfileCard
               profile={profile}
               income={income?.amount}
@@ -117,9 +119,9 @@ export default function InsightsPage() {
             />
           </div>
 
-          <div className="flex flex-1 flex-col gap-1">
-            <h2 className="text-text text-sm font-semibold">Em crescimento</h2>
-            <div className="flex items-start gap-3">
+          <div className="flex flex-col gap-2">
+            <h2 className="text-text text-sm font-semibold tracking-wide">Em crescimento</h2>
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-stretch">
               <GrowingCategoryCard result={growingCategory} allMonthsData={relevantMonths} />
               {dominantPercentage && (
                 <ConcentrationInsightCard
@@ -131,16 +133,16 @@ export default function InsightsPage() {
             </div>
           </div>
         </section>
-        <section className="flex flex-1 flex-col overflow-y-auto">
-          <div className="mb-4 flex flex-col gap-1">
-            <h2 className="text-text text-sm font-semibold">Gastos por semana</h2>
-            <div className="flex flex-col gap-3">
-              <WeeklyPatternChart pattern={weeklyPattern} />
-            </div>
+        <section className="flex flex-col gap-4 md:gap-5 lg:flex-1 lg:overflow-y-auto">
+          <div className="flex flex-col gap-2">
+            <h2 className="text-text text-sm font-semibold tracking-wide">Gastos por semana</h2>
+            <WeeklyPatternChart pattern={weeklyPattern} />
           </div>
           {mostFrequent && (
             <section aria-label="Outros comportamentos">
-              <h2 className="mb-sm text-text text-sm font-semibold">Outros comportamentos</h2>
+              <h2 className="mb-sm text-text text-sm font-semibold tracking-wide">
+                Outros comportamentos
+              </h2>
               <div className="gap-sm flex flex-col">
                 {healthData && (
                   <BehaviorInsightCard
