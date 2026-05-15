@@ -6,7 +6,7 @@ import { MonthContext } from './MonthContext'
 export function MonthProvider({ children }: { children: React.ReactNode }) {
   const [transactionsVersion, setTransactionsVersion] = useState(0)
 
-  const availableMonths = useMemo(() => getAvailableMonths(), [transactionsVersion])
+  const availableMonths = useMemo(() => getAvailableMonths(), [])
 
   const [selectedMonth, setSelectedMonth] = useState<string>(() => availableMonths.at(-1) ?? '')
 

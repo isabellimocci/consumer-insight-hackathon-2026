@@ -38,7 +38,7 @@ A maioria das ferramentas financeiras existentes exibe números, não narrativas
 
 | Tela             | Funcionalidade            | Descrição                                                                |
 | ---------------- | ------------------------- | ------------------------------------------------------------------------ |
-| **Transações**   | Listagem com filtros      | Histórico mensal com filtro por categoria           |
+| **Transações**   | Listagem com filtros      | Histórico mensal com filtro por categoria                                |
 | **Dashboard**    | Visão geral do mês        | KPIs, gráfico de pizza por categoria e destaque do vilão                 |
 | **Vilão do Mês** | Análise da pior categoria | Detalhamento da categoria que mais cresceu, com comparação mensal        |
 | **Insights**     | Perfil comportamental     | Arquétipo de consumo, padrão semanal, categoria em crescimento e alertas |
@@ -47,7 +47,6 @@ A maioria das ferramentas financeiras existentes exibe números, não narrativas
 
 ## 📸 Screenshots
 
-
 ### Dashboard principal com visão mensal:
 
 <img width="1914" height="864" alt="Screenshot_6" src="https://github.com/user-attachments/assets/21fbbdd1-46a9-44c5-9559-30a87ee02bb2" />
@@ -55,7 +54,6 @@ A maioria das ferramentas financeiras existentes exibe números, não narrativas
 ### Insights do usuário alertando sobre padrões de consumo, categorias de gastos e outros alertas:
 
 <img width="1914" height="865" alt="Screenshot_7" src="https://github.com/user-attachments/assets/bb587e0d-73af-49e6-9140-227bf14ff3b4" />
-
 
 ---
 
