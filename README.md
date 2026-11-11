@@ -119,7 +119,7 @@ Desenvolvido com 💚 no **Hackathon Elas+ Tech 2026 — Ada & Artemisia & CAIXA
 | **Taisa Soares**      | Gestão · Frontend | [taisasoares](https://github.com/taisasoares)     | [/in/taisasoares](https://www.linkedin.com/in/taisasoares)                                                       |
 | **Fabianne Costa**    | Frontend ·        | [AnneCosta](https://github.com/AnneCosta)         | [/in/fabiannecosta](https://www.linkedin.com/in/fabiannecosta)                                                   |
 | **Joyce Pereira**     | Frontend ·        | [joyceps44](https://github.com/joyceps44)         | [/in/joycepereirasantos](https://www.linkedin.com/in/joycepereirasantos)                                         |
-| **Priscila Oliveira** | Frontend ·        | [PriOliverS](https://github.com/PriOliverS)       | [/in/priscila-soares-de-oliveira-47aa06233/](https://www.linkedin.com/in/priscila-soares-de-oliveira-47aa06233/) |
+| **Priscila Oliveira** | Frontend ·        | [PriOliverS](https://github.com/PriOliverS)       | [/in/priscilaoliverr](https://www.linkedin.com/in/priscilaoliverr)                                               |
 
 ---
 
